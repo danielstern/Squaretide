@@ -15,17 +15,7 @@ package {
 				x = startX + tile.x * 48;
 				y = startY + tile.y * 48;
 				
-				if (tile.occupied) {
-					alpha = 1;
-				} else {
-					alpha = 0;
-				}
-				
-				if (tile.color) {
-					fill.gotoAndStop(tile.color);				
-				} else {
-				    fill.gotoAndStop("NONE");	
-				}
+				fill.gotoAndStop(tile.color);
 			});
 			
 			addEventListener(MouseEvent.CLICK, function() {
