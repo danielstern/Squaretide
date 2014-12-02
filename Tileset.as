@@ -45,7 +45,9 @@ package {
 		public function getRow(index) {
 			return tiles.filter(function(tile) {
 				return tile.y == index;
-			})
+			}).sort(function(a,b) {
+				return a.y - b.y;
+			});
 		}
 		
 		public function getAllAsColumns() : Array {
@@ -54,6 +56,14 @@ package {
 				allColumns.push(getColumn(i));				
 			}	
 			return allColumns;
+		}
+		
+		public function getAllAsRows() : Array {
+			var allRows = [];
+			for (var i = 0; i < numRows; i++) {
+				allRows.push(getRow(i));				
+			}	
+			return allRows;
 		}
 
 		public function getMatchingTiles(matcher) {
@@ -81,11 +91,16 @@ package {
 		function switchTiles(tile1:Tile, tile2:Tile) {
 			trace("Switching tiles.");
 			var diff = getTileDiff(tile1, tile2);
+			var tile1IsOccupied = tile1.occupied;
+			
 			tile1.x -= diff.x;
 			tile1.y -= diff.y;
 			
 			tile2.x += diff.x;
 			tile2.y += diff.y;
+			
+			//tile1.occupied = tile2.occupied;
+			//tile2.occupied = tile1IsOccupied;
 		}
 
 		function tilesAreAdjacent(tile1:Tile,tile2:Tile) {

@@ -1,60 +1,3 @@
-var TileSetAnalyzer = {
-	getLastEmptyTile: function(col) {
-		for (var i = col.length - 1; i >= 0; i--) { 
-			var tile = col[i];
-			if (!tile.occupied) {
-				return tile;
-			}
-		}
-	},
-	getChains:function(tiles, processor, minumum) {
-		var allSequences = [];
-		var allMatchingChains = [];
-		
-		var columns = tiles.getAllAsColumns();
-		columns.forEach(function(column) {
-			var maxSliceSize = column.length;
-			var minSliceSize = minumum;
-			for (var sliceSize = minumum; sliceSize <= maxSliceSize; sliceSize++) {
-				var totalSlices = maxSliceSize - sliceSize;
-				for (var sliceIndex = 0; sliceIndex < totalSlices; sliceIndex++) {
-					allSequences.push(column.slice(sliceIndex, sliceSize + 1))
-				}					
-			}
-		});
-		
-		allSequences.forEach(function(sequence) {
-			console.assert(sequence[0],"WARNING: NO SEQUENCE 0",sequence);
-			var success = true;
-			var originator = sequence[0];
-
-			if (!originator) {
-				return;
-			}
-
-			
-
-			if (!originator.occupied) {
-				success = false;
-			}
-			
-			for (var i = 1; i < sequence.length; i++) {
-				var current = sequence[i];
-				if (processor(originator, current)) {
-					
-				} else {
-					success = false;
-				}
-			}
-			
-			if (success) {
-				allMatchingChains.push(sequence);					
-			}
-		});
-		
-		return allMatchingChains;
-	}		
-}
 
 function Tile() {
 	var x;
@@ -107,7 +50,7 @@ function Tileset(columns, rows, adjuster) {
 
     numColumns = columns;
     numRows = rows;
-    for (var i = 0; i <= columns; i++) {
+    for (var i = 0; i < columns; i++) {
         for (var k = 0; k < rows; k++) {
             var tile = new Tile();
             tile.x = i;
@@ -137,7 +80,9 @@ function Tileset(columns, rows, adjuster) {
     function getRow(index) {
         return tiles.filter(function(tile) {
             return tile.y == index;
-        })
+        }).sort(function(a, b) {
+            return a.x - b.x;
+        });
     }
 
 
@@ -147,6 +92,13 @@ function Tileset(columns, rows, adjuster) {
             allColumns.push(getColumn(i));
         }
         return allColumns;
+    }
+    function getAllAsRows() {
+    	var allRows = [];
+    	for (var i = 0; i < numRows; i++) {
+    		allRows.push(getRow(i));				
+    	}	
+    	return allRows;
     }
 
 
@@ -195,6 +147,7 @@ function Tileset(columns, rows, adjuster) {
     	getAllAsColumns:getAllAsColumns,
     	tilesAreAdjacent:tilesAreAdjacent,
     	switchTiles:switchTiles,
+    	getAllAsRows:getAllAsRows,
     }
 }
 
@@ -253,12 +206,11 @@ function Squaretide() {
         };
 
         var matchingSets = TileSetAnalyzer.getChains(tiles, function(originator, tile) {
-        	return originator.color && originator.color === tile.color;					
+        	return originator.color && originator.color === tile.color && !originator.resolved && !tile.resolved;					
         },3);
         
         
         matchingSets.forEach(function(chain){
-          console.log("Chain of matchers...",chain);
           chain.forEach(function(tile) {
         	  
         	 // tile.color = undefined;
