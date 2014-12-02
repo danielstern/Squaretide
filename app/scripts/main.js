@@ -52,27 +52,36 @@ function Squaretide() {
         };
 
         var matchingSets = TileSetAnalyzer.getChains(tiles, function(originator, tile) {
-        	return originator.color && originator.color === tile.color && !originator.resolved && !tile.resolved;					
+        	return originator.color && originator.color === tile.color && !originator.resolved && !tile.resolved && originator.canInteract && tile.canInteract;					
         },3);
-        
-        
-        matchingSets.forEach(function(chain){
-          chain.forEach(function(tile) {
-        	  
-        	 tile.color = undefined;
-        	 tile.occupied = false;
-        	 tile.resolved = true;
-        	 // tile.x = 0;
-        	 //score += 1;
-          });
-        });
 
         tiles.flattenBottom();
+        
+        if (matchingSets[0]) {
+        	// stopTimer();
+	        matchingSets.forEach(function(chain){
+	          chain.forEach(function(tile) {
+	        	  
+	        	 // tile.color = undefined;
+	        	 tile.resolved = true;
+	        	 tile.canInteract = false;
+
+	        	 setTimeout(function(){
+	        	 	tile.occupied = false;
+	        	 },350);
+	        	 // tile.x = 0;
+	        	 //score += 1;
+	          });
+	        });
+
+
+	        // setTimeout(startTimer,600);
+        }
+
 
         tickListeners.forEach(function(listener){
         	listener();
         });
-
 
     }
 
@@ -88,13 +97,25 @@ function Squaretide() {
             var coordinate = lastEmpty;
             coordinate.occupied = true;
             coordinate.resolved = false;
+            // coordinate.initialize();
             coordinate.color = getRandomColor();
+            setTimeout(function(){
+            	coordinate.canInteract = true;
+            })
            
         }
     }
 }
 
 var game = new Squaretide();
+var timer;
 game.startGame();
+startTimer();
 
-setInterval(game.tick,33);
+function startTimer(int){
+	timer = setInterval(game.tick,int || 33);
+}
+
+function stopTimer() {
+	clearInterval(timer);
+}

@@ -34,16 +34,18 @@ square {
   // background-color: blue;
   display: block;
   position: absolute;
-  transition: 0.1s all ease-in-out;
+  transition: 0.2s all ease-in-out;
 
   &[selected="true"] {
     margin-top: -2px;
     margin-left: -2px;
-    z-index: 1;
+    z-index: 1000;
   }
 
   &[resolved="true"] {
-    opacity: 0.5;
+    transition: 1s opacity;
+    opacity: 0;
+    -webkit-animation: spin-out 2s;
   }
 }
 
@@ -52,20 +54,18 @@ square {
 .x-loop (@i) when (@i >= 0) {
   square[x="@{i}"] {
     left: @i * 48px;
+    z-index: @i;
+  }
+
+  square[y="@{i}"] {
+    top: @i * 48px;
+    z-index: @i;
   }
   .x-loop(@i - 1);
 }
 
 .x-loop(@iterations);
 
-.y-loop (@i) when (@i >= 0) {
-  square[y="@{i}"] {
-    top: @i * 48px;
-  }
-  .y-loop(@i - 1);
-}
-
-.y-loop(@iterations);
 
 square[color="red"] {
   background-color: red;
@@ -81,4 +81,25 @@ square[color="gold"] {
 
 square[color="blue"] {
   background-color: blue;
+}
+
+square[fly="in"] {
+  animation: fly-in 1s;
+  -webkit-animation: fly-in 1s;
+  -webkit-animation-timing-function: ease-out; /* Chrome, Safari, Opera */
+  animation-timing-function: ease-out;
+}
+
+@-webkit-keyframes fly-in {
+  0%   { margin-top: -900px; }
+  100% { margin:top: 0px; }
+}
+
+@-webkit-keyframes spin-out {
+  // 0%   { margin-top:0px }
+  // 100% {margin-top:1000px }
+}
+
+square[color] {
+  // box-shadow: 1px 1px 1px black;
 }
