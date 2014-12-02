@@ -25,31 +25,26 @@ function TileVisualizer() {
 	var div2=document.createElement("square");//create a new div
 
 	var tile;
+	var visualizer = this;
 
+	div2.addEventListener("click",onClick);
 
 	 function onTick() {
-		// x = startX + tile.x * 48;
-		// y = startY + tile.y * 48;
-		
 		div2.setAttribute("x", tile.x); 
 		div2.setAttribute("y", tile.y); 
-		// fill.gotoAndStop(tile.color);
+		div2.setAttribute("color",tile.color);
+		div2.setAttribute("selected",tile.selected);
+	};
+	function onClick() {
+		if (tile.selected) {
+			tile.selected = false;
+		} else {
+			tile.selected = true;
+		}
 	};
 	function attachToTile(_tile) {
 		tile = _tile;
-
-		div2.innerHTML="square";
-
 		div1.appendChild(div2);// append to div
-
-		
-		function onClick() {
-			if (tile.selected) {
-				tile.selected = false;
-			} else {
-				tile.selected = true;
-			}
-		}
 	}
 
 	return {
@@ -151,7 +146,9 @@ function Tileset(columns, rows, adjuster) {
 
     return {
     	getMatchingTiles:getMatchingTiles,
-    	getAllAsColumns:getAllAsColumns
+    	getAllAsColumns:getAllAsColumns,
+    	tilesAreAdjacent:tilesAreAdjacent,
+    	switchTiles:switchTiles,
     }
 }
 

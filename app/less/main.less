@@ -1,0 +1,80 @@
+body {
+  background: #fafafa;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #333;
+}
+
+.hero-unit {
+  margin: 50px auto 0 auto;
+  width: 300px;
+  font-size: 18px;
+  font-weight: 200;
+  line-height: 30px;
+  background-color: #eee;
+  border-radius: 6px;
+  padding: 60px;
+}
+
+.hero-unit h1 {
+  font-size: 60px;
+  line-height: 1;
+  letter-spacing: -1px;
+}
+
+.browsehappy {
+  margin: 0.2em 0;
+  background: #ccc;
+  color: #000;
+  padding: 0.2em 0;
+}
+
+square {
+  width:48px;
+  height: 48px;
+  background-color: blue;
+  display: block;
+  position: absolute;
+  transition: 0.1s all ease-in-out;
+
+  &[selected="true"] {
+    margin-top: -2px;
+    margin-left: -2px;
+    z-index: 1;
+  }
+}
+
+@iterations: 15;
+
+.x-loop (@i) when (@i >= 0) {
+  square[x="@{i}"] {
+    left: @i * 48px;
+  }
+  .x-loop(@i - 1);
+}
+
+.x-loop(@iterations);
+
+.y-loop (@i) when (@i >= 0) {
+  square[y="@{i}"] {
+    top: @i * 48px;
+  }
+  .y-loop(@i - 1);
+}
+
+.y-loop(@iterations);
+
+square[color="red"] {
+  background-color: red;
+}
+
+square[color="green"] {
+  background-color: green;
+}
+
+square[color="gold"] {
+  background-color: gold;
+}
+
+square[color="blue"] {
+  background-color: blue;
+}
