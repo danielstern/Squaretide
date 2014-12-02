@@ -11,18 +11,28 @@ function TileVisualizer() {
 
 	var div1=document.getElementById('gamefield');//get the div element
 	var div2=document.createElement("square");//create a new div
+	div1.appendChild(div2);// append to div
 
 	var tile;
 	var visualizer = this;
+	var finished = false;
 
 	div2.addEventListener("click",onClick);
 
 	 function onTick() {
+	 	if (finished) {
+	 		return;
+	 	}
 		div2.setAttribute("x", tile.x); 
 		div2.setAttribute("y", tile.y); 
 		div2.setAttribute("color",tile.color);
 		div2.setAttribute("selected",tile.selected);
 		div2.setAttribute("resolved",tile.resolved);
+
+		if (tile.resolved) {
+			// div1.removeChild(div2);
+			// finished = true;
+		}
 	};
 	function onClick() {
 		if (tile.selected) {
@@ -33,7 +43,7 @@ function TileVisualizer() {
 	};
 	function attachToTile(_tile) {
 		tile = _tile;
-		div1.appendChild(div2);// append to div
+
 	}
 
 	return {
@@ -83,6 +93,24 @@ function Tileset(columns, rows, adjuster) {
         }).sort(function(a, b) {
             return a.x - b.x;
         });
+    }
+
+    function flattenBottom() {
+    	var columns = getAllAsColumns();
+    	columns.forEach(function(column){
+    		for (var i = column.length; i > 0;i--) {
+    			var tile = column[i - 1];
+    			if (!tile.occupied) {
+    				for (var k = i; k > 0; k--) {
+    					var tile2 = column[k-1];
+    					if (tile2.occupied) {
+    						switchTiles(tile, tile2);
+    						break;
+    					}
+    				}
+    			}
+    		}
+    	})
     }
 
 
@@ -148,6 +176,7 @@ function Tileset(columns, rows, adjuster) {
     	tilesAreAdjacent:tilesAreAdjacent,
     	switchTiles:switchTiles,
     	getAllAsRows:getAllAsRows,
+    	flattenBottom:flattenBottom,
     }
 }
 
@@ -213,13 +242,15 @@ function Squaretide() {
         matchingSets.forEach(function(chain){
           chain.forEach(function(tile) {
         	  
-        	 // tile.color = undefined;
-        	 // tile.occupied = false;
+        	 tile.color = undefined;
+        	 tile.occupied = false;
         	 tile.resolved = true;
         	 // tile.x = 0;
         	 //score += 1;
           });
         });
+
+        tiles.flattenBottom();
 
         tickListeners.forEach(function(listener){
         	listener();
@@ -239,6 +270,7 @@ function Squaretide() {
         if (lastEmpty) {
             var coordinate = lastEmpty;
             coordinate.occupied = true;
+            coordinate.resolved = false;
             coordinate.color = getRandomColor();
             var square = new TileVisualizer();
             game.onTick(square.onTick);

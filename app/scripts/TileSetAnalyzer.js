@@ -71,8 +71,6 @@ var TileSetAnalyzer = {
 			}
 		});
 
-		console.log("All matching chains?",allMatchingChains.length)
-		
 		return allMatchingChains;
 	}		
 }
