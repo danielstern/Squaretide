@@ -1,5 +1,3 @@
-console.log('\'Allo \'Allo!');
-
 var TileSetAnalyzer = {
 	getLastEmptyTile: function(col) {
 		for (var i = col.length - 1; i >= 0; i--) { 
@@ -8,6 +6,53 @@ var TileSetAnalyzer = {
 				return tile;
 			}
 		}
+	},
+	getChains:function(tiles, processor, minumum) {
+		var allSequences = [];
+		var allMatchingChains = [];
+		
+		var columns = tiles.getAllAsColumns();
+		columns.forEach(function(column) {
+			var maxSliceSize = column.length;
+			var minSliceSize = minumum;
+			for (var sliceSize = minumum; sliceSize <= maxSliceSize; sliceSize++) {
+				var totalSlices = maxSliceSize - sliceSize;
+				for (var sliceIndex = 0; sliceIndex < totalSlices; sliceIndex++) {
+					allSequences.push(column.slice(sliceIndex, sliceSize + 1))
+				}					
+			}
+		});
+		
+		allSequences.forEach(function(sequence) {
+			console.assert(sequence[0],"WARNING: NO SEQUENCE 0",sequence);
+			var success = true;
+			var originator = sequence[0];
+
+			if (!originator) {
+				return;
+			}
+
+			
+
+			if (!originator.occupied) {
+				success = false;
+			}
+			
+			for (var i = 1; i < sequence.length; i++) {
+				var current = sequence[i];
+				if (processor(originator, current)) {
+					
+				} else {
+					success = false;
+				}
+			}
+			
+			if (success) {
+				allMatchingChains.push(sequence);					
+			}
+		});
+		
+		return allMatchingChains;
 	}		
 }
 
@@ -34,6 +79,7 @@ function TileVisualizer() {
 		div2.setAttribute("y", tile.y); 
 		div2.setAttribute("color",tile.color);
 		div2.setAttribute("selected",tile.selected);
+		div2.setAttribute("resolved",tile.resolved);
 	};
 	function onClick() {
 		if (tile.selected) {
@@ -206,9 +252,28 @@ function Squaretide() {
             timeSinceLasttile = 0;
         };
 
+        var matchingSets = TileSetAnalyzer.getChains(tiles, function(originator, tile) {
+        	return originator.color && originator.color === tile.color;					
+        },3);
+        
+        
+        matchingSets.forEach(function(chain){
+          console.log("Chain of matchers...",chain);
+          chain.forEach(function(tile) {
+        	  
+        	 // tile.color = undefined;
+        	 // tile.occupied = false;
+        	 tile.resolved = true;
+        	 // tile.x = 0;
+        	 //score += 1;
+          });
+        });
+
         tickListeners.forEach(function(listener){
         	listener();
-        })
+        });
+
+
     }
 
 
@@ -219,7 +284,6 @@ function Squaretide() {
 
         var lastEmpty = TileSetAnalyzer.getLastEmptyTile(column);
 
-	    console.log("adding tile...");
         if (lastEmpty) {
             var coordinate = lastEmpty;
             coordinate.occupied = true;

@@ -18,8 +18,9 @@
 			var yStart = playfield.y;
 			var ROWS = 6;
 			var COLUMNS = 10;
-			var score = 1;
+			var score = 0;
 			var gridSize = 48;
+			
 			var tiles:Tileset;
 	
 			function getRandomColor(){
@@ -62,6 +63,21 @@
 					timeSinceLasttile = 0;
 				};
 				
+				var matchingSets:Array = TileSetAnalyzer.getChains(tiles, function(originator:Tile, tile:Tile) {
+					return originator.color && originator.color === tile.color;					
+				},3);
+				
+				//return;
+				
+				
+				matchingSets.forEach(function(chain){
+				  chain.forEach(function(tile:Tile) {
+					  
+					 tile.color = undefined;
+					 //tile.occupied = false;
+					 //score += 1;
+				  });
+				});
 			}
 
 			

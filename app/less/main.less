@@ -31,7 +31,7 @@ body {
 square {
   width:48px;
   height: 48px;
-  background-color: blue;
+  // background-color: blue;
   display: block;
   position: absolute;
   transition: 0.1s all ease-in-out;
@@ -40,6 +40,10 @@ square {
     margin-top: -2px;
     margin-left: -2px;
     z-index: 1;
+  }
+
+  &[resolved="true"] {
+    margin-top: -300px;
   }
 }
 
