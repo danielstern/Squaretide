@@ -13,9 +13,6 @@ function Tileset(columns, rows, game) {
             var tile = new Tile();
             tile.x = i;
             tile.y = k;
-            // if (adjuster != null) {
-            //     adjuster(tile);
-            // };
 
             var square = new TileVisualizer();
             game.onTick(square.onTick);

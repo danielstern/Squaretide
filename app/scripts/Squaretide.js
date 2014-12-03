@@ -16,6 +16,8 @@ function Squaretide() {
     var tiles;
     var colors = ["BLUE", 'RED', 'GREEN', 'GOLD',"PINK"];
     var gameEndListener;
+
+
     
     
 
@@ -41,26 +43,64 @@ function Squaretide() {
     }
 
 
-    function populateAll() {
-        tiles.getTiles().forEach(function(tile){
-            tile.activate();
-            
+    function populateAll(_delay) {
+        var _tiles = tiles.getTiles().slice(0,tiles.getTiles().length);
+        var delay = _delay || 33;
 
-            tile.color = getSafeColor(tile);
-        })
+
+
+
+        function recursivelyPopulateTile() {
+            var tile = _tiles[0];
+            tile.activate();
+            if (_tiles[1]) {
+                _tiles.shift();
+                setTimeout(recursivelyPopulateTile,delay);
+            }
+        }
+
+        recursivelyPopulateTile();
+    }
+
+    this.startGameFlair = function(options) {
+        var _tiles = tiles.getTiles().slice(0,tiles.getTiles().length);
+        startTimer();
+        timeSinceLasttile -= 100;
+        function recursivelyResolveTile(cb) {
+            var tile = _tiles[0];
+            tile.resolve();
+            if (_tiles[1]) {
+                _tiles.shift();
+                setTimeout(recursivelyResolveTile,33,cb);
+            } else {
+                cb();
+            }
+        }
+
+        recursivelyResolveTile(function(){
+
+            setTimeout(game.startGame,1000,options);
+        });
+
     }
 
     this.startGame = function(options) {
 
-
-        // populateAll();
+        options = options || {};
 
        tiles = tiles || new Tileset(COLUMNS, ROWS, game);
         // level = 1;
-        timeRemaining = options.time * 1000;
+        timeRemaining = (options.time || 60) * 1000;
         gameEndListener = options.gameEndListener;
 
-        populateAll();
+        timeSinceLasttile -= 20;
+
+        tiles.getTiles().forEach(function(tile){
+            tile.color = getSafeColor(tile);    
+        });
+
+        populateAll(1);
+        score = 0;
         startTimer();
     }
 
@@ -82,6 +122,9 @@ function Squaretide() {
     }
 
     function startTimer(int) {
+        if (timer) {
+            stopTimer();
+        }
         timer = setInterval(game.tick, int || 33);
     }
 

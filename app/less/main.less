@@ -150,6 +150,8 @@ button + button {
   -ms-transform: translate3d(0,0,0);
   -o-transform: translate3d(0,0,0);
   transform: translate3d(0,0,0);
+
+  overflow: hidden;
   // transform: rotateX(45deg);
 
 }
@@ -200,7 +202,7 @@ square {
   -o-transform: translate3d(0,0,0);
   transform: translate3d(0,0,0);
 
-  box-shadow: 1px 1px 1px rgba(0,0,0,0.3), 0px 1px 1px rgba(0,0,0,0.3);
+
 
   &:hover {
     transform: translateZ(2px) scale(1.05);
@@ -225,6 +227,7 @@ square {
     -webkit-animation: fly-in 1s;
     -webkit-animation-timing-function: ease-out; /* Chrome, Safari, Opera */
     animation-timing-function: ease-out;
+    box-shadow: 1px 1px 1px rgba(0,0,0,0.3), 0px 1px 1px rgba(0,0,0,0.3);
   }
 
   &[color="red"] {
