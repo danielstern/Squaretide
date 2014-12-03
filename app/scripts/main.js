@@ -16,7 +16,8 @@ start.addEventListener("click", function() {
 	// showInstructions = !showInstructions;
 	document.getElementById('game').setAttribute("show-menu",false);  		
 	game.startGame({
-    	time: 5,
+    	time: 60,
+    	// time: 5,
     	gameEndListener:function(){
     		console.log("game ended");
   			document.getElementById('game').setAttribute("show-instructions",false);  		
