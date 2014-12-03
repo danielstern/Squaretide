@@ -41,20 +41,39 @@ body {
   pointer-events: none;
 }
 
+h1 {
+  position: absolute;
+  width: 480px;
+  left: 0;
+  right: 0;
+  margin: auto;
+  text-transform: uppercase;
+  font-size: 5rem;
+  color: @gray1;
+  text-shadow: 1px 1px 1px rgba(0,0,0,0.3), 0px 1px 1px rgba(0,0,0,0.3);
+}
+
 square {
-  width:48px;
-  height: 48px;
+  width:46px;
+  height: 46px;
+  margin-top: 1px;
+  margin-left: 1px;
   perspective: inherit;
   transform: translateZ(0px);
   display: block;
   position: absolute;
   transition: 0.2s all ease-in-out;
+  cursor: pointer;
 
+  box-shadow: 1px 1px 1px rgba(0,0,0,0.3), 0px 1px 1px rgba(0,0,0,0.3);
+
+  &:hover {
+    transform: translateZ(2px) scale(1.05);
+    z-index: 2000;
+  }
   &[selected="true"] {
-    transform: translateZ(10px);
+    transform: translateZ(10px) scale(1.10);
     z-index: 100;
-    box-shadow: 1px 1px 1px black;
-
   }
 
   &[resolved="true"] {
@@ -113,8 +132,8 @@ square[fly="in"] {
 }
 
 @-webkit-keyframes fly-in {
-  0%   { margin-top: -900px; }
-  100% { margin:top: 0px; }
+  0%   { margin-top: -900px; transform:rotate(0deg) translateZ(10px); }
+  100% { margin:top: 0px; transform:rotate(0deg) translateZ(0px); }
 }
 
 @-webkit-keyframes spin-out {
