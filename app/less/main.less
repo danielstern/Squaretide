@@ -69,6 +69,7 @@ menu {
     overflow: hidden;
     padding: 0 1rem;
     height: 0px;
+    box-shadow: 0px -1px 0px rgba(0,0,0,0.3);
   }
 }
 
@@ -143,6 +144,12 @@ button + button {
   left: 0;
   right: 0;
   margin: auto;
+
+  -webkit-transform: translate3d(0,0,0);
+  -moz-transform: translate3d(0,0,0);
+  -ms-transform: translate3d(0,0,0);
+  -o-transform: translate3d(0,0,0);
+  transform: translate3d(0,0,0);
   // transform: rotateX(45deg);
 
 }
@@ -186,6 +193,12 @@ square {
   position: absolute;
   transition: 0.2s all ease-in-out;
   cursor: pointer;
+
+  -webkit-transform: translate3d(0,0,0);
+  -moz-transform: translate3d(0,0,0);
+  -ms-transform: translate3d(0,0,0);
+  -o-transform: translate3d(0,0,0);
+  transform: translate3d(0,0,0);
 
   box-shadow: 1px 1px 1px rgba(0,0,0,0.3), 0px 1px 1px rgba(0,0,0,0.3);
 
@@ -260,8 +273,14 @@ square[fly="in"] {
 }
 
 @-webkit-keyframes spin-out {
-  0%   { transform:rotate(0deg) translateZ(0px); }
-  100% { transform:rotate(115deg) translateZ(10px); }
+  0%   { 
+    transform:rotate(0deg) translateZ(0px); 
+    -webkit-transform:rotate(0deg) translateZ(0px); 
+  }
+  100% { 
+    transform:rotate(115deg) translateZ(10px); 
+    -webkit-transform:rotate(115deg) translateZ(10px); 
+  }
 }
 
 @media screen and (min-width:960px) {

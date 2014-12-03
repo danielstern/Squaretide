@@ -125,7 +125,6 @@ function Squaretide() {
                 chainsSinceLastCombo = 0;
             }
 
-            timeSinceLasttile -= longTileFrequency;
 
         }
 
@@ -147,10 +146,24 @@ function Squaretide() {
             var totalScoreForSets = 0;
             matchingSets.forEach(function(chain) {
 
-                chain.forEach(function(tile) {
+                var delay = 33;
+
+                function resolveTilesRecursively() {
+                    tile = chain[0];
                     tile.resolve();
-                    totalScoreForSets += 100;
-                });
+                    totalScoreForSets += tile.score || 100;
+                    if (chain[1]) {
+                        setTimeout(resolveTilesRecursively, delay);
+                        chain.shift();
+                        timeSinceLasttile -= 1;
+                    }
+                }
+
+                resolveTilesRecursively();
+                // chain.forEach(function(tile) {
+                //     tile.resolve();
+                //     totalScoreForSets += 100;
+                // });
 
             });
             totalScoreForSets *= matchingSets.length;
