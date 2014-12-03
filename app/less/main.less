@@ -7,9 +7,17 @@
 @color7: #36b773;
 
 @gray1: #333;
+@fade1: rgba(0,0,0,0.2);
+@fade2: rgba(0,0,0,0.3);
 @numRows: 6;
 @numColumns : 6;
 @squareSide : 48px;
+
+
+.pattern(@color) {
+  background: radial-gradient(ellipse at center, lighten(@color,25%) 0%,lighten(@color,20%) 100%); /* W3C */
+  
+}
 
 
 html {
@@ -20,6 +28,92 @@ body {
   background-color: lighten(@gray1,75%);
   font-family: RobotoDraft;
   perspective: 450px;
+}
+
+menu {
+  width: @squareSide * @numColumns;
+  height: @squareSide * @numRows;
+  position: absolute;
+  padding: 0px;
+  top: 6rem;
+  // bottom: 0;
+  transition: background-color 0.2s ease-in-out;
+  left: 0;
+  background-color: @fade1;
+  right: 0;
+  margin: auto;
+  z-index:10000;
+
+  p {
+
+  }
+
+  nav {
+    transform: translateZ(0);
+    position: absolute;
+    width: 100%;
+    top: 8rem;
+    transition: top 0.2s ease-in-out;
+    text-align: center;
+  }
+
+  .instructions {
+
+    transform: translateZ(0);
+    background-color: white;
+    position: absolute;
+    transition: all 0.2s ease-in-out;
+    bottom: 0px;
+    overflow: hidden;
+    padding: 0 1rem;
+    height: 0px;
+  }
+}
+
+button {
+  font-size: 1rem;
+  font-family: RobotoDraft;
+  padding: 1rem;
+  background-color: lighten(@gray1,83%);
+  border: none;
+  width: @squareSide * 1.8;
+  height: @squareSide * 1.8;
+  pointer: cursor;
+  // display: block;
+  // border-top: 1px solid lighten(@gray1,93%);
+  // border-left: 1px solid lighten(@gray1,83%);
+  // border-right: 2px solid lighten(@gray1,63%);
+  // border-bottom: 2px solid lighten(@gray1,43%);
+
+  box-shadow: 1px 1px 1px rgba(0,0,0,0.3), 0px 1px 1px rgba(0,0,0,0.3);
+  // text-shadow: 1px 1px 1px rgba(0,0,0,0.1), 0px 1px 1px rgba(0,0,0,0.1);
+}
+
+#instructionsButton {
+  .pattern(@color3);
+  color: rgba(255,255,255,0.83);
+}
+#startButton {
+  .pattern(@color1);
+  color: rgba(255,255,255,0.83);
+}
+
+button + button {
+  margin-left: 3rem;
+}
+
+[show-instructions="true"] {
+  .instructions {
+    height: 80px;
+    padding: 1rem;
+  }
+
+  menu {
+    background-color: darken(@fade2,0%);
+    nav {
+      top: 6rem;
+    }
+  }
 }
 
 .gamefield {
@@ -100,11 +194,6 @@ square {
     -webkit-animation: fly-in 1s;
     -webkit-animation-timing-function: ease-out; /* Chrome, Safari, Opera */
     animation-timing-function: ease-out;
-  }
-
-  .pattern(@color) {
-    background: radial-gradient(ellipse at center, lighten(@color,25%) 0%,lighten(@color,20%) 100%); /* W3C */
-    
   }
 
   &[color="red"] {

@@ -1,6 +1,7 @@
 <!doctype html>
 <html class="no-js">
-  <head>
+
+<head>
     <meta charset="utf-8">
     <title>squaretide</title>
     <meta name="description" content="">
@@ -16,27 +17,51 @@
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=RobotoDraft:400,500,700,400italic">
     <!-- endbuild -->
-  </head>
-  <body>
+</head>
+
+<body>
     <!--[if lt IE 10]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
+    <div id="game">
 
-    <!-- <div class="hero-unit">
+        <!-- <div class="hero-unit">
       <h1>Amusing Game</h1>
     </div> -->
+        <menu>
+          <nav>
+            <button id='startButton'>
+                New Game
+            </button>
+            <button id='instructionsButton'>
+                Instructions
+            </button>
+          </nav>
+          <article class="instructions">
+              <p>
+                  <strong>
+                    Tap 
+                  </strong> 
+                  two adjacent squares to switch them.
+              </p>
+              <p>
+                  Line up 3 or more squares of the same color to collect points.
+              </p>
 
-    <h1>
+          </article>
+        </menu>
+        <h1>
       Squaretide
     </h1>
 
-    <div class=gamefield id="gamefield">
-      
-    </div>
-    <div id="score" class='score'></div>
-    <div id="time" class='time'>60</div>
+        <div class=gamefield id="gamefield">
 
+        </div>
+        <div id="score" class='score'></div>
+        <div id="time" class='time'>60</div>
+
+    </div>
 
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
@@ -47,21 +72,30 @@
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
     <script>
-      (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
-      function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
-      e=o.createElement(i);r=o.getElementsByTagName(i)[0];
-      e.src='//www.google-analytics.com/analytics.js';
-      r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
-      ga('create','UA-XXXXX-X');ga('send','pageview');
+    (function(b, o, i, l, e, r) {
+        b.GoogleAnalyticsObject = l;
+        b[l] || (b[l] =
+            function() {
+                (b[l].q = b[l].q || []).push(arguments)
+            });
+        b[l].l = +new Date;
+        e = o.createElement(i);
+        r = o.getElementsByTagName(i)[0];
+        e.src = '//www.google-analytics.com/analytics.js';
+        r.parentNode.insertBefore(e, r)
+    }(window, document, 'script', 'ga'));
+    ga('create', 'UA-XXXXX-X');
+    ga('send', 'pageview');
     </script>
 
-        <!-- build:js({app,.tmp}) scripts/main.js -->
-        <script src="scripts/Tile.js"></script>
-        <script src="scripts/TileVisualizer.js"></script>
-        <script src="scripts/Tileset.js"></script>
-        <script src="scripts/TileSetAnalyzer.js"></script>
-        <script src="scripts/Squaretide.js"></script>
-        <script src="scripts/main.js"></script>
-        <!-- endbuild -->
+    <!-- build:js({app,.tmp}) scripts/main.js -->
+    <script src="scripts/Tile.js"></script>
+    <script src="scripts/TileVisualizer.js"></script>
+    <script src="scripts/Tileset.js"></script>
+    <script src="scripts/TileSetAnalyzer.js"></script>
+    <script src="scripts/Squaretide.js"></script>
+    <script src="scripts/main.js"></script>
+    <!-- endbuild -->
 </body>
+
 </html>
