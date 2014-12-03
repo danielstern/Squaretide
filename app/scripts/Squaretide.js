@@ -12,7 +12,9 @@ function Squaretide() {
     var timer;
     var game = this;
     var level = 1;
+    var timeRemaining = 0;
     var colors = ["BLUE", 'RED', 'GREEN', 'GOLD',"PINK"];
+    var gameEndListener;
 
     function getRandomColor() {
         return colors[Math.floor(Math.random() * colors.length)];
@@ -44,14 +46,31 @@ function Squaretide() {
     	})
     }
 
-    this.startGame = function() {
+    this.startGame = function(options) {
         tiles = new Tileset(COLUMNS, ROWS);
-        level = 1;
+        // level = 1;
+        timeRemaining = options.time * 1000;
+        gameEndListener = options.gameEndListener;
 
         populateAll();
-
         startTimer();
+    }
 
+    this.pauseGame = function() {
+        stopTimer();
+    }
+
+    this.resumeGame = function() {
+        startTimer();
+    }
+
+    function endGame() {
+        stopTimer();
+        if (gameEndListener) {
+            gameEndListener({
+                score:score
+            });
+        }
     }
 
     function startTimer(int) {
@@ -69,6 +88,12 @@ function Squaretide() {
 
 
     this.tick = function() {
+
+        timeRemaining-= 33;
+
+        if (timeRemaining < 0) {
+            endGame();
+        }
 
         var activetiles = tiles.getMatchingTiles(function(tile) {
             return tile.selected;
@@ -133,9 +158,9 @@ function Squaretide() {
         });
 
         document.getElementById('score').innerHTML = score;
+        document.getElementById('time').innerHTML = Math.floor(timeRemaining / 1000);
 
     }
-
 
     function addTile() {
         var tile = tiles.getRandomTile();

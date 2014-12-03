@@ -1,3 +1,5 @@
 var game = new Squaretide();
 
-game.startGame();
+game.startGame({
+	time:60
+});

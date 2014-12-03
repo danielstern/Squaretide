@@ -7,8 +7,17 @@ function TileVisualizer() {
 	var tile;
 	var visualizer = this;
 	var finished = false;
+	var isTouchDevice = false;
 
-	div2.addEventListener("click",onClick);
+	div2.addEventListener("touchstart",function(){
+		isTouchDevice = true;
+		onClick();
+	});
+	div2.addEventListener("click",function(){
+		if (!isTouchDevice) {
+			onClick();
+		}	
+	});
 
 	 function onTick() {
 	 	if (finished) {
@@ -27,6 +36,7 @@ function TileVisualizer() {
 		}
 	};
 	function onClick() {
+		console.log("event")
 		if (tile.selected) {
 			tile.selected = false;
 		} else {
