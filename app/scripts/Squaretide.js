@@ -245,26 +245,41 @@ function Squaretide() {
 
         if (matchingSets[0]) {
             matchingSets = matchingSets.sort(function(a,b){
-                return a.length - b.length;
+                return b.length - a.length;
             })
             chainsSinceLastCombo += 1;
             var totalScoreForSets = 0;
             var delay = 170;
             stopTimer();
+            var baseTone = 440;
+            var chainsSoFar = 0;
+
             function resolveTilesInChain(chain){
 
+                chainsSoFar++;
+                var tilesSoFar = 0;
+
+                if (chain.every(function(tile){
+                    return !tile.occupied;
+                })) {
+                    return;
+                }
+
                 function resolveTile(tile) {
+                    tilesSoFar++;
                     tile.resolve();
                     totalScoreForSets += tile.score || 100;
+
+                    synth.tone(baseTone * (1.0 + chainsSoFar/ 10) * (1.0 + tilesSoFar / 10), 100);
                 }
 
                 trampoline(chain,resolveTile,delay);
 
-                matchingSets = matchingSets.filter(function(chain){
-                    return chain.every(function(tile){
-                        return tile.occupied;
-                    })
-                })
+                // matchingSets = matchingSets.filter(function(chain){
+                //     return chain.every(function(tile){
+                //         return tile.occupied;
+                //     })
+                // })
             }
 
             trampoline(matchingSets,resolveTilesInChain,delay * 3.3,function(){

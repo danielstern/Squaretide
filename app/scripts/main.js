@@ -1,5 +1,11 @@
-var game = new Squaretide();
+var jukebox = new Jukebox();
 
+var synth = new jukebox.Synth();
+var synth2 = new jukebox.Synth();
+
+var drums = new jukebox.Drums();
+
+var game = new Squaretide();
 
 
 var showInstructions = false;
