@@ -102,24 +102,29 @@ square {
     animation-timing-function: ease-out;
   }
 
+  .pattern(@color) {
+    background: radial-gradient(ellipse at center, lighten(@color,25%) 0%,lighten(@color,20%) 100%); /* W3C */
+    
+  }
+
   &[color="red"] {
-    background-color: @color3;
+    .pattern(@color3);
   }
 
 
   &[color="green"] {
-    background-color: @color7;
+    .pattern(@color7);
   }
 
   &[color="gold"] {
-    background-color: @color4;
+    .pattern(@color4);
   }
 
   &[color="blue"] {
-    background-color: @color1;
+    .pattern(@color1);
   }
   &[color="pink"] {
-    background-color: @gray1;
+    .pattern(darken(mix(@color1,@color7),25%));
   }
 }
 
@@ -150,4 +155,8 @@ square[fly="in"] {
 @-webkit-keyframes spin-out {
   0%   { transform:rotate(0deg) translateZ(0px); }
   100% { transform:rotate(115deg) translateZ(10px); }
+}
+
+@media screen and (min-width:960px) {
+
 }
