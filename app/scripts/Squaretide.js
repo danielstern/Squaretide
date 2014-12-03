@@ -284,7 +284,7 @@ function Squaretide() {
 
                 setTimeout(function(){
                     startTimer();
-                },300);
+            },300);
 
             })
         }

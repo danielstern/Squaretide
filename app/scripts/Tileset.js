@@ -49,6 +49,14 @@ function Tileset(columns, rows, game) {
         });
     }
 
+    function getDiagonalLR(index) {
+        return tiles.filter(function(tile) {
+            return tile.x - tile.y == index;
+        }).sort(function(a, b) {
+            return a.x - b.x;
+        });
+    }
+
 
     function getRow(index) {
         return tiles.filter(function(tile) {
@@ -83,6 +91,17 @@ function Tileset(columns, rows, game) {
             allColumns.push(getColumn(i));
         }
         return allColumns;
+    }
+    function getAllAsDiagonals() {
+        var allDiagonals = [];
+        for (var i = 0; i < numColumns; i++) {
+            allDiagonals.push(getDiagonalLR(i));
+        }
+        for (var k = 0; k < numRows; k++) {
+            // debugger;
+            allDiagonals.push(getDiagonalLR(-i));
+        }
+        return allDiagonals;
     }
     function getAllAsRows() {
     	var allRows = [];
@@ -138,6 +157,7 @@ function Tileset(columns, rows, game) {
         flattenBottom:flattenBottom,
         getRandomTile:getRandomTile,
         getTiles:getTiles,
-    	getAllNeighbours:getAllNeighbours,
+        getAllNeighbours:getAllNeighbours,
+    	getAllAsDiagonals:getAllAsDiagonals,
     }
 }

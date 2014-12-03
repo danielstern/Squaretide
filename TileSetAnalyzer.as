@@ -16,6 +16,8 @@ package {
 			
 			
 			var columns:Array = tiles.getAllAsColumns();
+			var rows:Array = tiles.getAllAsRows();
+			var diagonals:Array = tiles.getAllAsDiagonals();
 			
 			//columns.fo
 			function getAllSegments(column) {
