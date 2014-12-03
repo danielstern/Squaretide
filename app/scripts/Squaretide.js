@@ -42,47 +42,76 @@ function Squaretide() {
         tickListeners.push(listener)
     }
 
-
-    function populateAll(_delay) {
-        var _tiles = tiles.getTiles().slice(0,tiles.getTiles().length);
-        var delay = _delay || 33;
-
-
-
-
-        function recursivelyPopulateTile() {
-            var tile = _tiles[0];
-            tile.activate();
-            if (_tiles[1]) {
-                _tiles.shift();
-                setTimeout(recursivelyPopulateTile,delay);
-            }
-        }
-
-        recursivelyPopulateTile();
+    function purgeAllTiles() {
+        tiles.getTiles().forEach(function(tile){
+            tile.resolve();
+        })
     }
 
-    this.startGameFlair = function(options) {
-        var _tiles = tiles.getTiles().slice(0,tiles.getTiles().length);
-        startTimer();
-        timeSinceLasttile -= 100;
-        function recursivelyResolveTile(cb) {
-            var tile = _tiles[0];
-            tile.resolve();
-            if (_tiles[1]) {
-                _tiles.shift();
-                setTimeout(recursivelyResolveTile,33,cb);
-            } else {
-                cb();
-            }
-        }
+    function changeColorAllTiles() {
+        tiles.getMatchingTiles(function(tile){
+            return tile.occupied;
+        }).forEach(function(tile){
+           tile.color = getSafeColor(tile);  
+        })
+    }
 
-        recursivelyResolveTile(function(){
 
-            setTimeout(game.startGame,1000,options);
+    function populateAllEmptyTiles() {
+        tiles.getMatchingTiles(function(tile){
+            return !tile.occupied;
+        }).forEach(function(tile){
+            tile.color = getSafeColor(tile); 
+            tile.activate();
         });
 
+        // var _tiles = tiles.getTiles().slice(0,tiles.getTiles().length);
+        // var delay = 33;
+
+        // if (reset) {
+        //     _tiles.forEach(function(tile){
+        //         tile.color = getSafeColor(tile);    
+        //     })
+        // }
+
+        // function recursivelyPopulateTile() {
+        //     var tile = _tiles[0];
+        //     if (reset || !tile.occupied) {
+        //         tile.color = getSafeColor(tile);    
+        //         tile.activate();
+        //     }
+
+        //     if (_tiles[1]) {
+        //         _tiles.shift();
+        //         setTimeout(recursivelyPopulateTile,delay);
+        //     }
+        // }
+
+        // recursivelyPopulateTile();
     }
+
+    // this.startGameFlair = function(options) {
+    //     var _tiles = tiles.getTiles().slice(0,tiles.getTiles().length);
+    //     // purgeAllTiles();
+    //     startTimer();
+    //     timeSinceLasttile -= 100;
+    //     function recursivelyResolveTile(cb) {
+    //         var tile = _tiles[0];
+    //         tile.resolve();
+    //         if (_tiles[1]) {
+    //             _tiles.shift();
+    //             setTimeout(recursivelyResolveTile,33,cb);
+    //         } else {
+    //             cb();
+    //         }
+    //     }
+
+    //     recursivelyResolveTile(function(){
+
+    //         setTimeout(game.startGame,300,options);
+    //     });
+
+    // }
 
     this.startGame = function(options) {
 
@@ -93,13 +122,10 @@ function Squaretide() {
         timeRemaining = (options.time || 60) * 1000;
         gameEndListener = options.gameEndListener;
 
-        timeSinceLasttile -= 20;
+        purgeAllTiles();
+        populateAllEmptyTiles();
+        changeColorAllTiles(); 
 
-        tiles.getTiles().forEach(function(tile){
-            tile.color = getSafeColor(tile);    
-        });
-
-        populateAll(1);
         score = 0;
         startTimer();
     }
@@ -162,8 +188,8 @@ function Squaretide() {
 
                 timeSinceLasttile -= longTileFrequency;
 
-                tile1.suspend(350);
-                tile2.suspend(350);
+                // tile1.suspend(350);
+                // tile2.suspend(350);
                 tiles.switchTiles(tile1, tile2);
                 chainsSinceLastCombo = 0;
             }
@@ -171,18 +197,10 @@ function Squaretide() {
 
         }
 
-        timeSinceLasttile += 1;
-        if (timeSinceLasttile >= tileFrequency) {
-            addTile();
-            timeSinceLasttile = 0;
-
-        };
-
         var matchingSets = TileSetAnalyzer.getChains(tiles, function(originator, tile) {
             return originator.color && originator.color === tile.color && !originator.resolved && !tile.resolved && originator.canInteract && tile.canInteract;
         }, 3);
 
-        tiles.flattenBottom();
 
         if (matchingSets[0]) {
             chainsSinceLastCombo += 1;
@@ -198,15 +216,10 @@ function Squaretide() {
                     if (chain[1]) {
                         setTimeout(resolveTilesRecursively, delay);
                         chain.shift();
-                        timeSinceLasttile -= 1;
                     }
                 }
 
                 resolveTilesRecursively();
-                // chain.forEach(function(tile) {
-                //     tile.resolve();
-                //     totalScoreForSets += 100;
-                // });
 
             });
             totalScoreForSets *= matchingSets.length;
@@ -222,22 +235,13 @@ function Squaretide() {
 
         tickListeners.forEach(function(listener) {
             listener();
-
         });
+
+        tiles.flattenBottom();
+        // populateAllEmptyTiles();
 
         document.getElementById('score').innerHTML = score;
         document.getElementById('time').innerHTML = Math.floor(timeRemaining / 1000);
 
     }
-
-    function addTile() {
-        var tile = tiles.getRandomTile();
-
-        if (!tile.occupied) {
-            tile.activate();
-            tile.color = getSafeColor(tile);
-        }
-    }
-
-
 }

@@ -28,6 +28,7 @@ function TileVisualizer() {
 		div2.setAttribute("color",tile.color);
 		div2.setAttribute("selected",tile.selected);
 		div2.setAttribute("resolved",tile.resolved);
+		div2.setAttribute("occupied",tile.occupied);
 
 		if (tile.occupied) {
 			div2.setAttribute("fly","in");
@@ -35,8 +36,10 @@ function TileVisualizer() {
 			div2.setAttribute("fly","out");
 		}
 	};
+
+	setInterval(onTick, 33);
 	function onClick() {
-		console.log("event")
+		console.log("Tile:", tile)
 		if (tile.selected) {
 			tile.selected = false;
 		} else {

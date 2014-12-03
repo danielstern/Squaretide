@@ -4,10 +4,10 @@ function Tile() {
 
 		tile.resolved = true;
 		tile.canInteract = false;
+		tile.occupied = false;
 
-		setTimeout(function(){
-			tile.occupied = false;
-		},350);
+		// setTimeout(function(){
+		// },350);
 
 	}
 

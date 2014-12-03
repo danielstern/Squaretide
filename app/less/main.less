@@ -214,20 +214,25 @@ square {
     z-index: 100;
   }
 
+
   &[resolved="true"] {
     transition: 0.3s opacity;
     opacity: 0;
+    animation: spin-out 0s 0.3s;
     -webkit-animation: spin-out 0.3s;
     z-index: 3000;
-    // animation: spin-out 0s 0.3s;
   }
 
   &[resolved="false"] {
-    animation: fly-in 1s;
-    -webkit-animation: fly-in 1s;
+    // -webkit-animation: fly-in 1s;
+    // animation: fly-in 1s;
     -webkit-animation-timing-function: ease-out; /* Chrome, Safari, Opera */
     animation-timing-function: ease-out;
     box-shadow: 1px 1px 1px rgba(0,0,0,0.3), 0px 1px 1px rgba(0,0,0,0.3);
+  }
+
+  &[occupied="false"] {
+    box-shadow: none;
   }
 
   &[color="red"] {

@@ -15,7 +15,8 @@ instructions.addEventListener("click", function() {
 start.addEventListener("click", function() {
 	// showInstructions = !showInstructions;
 	document.getElementById('game').setAttribute("show-menu",false);  		
-	game.startGameFlair({
+	game.startGame({
+	// game.startGameFlair({
     	time: 60,
     	// time: 5,
     	gameEndListener:function(){
@@ -26,7 +27,7 @@ start.addEventListener("click", function() {
 	});
 })
 
-game.startGame();
-setTimeout(function(){
-	// game.pauseGame();
-},2000);
+// game.startGame();
+// setTimeout(function(){
+// 	// game.pauseGame();
+// },2000);
