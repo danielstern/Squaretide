@@ -23,11 +23,12 @@ function TileVisualizer() {
 	 	if (finished) {
 	 		return;
 	 	}
-		div2.setAttribute("x", tile.x); 
-		div2.setAttribute("y", tile.y); 
+	 	if (tile.occupied) {
+			div2.setAttribute("x", tile.x); 
+			div2.setAttribute("y", tile.y); 
+	 	}
 		div2.setAttribute("color",tile.color);
 		div2.setAttribute("selected",tile.selected);
-		div2.setAttribute("resolved",tile.resolved);
 		div2.setAttribute("occupied",tile.occupied);
 
 		if (tile.occupied) {

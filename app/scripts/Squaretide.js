@@ -195,31 +195,50 @@ function Squaretide() {
             }
 
 
+
         }
 
         var matchingSets = TileSetAnalyzer.getChains(tiles, function(originator, tile) {
-            return originator.color && originator.color === tile.color && !originator.resolved && !tile.resolved && originator.canInteract && tile.canInteract;
+            return originator.color && originator.color === tile.color && originator.occupied && tile.occupied && originator.canInteract && tile.canInteract;
         }, 3);
 
+
+      
+
+        tickListeners.forEach(function(listener) {
+            listener();
+        });
+
+        tiles.flattenBottom();
+        console.log("flatten tiles");
+        populateAllEmptyTiles();
 
         if (matchingSets[0]) {
             chainsSinceLastCombo += 1;
             var totalScoreForSets = 0;
             matchingSets.forEach(function(chain) {
 
-                var delay = 33;
+                var delay = 300;
 
-                function resolveTilesRecursively() {
+                stopTimer();
+                console.log("stop timer");
+
+                function resolveTilesRecursively(cb) {
                     tile = chain[0];
                     tile.resolve();
                     totalScoreForSets += tile.score || 100;
                     if (chain[1]) {
-                        setTimeout(resolveTilesRecursively, delay);
+                        setTimeout(resolveTilesRecursively, delay,cb);
                         chain.shift();
+                    } else {
+                        setTimeout(cb, delay);
                     }
                 }
 
-                resolveTilesRecursively();
+                resolveTilesRecursively(function(){
+                    // console.log("starting timer again");
+                    startTimer();
+                });
 
             });
             totalScoreForSets *= matchingSets.length;
@@ -232,13 +251,6 @@ function Squaretide() {
             }
             score += totalScoreForSets;
         }
-
-        tickListeners.forEach(function(listener) {
-            listener();
-        });
-
-        tiles.flattenBottom();
-        // populateAllEmptyTiles();
 
         document.getElementById('score').innerHTML = score;
         document.getElementById('time').innerHTML = Math.floor(timeRemaining / 1000);

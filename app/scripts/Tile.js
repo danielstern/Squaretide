@@ -1,23 +1,13 @@
 function Tile() {
 	var tile = this;
 	this.resolve = function(){
-
-		tile.resolved = true;
 		tile.canInteract = false;
 		tile.occupied = false;
-
-		// setTimeout(function(){
-		// },350);
-
 	}
 
 	this.activate = function() {
 		tile.occupied = true;
-		tile.resolved = false;
 		tile.canInteract = true;
-		
-		// setTimeout(function(){
-		// },350)
 	}
 
 	this.suspend = function(time,callback) {

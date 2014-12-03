@@ -214,26 +214,38 @@ square {
     z-index: 100;
   }
 
-
-  &[resolved="true"] {
-    transition: 0.3s opacity;
-    opacity: 0;
-    animation: spin-out 0s 0.3s;
-    -webkit-animation: spin-out 0.3s;
-    z-index: 3000;
-  }
-
-  &[resolved="false"] {
+  // &[resolved="false"] {
     // -webkit-animation: fly-in 1s;
     // animation: fly-in 1s;
-    -webkit-animation-timing-function: ease-out; /* Chrome, Safari, Opera */
-    animation-timing-function: ease-out;
-    box-shadow: 1px 1px 1px rgba(0,0,0,0.3), 0px 1px 1px rgba(0,0,0,0.3);
-  }
+    // -webkit-animation-timing-function: ease-out; /* Chrome, Safari, Opera */
+    // animation-timing-function: ease-out;
+  // }
+
 
   &[occupied="false"] {
     box-shadow: none;
+    // transition: 1s opacity;
+    // opacity: 0;
+    -webkit-animation-fill-mode: forwards;
+    animation: spin-out 1s ;
+    -webkit-animation: spin-out 1s;
+    z-index: 3000;
+    opacity: 0 !important;
   }
+
+  &[occupied="true"] {
+    box-shadow: none;
+
+    -webkit-animation: fly-in 1s;
+    box-shadow: 1px 1px 1px rgba(0,0,0,0.3), 0px 1px 1px rgba(0,0,0,0.3);
+  }
+
+
+
+
+  // &[resolved="true"] {
+  
+  // }
 
   &[color="red"] {
     .pattern(@color3);
@@ -284,11 +296,16 @@ square[fly="in"] {
   0%   { 
     transform:rotate(0deg) translateZ(0px); 
     -webkit-transform:rotate(0deg) translateZ(0px); 
+    opacity: 1;
   }
   100% { 
     transform:rotate(115deg) translateZ(10px); 
     -webkit-transform:rotate(115deg) translateZ(10px); 
+    opacity: 0;
+    // margin-top: 0px;
   }
+  // 76%   { margin-top: -900px; transform:rotate(0deg) translateZ(10px); }
+  // 100% { margin:top: 0px; transform:rotate(0deg) translateZ(0px); }
 }
 
 @media screen and (min-width:960px) {
