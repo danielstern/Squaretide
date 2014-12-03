@@ -58,6 +58,18 @@ function Tileset(columns, rows, game) {
     }
 
 
+    function getDiagonalRL(index) {
+        console.log("Get diagonal rl",index);
+        return tiles.filter(function(tile) {
+            // debugger;
+            return tile.y + tile.x == index;
+        }).sort(function(a, b) {
+            return a.y - b.y;
+        });
+    }
+
+
+
     function getRow(index) {
         return tiles.filter(function(tile) {
             return tile.y == index;
@@ -93,13 +105,17 @@ function Tileset(columns, rows, game) {
         return allColumns;
     }
     function getAllAsDiagonals() {
+        // debugger;
         var allDiagonals = [];
         for (var i = 0; i < numColumns; i++) {
             allDiagonals.push(getDiagonalLR(i));
+            allDiagonals.push(getDiagonalRL(i));
         }
         for (var k = 0; k < numRows; k++) {
             // debugger;
-            allDiagonals.push(getDiagonalLR(-i));
+
+            allDiagonals.push(getDiagonalLR(-k - 1));
+            allDiagonals.push(getDiagonalRL(-k - 1));
         }
         return allDiagonals;
     }
