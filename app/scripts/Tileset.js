@@ -30,6 +30,21 @@ function Tileset(columns, rows, adjuster) {
         return tiles;
     }
 
+    function getRandomTile() {
+        return tiles[Math.floor(Math.random()* tiles.length)];
+    }
+
+    function getAllNeighbours(tile) {
+        return [
+            getTileAtCoordinates(tile.x,tile.y+1),
+            getTileAtCoordinates(tile.x,tile.y-1),
+            getTileAtCoordinates(tile.x+1,tile.y),
+            getTileAtCoordinates(tile.x-1,tile.y),
+        ].filter(function(tile){
+            return tile;
+        });
+    }
+
 
     function getColumn(index) {
         return tiles.filter(function(tile) {
@@ -125,6 +140,9 @@ function Tileset(columns, rows, adjuster) {
     	tilesAreAdjacent:tilesAreAdjacent,
     	switchTiles:switchTiles,
     	getAllAsRows:getAllAsRows,
-    	flattenBottom:flattenBottom,
+        flattenBottom:flattenBottom,
+        getRandomTile:getRandomTile,
+        getTiles:getTiles,
+    	getAllNeighbours:getAllNeighbours,
     }
 }

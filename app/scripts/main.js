@@ -1,6 +1,6 @@
 function Squaretide() {
 
-    var tileFrequency = 12;
+    var tileFrequency = 1;
     var timeSinceLasttile = 0;
     var ROWS = 6;
     var COLUMNS = 10;
@@ -9,24 +9,56 @@ function Squaretide() {
     var tilesset;
     var chainsSinceLastCombo = 0;
     var tickListeners = [];
+    var timer;
     var game = this;
+    var colors = ["BLUE", 'RED', 'GREEN', 'GOLD',"PINK"];
 
     function getRandomColor() {
-        var colors = ["BLUE", 'RED', 'GREEN', 'GOLD'];
         return colors[Math.floor(Math.random() * colors.length)];
     }
 
-    this.onTick = function(listener){
-    	tickListeners.push(listener)
-    }   
+    this.onTick = function(listener) {
+        tickListeners.push(listener)
+    }
+
+
+    function populateAll() {
+    	tiles.getTiles().forEach(function(tile){
+    		tile.activate();
+    		var neighbours = tiles.getAllNeighbours(tile);
+    		var safeColors = colors.slice(0,colors.length);
+    		neighbours.forEach(function(neighbour){
+    			if (safeColors.indexOf(neighbour.color) != -1) {
+    				safeColors.splice(safeColors.indexOf(neighbour.color),1);
+    			}
+    		})
+
+    		tile.color = safeColors[Math.floor(Math.random() * safeColors.length)];
+    	})
+    }
 
     this.startGame = function() {
         tiles = new Tileset(COLUMNS, ROWS);
+
+        populateAll();
+
+        startTimer();
+
     }
 
-    function bonusMessage(message){
-    	console.info(message);
+    function startTimer(int) {
+        timer = setInterval(game.tick, int || 33);
     }
+
+    function stopTimer() {
+        clearInterval(timer);
+    }
+
+
+    function bonusMessage(message) {
+        console.info(message);
+    }
+
 
     this.tick = function() {
 
@@ -44,16 +76,10 @@ function Squaretide() {
 
             if (tiles.tilesAreAdjacent(tile1, tile2)) {
 
-            	tile1.canInteract = false;
-            	tile2.canInteract = false;
+            	tile1.suspend(350);
+            	tile2.suspend(350);
                 tiles.switchTiles(tile1, tile2);
-
                 chainsSinceLastCombo = 0;
-
-                setTimeout(function(){
-                	tile1.canInteract = true;
-                	tile2.canInteract = true;
-                },350);
             }
 
         }
@@ -62,46 +88,40 @@ function Squaretide() {
         if (timeSinceLasttile >= tileFrequency) {
             addTile();
             timeSinceLasttile = 0;
-       
+
         };
 
         var matchingSets = TileSetAnalyzer.getChains(tiles, function(originator, tile) {
-        	return originator.color && originator.color === tile.color && !originator.resolved && !tile.resolved && originator.canInteract && tile.canInteract;					
-        },3);
+            return originator.color && originator.color === tile.color && !originator.resolved && !tile.resolved && originator.canInteract && tile.canInteract;
+        }, 3);
 
         tiles.flattenBottom();
-        
+
         if (matchingSets[0]) {
+            chainsSinceLastCombo += 1;
+            var totalScoreForSets = 0;
+            matchingSets.forEach(function(chain) {
 
-	        chainsSinceLastCombo += 1;
-	        var totalScoreForSets = 0;
-	        matchingSets.forEach(function(chain){
+                chain.forEach(function(tile) {
+                    tile.resolve();
+                    totalScoreForSets += 100;
+                });
 
-	          chain.forEach(function(tile) {	        	  
-	        	 tile.resolved = true;
-	        	 tile.canInteract = false;
-
-	        	 totalScoreForSets+=100;
-
-	        	 setTimeout(function(){
-	        	 	tile.occupied = false;
-	        	 },350);
-	          });
-
-	        });
-	        totalScoreForSets *= matchingSets.length;
-	        if (matchingSets.length > 1) {
-	        	bonusMessage("Combo: "+matchingSets.length);
-	        }
+            });
+            totalScoreForSets *= matchingSets.length;
+            if (matchingSets.length > 1) {
+                bonusMessage("Combo: " + matchingSets.length);
+            }
             totalScoreForSets *= chainsSinceLastCombo;
             if (chainsSinceLastCombo > 1) {
-            	bonusMessage("Chain: "+chainsSinceLastCombo);
+                bonusMessage("Chain: " + chainsSinceLastCombo);
             }
-            score+= totalScoreForSets;
+            score += totalScoreForSets;
         }
 
-        tickListeners.forEach(function(listener){
-        	listener();
+        tickListeners.forEach(function(listener) {
+            listener();
+
         });
 
         document.getElementById('score').innerHTML = score;
@@ -110,35 +130,15 @@ function Squaretide() {
 
 
     function addTile() {
-        var columns = tiles.getAllAsColumns();
+        var tile = tiles.getRandomTile();
 
-        var column = columns[Math.floor(Math.random() * columns.length)];
-
-        var lastEmpty = TileSetAnalyzer.getLastEmptyTile(column);
-
-        if (lastEmpty) {
-            var coordinate = lastEmpty;
-            coordinate.occupied = true;
-            coordinate.resolved = false;
-            // coordinate.initialize();
-            coordinate.color = getRandomColor();
-            setTimeout(function(){
-            	coordinate.canInteract = true;
-            },350)
-           
+        if (!tile.occupied) {
+            tile.activate();
+            tile.color = getRandomColor();
         }
     }
 }
 
 var game = new Squaretide();
-var timer;
+
 game.startGame();
-startTimer();
-
-function startTimer(int){
-	timer = setInterval(game.tick,int || 33);
-}
-
-function stopTimer() {
-	clearInterval(timer);
-}
