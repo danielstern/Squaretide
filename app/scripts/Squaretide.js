@@ -6,30 +6,33 @@ function Squaretide() {
     var COLUMNS = 6;
     var score = 0;
     var gridSize = 48;
-    var tilesset;
     var chainsSinceLastCombo = 0;
     var tickListeners = [];
     var timer;
     var game = this;
     var level = 1;
     var timeRemaining = 0;
+    var tiles;
     var colors = ["BLUE", 'RED', 'GREEN', 'GOLD',"PINK"];
     var gameEndListener;
+    
+    
 
+   
     function getRandomColor() {
         return colors[Math.floor(Math.random() * colors.length)];
     }
 
     function getSafeColor(tile) {
-    	var neighbours = tiles.getAllNeighbours(tile);
-    	var safeColors = colors.slice(0,colors.length);
-    	neighbours.forEach(function(neighbour){
-    		if (safeColors.indexOf(neighbour.color) != -1) {
-    			safeColors.splice(safeColors.indexOf(neighbour.color),1);
-    		}
-    	})
+        var neighbours = tiles.getAllNeighbours(tile);
+        var safeColors = colors.slice(0,colors.length);
+        neighbours.forEach(function(neighbour){
+            if (safeColors.indexOf(neighbour.color) != -1) {
+                safeColors.splice(safeColors.indexOf(neighbour.color),1);
+            }
+        })
 
-    	return safeColors[Math.floor(Math.random() * safeColors.length)];
+        return safeColors[Math.floor(Math.random() * safeColors.length)];
     }
 
     this.onTick = function(listener) {
@@ -38,16 +41,20 @@ function Squaretide() {
 
 
     function populateAll() {
-    	tiles.getTiles().forEach(function(tile){
-    		tile.activate();
-    		
+        tiles.getTiles().forEach(function(tile){
+            tile.activate();
+            
 
-    		tile.color = getSafeColor(tile);
-    	})
+            tile.color = getSafeColor(tile);
+        })
     }
 
     this.startGame = function(options) {
-        tiles = new Tileset(COLUMNS, ROWS);
+
+
+        // populateAll();
+
+       tiles = tiles || new Tileset(COLUMNS, ROWS, game);
         // level = 1;
         timeRemaining = options.time * 1000;
         gameEndListener = options.gameEndListener;
@@ -109,8 +116,8 @@ function Squaretide() {
 
             if (tiles.tilesAreAdjacent(tile1, tile2)) {
 
-            	tile1.suspend(350);
-            	tile2.suspend(350);
+                tile1.suspend(350);
+                tile2.suspend(350);
                 tiles.switchTiles(tile1, tile2);
                 chainsSinceLastCombo = 0;
             }
@@ -170,4 +177,6 @@ function Squaretide() {
             tile.color = getSafeColor(tile);
         }
     }
+
+
 }
