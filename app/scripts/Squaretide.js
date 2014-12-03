@@ -1,3 +1,24 @@
+function trampoline(array,iterator,delay,callback) {
+    function bounce() {
+        elem = array[0];
+        iterator(elem);
+        // var _delay;
+        // if (typeof delay === "number") {
+            // _delay = delay;
+        // } else {
+            // _delay = delay(elem);
+        // }
+        if (array[1]) {
+            setTimeout(bounce, delay);
+            array.shift();
+        } else {
+            setTimeout(callback, delay);
+        }
+    }
+
+    bounce();
+}
+
 function Squaretide() {
 
     var tileFrequency = 1;
@@ -187,9 +208,8 @@ function Squaretide() {
             if (tiles.tilesAreAdjacent(tile1, tile2)) {
 
                 timeSinceLasttile -= longTileFrequency;
-
-                // tile1.suspend(350);
-                // tile2.suspend(350);
+                tile1.suspend(350);
+                tile2.suspend(350);
                 tiles.switchTiles(tile1, tile2);
                 chainsSinceLastCombo = 0;
             }
@@ -209,47 +229,53 @@ function Squaretide() {
             listener();
         });
 
+        // this is the most amazing hack.
         tiles.flattenBottom();
-        console.log("flatten tiles");
+        tiles.flattenBottom();
+        tiles.flattenBottom();
+
         populateAllEmptyTiles();
 
+
+
         if (matchingSets[0]) {
+            matchingSets = matchingSets.sort(function(a,b){
+                return a.length - b.length;
+            })
             chainsSinceLastCombo += 1;
             var totalScoreForSets = 0;
-            matchingSets.forEach(function(chain) {
+            var delay = 150;
+            stopTimer();
+            function resolveTilesInChain(chain){
 
-                var delay = 300;
-
-                stopTimer();
-                console.log("stop timer");
-
-                function resolveTilesRecursively(cb) {
-                    tile = chain[0];
+                function resolveTile(tile) {
                     tile.resolve();
                     totalScoreForSets += tile.score || 100;
-                    if (chain[1]) {
-                        setTimeout(resolveTilesRecursively, delay,cb);
-                        chain.shift();
-                    } else {
-                        setTimeout(cb, delay);
-                    }
                 }
 
-                resolveTilesRecursively(function(){
-                    // console.log("starting timer again");
-                    startTimer();
-                });
+                trampoline(chain,resolveTile,delay);
 
-            });
-            totalScoreForSets *= matchingSets.length;
-            if (matchingSets.length > 1) {
-                bonusMessage("Combo: " + matchingSets.length);
+                matchingSets = matchingSets.filter(function(chain){
+                    return chain.every(function(tile){
+                        return tile.occupied;
+                    })
+                })
             }
-            totalScoreForSets *= chainsSinceLastCombo;
-            if (chainsSinceLastCombo > 1) {
-                bonusMessage("Chain: " + chainsSinceLastCombo);
-            }
-            score += totalScoreForSets;
+
+            trampoline(matchingSets,resolveTilesInChain,delay * 3,function(){
+
+                totalScoreForSets *= matchingSets.length;
+                if (matchingSets.length > 1) {
+                    bonusMessage("Combo: " + matchingSets.length);
+                }
+                totalScoreForSets *= chainsSinceLastCombo;
+                if (chainsSinceLastCombo > 1) {
+                    bonusMessage("Chain: " + chainsSinceLastCombo);
+                }
+                score += totalScoreForSets;
+
+                startTimer();
+            })
         }
 
         document.getElementById('score').innerHTML = score;
