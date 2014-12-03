@@ -34,14 +34,14 @@ var TileSetAnalyzer = {
 			return segments;
 		}
 
-		// columns.forEach(function(column){
-		// 	allSequences = allSequences.concat(getSegments(column));	
-		// })
+		columns.forEach(function(column){
+			allSequences = allSequences.concat(getSegments(column));	
+		})
 
 
-		// rows.forEach(function(row){
-		// 	allSequences = allSequences.concat(getSegments(row));	
-		// })
+		rows.forEach(function(row){
+			allSequences = allSequences.concat(getSegments(row));	
+		})
 
 		diagonals.forEach(function(diagonal){
 			allSequences = allSequences.concat(getSegments(diagonal));	

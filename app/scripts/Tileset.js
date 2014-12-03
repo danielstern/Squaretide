@@ -35,6 +35,10 @@ function Tileset(columns, rows, game) {
             getTileAtCoordinates(tile.x,tile.y-1),
             getTileAtCoordinates(tile.x+1,tile.y),
             getTileAtCoordinates(tile.x-1,tile.y),
+            getTileAtCoordinates(tile.x-1,tile.y-1),
+            getTileAtCoordinates(tile.x+1,tile.y-1),
+            getTileAtCoordinates(tile.x+1,tile.y+1),
+            getTileAtCoordinates(tile.x-1,tile.y+1),
         ].filter(function(tile){
             return tile;
         });
@@ -59,7 +63,6 @@ function Tileset(columns, rows, game) {
 
 
     function getDiagonalRL(index) {
-        console.log("Get diagonal rl",index);
         return tiles.filter(function(tile) {
             // debugger;
             return tile.y + tile.x == index;

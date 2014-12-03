@@ -35,7 +35,7 @@ function Squaretide() {
     var level = 1;
     var timeRemaining = 0;
     var tiles;
-    var colors = ["BLUE", 'RED', 'GREEN', 'GOLD',"PINK"];
+    var colors = ["BLUE", 'RED', 'GREEN', 'GOLD',"PINK","PURPLE","ORANGE","YELLOW","VIOLET"];
     var gameEndListener;
 
 
