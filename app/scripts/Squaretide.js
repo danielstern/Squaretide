@@ -35,7 +35,8 @@ function Squaretide() {
     var level = 1;
     var timeRemaining = 0;
     var tiles;
-    var colors = ["BLUE", 'RED', 'GREEN', 'GOLD',"PINK","PURPLE","ORANGE","YELLOW","VIOLET"];
+    var colors = ["BLUE", 'RED', 'GREEN', 'GOLD',"PINK","ORANGE"];
+    // var colors = ["BLUE", 'RED', 'GREEN', 'GOLD',"PINK","PURPLE","ORANGE","YELLOW","VIOLET"];
     var gameEndListener;
 
 
@@ -56,7 +57,7 @@ function Squaretide() {
             }
         })
 
-        return safeColors[Math.floor(Math.random() * safeColors.length)];
+        return safeColors[Math.floor(Math.random() * safeColors.length)] || "BLUE";
     }
 
     this.onTick = function(listener) {

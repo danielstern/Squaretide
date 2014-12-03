@@ -118,7 +118,7 @@ function Tileset(columns, rows, game) {
             // debugger;
 
             allDiagonals.push(getDiagonalLR(-k - 1));
-            allDiagonals.push(getDiagonalRL(-k - 1));
+            allDiagonals.push(getDiagonalRL(k + numColumns));
         }
         return allDiagonals;
     }
