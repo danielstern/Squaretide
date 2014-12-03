@@ -44,6 +44,7 @@ function TileVisualizer() {
 		if (tile.selected) {
 			tile.selected = false;
 		} else {
+			tile.timeSelected = new Date().getTime();
 			tile.selected = true;
 		}
 	};

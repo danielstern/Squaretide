@@ -195,23 +195,27 @@ function Squaretide() {
 
         var activetiles = tiles.getMatchingTiles(function(tile) {
             return tile.selected;
-        });
+        }).sort(function(a,b){
+            return a.timeSelected - b.timeSelected;
+        })
 
         if (activetiles.length > 1) {
 
             var tile1 = activetiles[0];
             var tile2 = activetiles[1];
 
-            tile1.selected = false;
-            tile2.selected = false;
 
             if (tiles.tilesAreAdjacent(tile1, tile2)) {
 
+                tile1.selected = false;
+                tile2.selected = false;
                 timeSinceLasttile -= longTileFrequency;
                 tile1.suspend(350);
                 tile2.suspend(350);
                 tiles.switchTiles(tile1, tile2);
                 chainsSinceLastCombo = 0;
+            } else {
+                tile1.selected = false;
             }
 
 
