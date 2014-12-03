@@ -13,7 +13,7 @@ var Jukebox = function() {
   this.gainNode = function(options) {
       var gain = jukebox.audioContext.createGain();
       gain.connect(jukebox.audioContext.destination);
-      gain.gain.value = 0.5;
+      gain.gain.value = 0.2;
       return gain;
   };
 

@@ -1,7 +1,9 @@
 var jukebox = new Jukebox();
 
 var synth = new jukebox.Synth();
+synth.setVolume(0.2);
 var synth2 = new jukebox.Synth();
+synth2.setVolume(0.2);
 
 var drums = new jukebox.Drums();
 
@@ -17,8 +19,9 @@ var toneFrequencies = [
 	//493.88, //b
 	523.25, // c
 	//587.33, //d
-	659.25, //e
+	// 659.25, //e
 	698.46, //f
+	880.00, //hi a
 ]
 
 var musicIntervals = [
@@ -42,11 +45,13 @@ var start = document.getElementById("startButton");
 instructions.addEventListener("click", function() {
 	showInstructions = !showInstructions;
 	document.getElementById('game').setAttribute("show-instructions",showInstructions);
+	synth.tone(toneFrequencies[0],200);
 	
 })
 
 start.addEventListener("click", function() {
 	// showInstructions = !showInstructions;
+	synth.tone(toneFrequencies[1],200);
 	document.getElementById('game').setAttribute("show-menu",false);  		
 	game.startGame({
 	// game.startGameFlair({

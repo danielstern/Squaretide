@@ -8,6 +8,8 @@ function TileVisualizer() {
 	var visualizer = this;
 	var finished = false;
 	var isTouchDevice = false;
+	var synth = new jukebox.Synth({volume:0.1});
+	synth.setVolume(0.1);
 
 	div2.addEventListener("touchstart",function(){
 		isTouchDevice = true;
