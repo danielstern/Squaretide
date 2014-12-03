@@ -7,24 +7,27 @@ function Tile() {
 
 		setTimeout(function(){
 			tile.occupied = false;
-		},500);
+		},350);
 
 	}
 
 	this.activate = function() {
 		tile.occupied = true;
 		tile.resolved = false;
+		tile.canInteract = true;
 		
-		setTimeout(function(){
-			tile.canInteract = true;
-		},350)
+		// setTimeout(function(){
+		// },350)
 	}
 
-	this.suspend = function(time) {
+	this.suspend = function(time,callback) {
 		tile.canInteract = false;
 
 		setTimeout(function() {
 		    tile.canInteract = true;
+		    if (callback) {
+		    	callback(tile);
+		    }
 		}, time || 350);
 	}
 }

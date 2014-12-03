@@ -1,6 +1,7 @@
 function Squaretide() {
 
     var tileFrequency = 1;
+    var longTileFrequency = 20;
     var timeSinceLasttile = 0;
     var ROWS = 6;
     var COLUMNS = 6;
@@ -116,11 +117,15 @@ function Squaretide() {
 
             if (tiles.tilesAreAdjacent(tile1, tile2)) {
 
+                timeSinceLasttile -= longTileFrequency;
+
                 tile1.suspend(350);
                 tile2.suspend(350);
                 tiles.switchTiles(tile1, tile2);
                 chainsSinceLastCombo = 0;
             }
+
+            timeSinceLasttile -= longTileFrequency;
 
         }
 
