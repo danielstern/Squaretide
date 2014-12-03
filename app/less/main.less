@@ -7,6 +7,10 @@
 @color7: #36b773;
 
 @gray1: #333;
+@numRows: 6;
+@numColumns : 6;
+@squareSide : 48px;
+
 
 html {
   font-size: 12px;
@@ -19,8 +23,8 @@ body {
 }
 
 .gamefield {
-  width: 480px;
-  height: 288px;
+  width: @squareSide * @numColumns;
+  height: @squareSide * @numRows;
   position: absolute;
   top: 6rem;
   // bottom: 0;
@@ -35,27 +39,26 @@ body {
   position: absolute;
   z-index: 1000;
   color: @gray1;
-  font-size: 3rem;
-  width: 480px;
+  font-size: 1.5rem;
+  width: @squareSide * @numColumns;
   left: 0;
   right: 0;
   margin: auto;
-  top: 31rem;
+  top: 4rem;
   pointer-events: none;
 }
 .time {
   text-align: right;
-  font-size: 3rem;
 }
 
 h1 {
   position: absolute;
-  width: 480px;
+  width: @squareSide * @numColumns;
   left: 0;
   right: 0;
   margin: auto;
   text-transform: uppercase;
-  font-size: 5rem;
+  font-size: 3rem;
   color: @gray1;
   text-shadow: 1px 1px 1px rgba(0,0,0,0.3), 0px 1px 1px rgba(0,0,0,0.3);
 }

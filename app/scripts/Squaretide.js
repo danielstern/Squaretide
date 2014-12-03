@@ -3,7 +3,7 @@ function Squaretide() {
     var tileFrequency = 1;
     var timeSinceLasttile = 0;
     var ROWS = 6;
-    var COLUMNS = 10;
+    var COLUMNS = 6;
     var score = 0;
     var gridSize = 48;
     var tilesset;
