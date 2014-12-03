@@ -6,6 +6,8 @@
 @color6: #36ae6e;
 @color7: #36b773;
 @gray1: #333;
+@gray2: rgba(0,0,0,0.83);
+@white1: rgba(255,255,255,0.83);
 @fade1: rgba(0, 0, 0, 0.2);
 @fade2: rgba(0, 0, 0, 0.3);
 @numRows: 6;
@@ -17,9 +19,14 @@
 }
 html {
     font-size: 12px;
+
+    background: radial-gradient(ellipse at center, darken(@color1, 25%) 0%, darken(@color1, 20%) 100%);
+    width: 100%;
+    height: 100%;
+    color: @white1;
 }
 body {
-    background-color: lighten(@gray1, 75%);
+    // background-color: lighten(@gray1, 75%);
     font-family: RobotoDraft;
     perspective: 450px;
 }
@@ -40,17 +47,18 @@ menu {
     right: 0;
     margin: auto;
     z-index: 10000;
-    p {} nav {
+    nav {
         transform: translateZ(0);
         position: absolute;
         width: 100%;
-        top: 8rem;
+        top: 0rem;
         transition: top 0.2s ease-in-out;
         text-align: center;
     }
     .instructions {
         transform: translateZ(0);
-        background-color: white;
+        .pattern(@white1);
+        color: @gray2;
         position: absolute;
         transition: all 0.2s ease-in-out;
         bottom: 0px;
@@ -74,7 +82,8 @@ h1 {
     margin: auto;
     text-transform: uppercase;
     font-size: 4rem;
-    color: @gray1;
+    color: @white1;
+    // color: @gray1;
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3), 0px 1px 1px rgba(0, 0, 0, 0.3);
 }
 [show-menu="false"] {
@@ -95,7 +104,7 @@ h1 {
 .score, .time {
     position: absolute;
     z-index: 1000;
-    color: @gray1;
+    color: @white1;
     font-size: 2.5rem;
     width: @squareSide * @numColumns;
     left: 0;
@@ -105,35 +114,39 @@ h1 {
     // display:block;
     pointer-events: none;
 }
-[show-menu="true"] {} button {
-    font-size: 1rem;
+
+button {
+    font-size: 2.5rem;
     font-family: RobotoDraft;
     padding: 1rem;
+    // border-radius: 3px;
     background-color: lighten(@gray1, 83%);
+    color: @white1;
+    font-weight: 700;
+    line-height: 2.2rem;
     border: none;
-    width: @squareSide * 1.8;
-    height: @squareSide * 1.8;
+    width: @squareSide * 3;
+    transition: 0.2s all ease-in-out;
+    height: @squareSide * 3;
     cursor: pointer;
     position: absolute;
-    // text-transform: uppercase;
+    text-transform: uppercase;
     // display: block;
     // border-top: 1px solid lighten(@gray1,93%);
     // border-left: 1px solid lighten(@gray1,83%);
     // border-right: 2px solid lighten(@gray1,63%);
     // border-bottom: 2px solid lighten(@gray1,43%);
-    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3), 0px 1px 1px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.3);
+    // box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3), 0px 1px 1px rgba(0, 0, 0, 0.3);
     // text-shadow: 1px 1px 1px rgba(0,0,0,0.1), 0px 1px 1px rgba(0,0,0,0.1);
 }
 #instructionsButton {
-    .pattern(@color3);
-    color: rgba(255, 255, 255, 0.83);
-    right: 3rem;
+    .pattern(darken(@color3,25%));
+    right: 0rem;
 }
 #startButton {
-    .pattern(@color6);
-    font-size: 1.5rem;
-    left: 3rem;
-    color: rgba(255, 255, 255, 0.83);
+    .pattern(darken(@color6,25%));
+    left: 0rem;
 }
 button + button {
     margin-left: 3rem;
@@ -153,6 +166,7 @@ button + button {
     -o-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);
     overflow: hidden;
+    background: radial-gradient(ellipse at center, lighten(@color1, 5%) 0%, lighten(@color1, 2%) 100%);
     // transform: rotateX(45deg);
 }
 [show-instructions="true"] {
@@ -165,8 +179,12 @@ button + button {
     }
     menu {
         background-color: darken(@fade2, 0%);
-        nav {
-            top: 6rem;
+        // nav {
+        //     top: 6rem;
+        // }
+
+        button {
+          height: @squareSide * 2;
         }
     }
 }

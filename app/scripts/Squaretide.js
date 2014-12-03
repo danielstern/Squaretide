@@ -268,11 +268,11 @@ function Squaretide() {
 
             trampoline(matchingSets,resolveTilesInChain,delay * 3.3,function(){
 
-                totalScoreForSets *= matchingSets.length;
+                totalScoreForSets *= matchingSets.length || 1;
                 if (matchingSets.length > 1) {
                     bonusMessage("Combo: " + matchingSets.length);
                 }
-                totalScoreForSets *= chainsSinceLastCombo;
+                totalScoreForSets *= chainsSinceLastCombo || 1;
                 if (chainsSinceLastCombo > 1) {
                     bonusMessage("Chain: " + chainsSinceLastCombo);
                 }

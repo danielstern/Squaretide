@@ -27,7 +27,7 @@ start.addEventListener("click", function() {
 	});
 })
 
-// game.startGame();
-// setTimeout(function(){
-// 	// game.pauseGame();
-// },2000);
+game.startGame();
+setTimeout(function(){
+	// game.pauseGame();
+},100);
