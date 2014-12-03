@@ -7,7 +7,7 @@ function Tile() {
 
 		setTimeout(function(){
 			tile.occupied = false;
-		},350);
+		},500);
 
 	}
 

@@ -17,6 +17,18 @@ function Squaretide() {
         return colors[Math.floor(Math.random() * colors.length)];
     }
 
+    function getSafeColor(tile) {
+    	var neighbours = tiles.getAllNeighbours(tile);
+    	var safeColors = colors.slice(0,colors.length);
+    	neighbours.forEach(function(neighbour){
+    		if (safeColors.indexOf(neighbour.color) != -1) {
+    			safeColors.splice(safeColors.indexOf(neighbour.color),1);
+    		}
+    	})
+
+    	return safeColors[Math.floor(Math.random() * safeColors.length)];
+    }
+
     this.onTick = function(listener) {
         tickListeners.push(listener)
     }
@@ -25,15 +37,9 @@ function Squaretide() {
     function populateAll() {
     	tiles.getTiles().forEach(function(tile){
     		tile.activate();
-    		var neighbours = tiles.getAllNeighbours(tile);
-    		var safeColors = colors.slice(0,colors.length);
-    		neighbours.forEach(function(neighbour){
-    			if (safeColors.indexOf(neighbour.color) != -1) {
-    				safeColors.splice(safeColors.indexOf(neighbour.color),1);
-    			}
-    		})
+    		
 
-    		tile.color = safeColors[Math.floor(Math.random() * safeColors.length)];
+    		tile.color = getSafeColor(tile);
     	})
     }
 
@@ -134,7 +140,7 @@ function Squaretide() {
 
         if (!tile.occupied) {
             tile.activate();
-            tile.color = getRandomColor();
+            tile.color = getSafeColor(tile);
         }
     }
 }
