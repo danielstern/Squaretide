@@ -278,7 +278,14 @@ function Squaretide() {
                 }
                 score += totalScoreForSets;
 
-                startTimer();
+                tiles.flattenBottom();
+                tiles.flattenBottom();
+                tiles.flattenBottom();
+
+                setTimeout(function(){
+                    startTimer();
+                },300);
+
             })
         }
 
