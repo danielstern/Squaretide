@@ -244,7 +244,7 @@ function Squaretide() {
             })
             chainsSinceLastCombo += 1;
             var totalScoreForSets = 0;
-            var delay = 150;
+            var delay = 170;
             stopTimer();
             function resolveTilesInChain(chain){
 
@@ -262,7 +262,7 @@ function Squaretide() {
                 })
             }
 
-            trampoline(matchingSets,resolveTilesInChain,delay * 3,function(){
+            trampoline(matchingSets,resolveTilesInChain,delay * 3.3,function(){
 
                 totalScoreForSets *= matchingSets.length;
                 if (matchingSets.length > 1) {
