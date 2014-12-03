@@ -35,7 +35,7 @@ function Squaretide() {
     var level = 1;
     var timeRemaining = 0;
     var tiles;
-    var colors = ["BLUE", 'RED', 'GREEN', 'GOLD',"PINK","ORANGE"];
+ 
     // var colors = ["BLUE", 'RED', 'GREEN', 'GOLD',"PINK","PURPLE","ORANGE","YELLOW","VIOLET"];
     var gameEndListener;
 
@@ -87,52 +87,9 @@ function Squaretide() {
             tile.activate();
         });
 
-        // var _tiles = tiles.getTiles().slice(0,tiles.getTiles().length);
-        // var delay = 33;
-
-        // if (reset) {
-        //     _tiles.forEach(function(tile){
-        //         tile.color = getSafeColor(tile);    
-        //     })
-        // }
-
-        // function recursivelyPopulateTile() {
-        //     var tile = _tiles[0];
-        //     if (reset || !tile.occupied) {
-        //         tile.color = getSafeColor(tile);    
-        //         tile.activate();
-        //     }
-
-        //     if (_tiles[1]) {
-        //         _tiles.shift();
-        //         setTimeout(recursivelyPopulateTile,delay);
-        //     }
-        // }
-
-        // recursivelyPopulateTile();
     }
 
-    // this.startGameFlair = function(options) {
-    //     var _tiles = tiles.getTiles().slice(0,tiles.getTiles().length);
-    //     // purgeAllTiles();
-    //     startTimer();
-    //     timeSinceLasttile -= 100;
-    //     function recursivelyResolveTile(cb) {
-    //         var tile = _tiles[0];
-    //         tile.resolve();
-    //         if (_tiles[1]) {
-    //             _tiles.shift();
-    //             setTimeout(recursivelyResolveTile,33,cb);
-    //         } else {
-    //             cb();
-    //         }
-    //     }
-
-    //     recursivelyResolveTile(function(){
-
-    //         setTimeout(game.startGame,300,options);
-    //     });
-
+ 
     // }
 
     this.startGame = function(options) {
@@ -214,6 +171,8 @@ function Squaretide() {
                 tile1.suspend(350);
                 tile2.suspend(350);
                 tiles.switchTiles(tile1, tile2);
+                synth.tone(toneFrequencies[colors.indexOf(tile1.color)], 0.5);
+                synth2.tone(toneFrequencies[colors.indexOf(tile2.color)], 0.5);
                 chainsSinceLastCombo = 0;
             } else {
                 tile1.selected = false;
@@ -249,9 +208,8 @@ function Squaretide() {
             })
             chainsSinceLastCombo += 1;
             var totalScoreForSets = 0;
-            var delay = 170;
+            var delay = 150;
             stopTimer();
-            var baseTone = 440;
             var chainsSoFar = 0;
 
             function resolveTilesInChain(chain){
@@ -259,27 +217,28 @@ function Squaretide() {
                 chainsSoFar++;
                 var tilesSoFar = 0;
 
+                var baseTone = toneFrequencies[colors.indexOf(chain[0].color)];
+
                 if (chain.every(function(tile){
                     return !tile.occupied;
                 })) {
                     return;
                 }
+                
+                synth2.tone(baseTone);
 
                 function resolveTile(tile) {
-                    tilesSoFar++;
                     tile.resolve();
                     totalScoreForSets += tile.score || 100;
 
-                    synth.tone(baseTone * (1.0 + chainsSoFar/ 10) * (1.0 + tilesSoFar / 10), 100);
+                    synth.tone(baseTone * musicIntervals[tilesSoFar], 100);
+                    tilesSoFar++;
                 }
 
-                trampoline(chain,resolveTile,delay);
-
-                // matchingSets = matchingSets.filter(function(chain){
-                //     return chain.every(function(tile){
-                //         return tile.occupied;
-                //     })
-                // })
+                trampoline(chain,resolveTile,delay,function(){
+                    synth2.stop();
+                    synth.stop();
+                });
             }
 
             trampoline(matchingSets,resolveTilesInChain,delay * 3.3,function(){
@@ -300,7 +259,7 @@ function Squaretide() {
 
                 setTimeout(function(){
                     startTimer();
-            },300);
+            },266);
 
             })
         }

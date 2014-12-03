@@ -120,6 +120,12 @@ var Jukebox = function() {
       }
     }
 
+    this.stop = function(){
+      oscillators.forEach(function(osc){
+        osc.stop();
+      })
+    }
+
 		this.tone = function(freq,duration) {
 			oscillators.forEach(function(osc){
 				osc.frequency = freq;

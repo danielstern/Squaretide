@@ -45,6 +45,7 @@ function TileVisualizer() {
 			tile.selected = false;
 		} else {
 			tile.timeSelected = new Date().getTime();
+			synth.tone(toneFrequencies[colors.indexOf(tile.color)], 50);
 			tile.selected = true;
 		}
 	};
