@@ -171,8 +171,9 @@ function Squaretide() {
                 tile1.suspend(350);
                 tile2.suspend(350);
                 tiles.switchTiles(tile1, tile2);
-                synth.tone(toneFrequencies[colors.indexOf(tile1.color)], 0.5);
-                synth2.tone(toneFrequencies[colors.indexOf(tile2.color)], 0.5);
+                soundManager.tone(colors.indexOf(tile1.color), 100);
+                soundManager.tone(colors.indexOf(tile2.color), 100);
+                // synth2.tone(toneFrequencies[colors.indexOf(tile2.color)], 0.5);
                 chainsSinceLastCombo = 0;
             } else {
                 tile1.selected = false;
@@ -217,7 +218,7 @@ function Squaretide() {
                 chainsSoFar++;
                 var tilesSoFar = 0;
 
-                var baseTone = toneFrequencies[colors.indexOf(chain[0].color)];
+                var baseTone = colors.indexOf(chain[0].color);
 
                 if (chain.every(function(tile){
                     return !tile.occupied;
@@ -225,19 +226,19 @@ function Squaretide() {
                     return;
                 }
                 
-                synth2.tone(baseTone);
+                soundManager.tone(baseTone);
 
                 function resolveTile(tile) {
                     tile.resolve();
                     totalScoreForSets += tile.score || 100;
 
-                    synth.tone(baseTone * musicIntervals[tilesSoFar], 100);
+                    soundManager.tone(baseTone + tilesSoFar, 100);
                     tilesSoFar++;
                 }
 
                 trampoline(chain,resolveTile,delay,function(){
-                    synth2.stop();
-                    synth.stop();
+                    // synth2.stop();
+                    // synth.stop();
                 });
             }
 

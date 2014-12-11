@@ -1,0 +1,1088 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"sy",
+				"synth"
+			],
+			[
+				"font",
+				"font-weight"
+			],
+			[
+				"empt",
+				"emptyValueProceedsFullValueInArray"
+			],
+			[
+				"all",
+				"changeColorAllTiles"
+			],
+			[
+				"box",
+				"box-shadow"
+			],
+			[
+				"bo",
+				"flattenBottom"
+			],
+			[
+				"reso",
+				"resolveTilesRecursively"
+			],
+			[
+				"get",
+				"getElementById"
+			],
+			[
+				"game",
+				"gameEndListener"
+			],
+			[
+				"chain",
+				"chainsSinceLastCombo"
+			],
+			[
+				"col",
+				"columns"
+			],
+			[
+				"min",
+				"minumum"
+			],
+			[
+				"co",
+				"columns"
+			],
+			[
+				"slice",
+				"sliceLength"
+			],
+			[
+				"sli",
+				"sliceSize"
+			],
+			[
+				"backg",
+				"background-color"
+			],
+			[
+				"tick",
+				"tickListeners"
+			],
+			[
+				"Tile",
+				"TileSetAnalyzer"
+			],
+			[
+				"square1",
+				"square1OriginalColor"
+			],
+			[
+				"squa",
+				"square1"
+			],
+			[
+				"getSq",
+				"getSquareRight"
+			],
+			[
+				"getS",
+				"getSquareAtCoordinates"
+			],
+			[
+				"rwo",
+				"rowNumber"
+			],
+			[
+				"retur",
+				"returnSquares"
+			],
+			[
+				"squ",
+				"squaresLine"
+			],
+			[
+				"sq",
+				"squaresAreAdjacent"
+			],
+			[
+				"pos",
+				"position"
+			],
+			[
+				"acti",
+				"activeSquares"
+			],
+			[
+				"gri",
+				"gridSize"
+			],
+			[
+				"num",
+				"numColumns"
+			],
+			[
+				"list-s",
+				"list-style"
+			],
+			[
+				"state",
+				"stateParams"
+			],
+			[
+				"ob",
+				"obj2"
+			],
+			[
+				"are",
+				"areEqual"
+			],
+			[
+				"time",
+				"timeNow"
+			],
+			[
+				"st",
+				"stateParams"
+			],
+			[
+				"hex",
+				"hexToRgb"
+			],
+			[
+				"thumb-shad",
+				"thumb-shadow-color"
+			],
+			[
+				"less",
+				"lessVals"
+			],
+			[
+				"track-b",
+				"track-border-width"
+			],
+			[
+				"les",
+				"lessVals"
+			],
+			[
+				"thumb-sh",
+				"thumb-shadow-color"
+			],
+			[
+				"thumb-s",
+				"thumb-shadow-blur"
+			],
+			[
+				"modi",
+				"modifyLess"
+			],
+			[
+				"background",
+				"background-size"
+			],
+			[
+				"thu",
+				"thumb-height"
+			],
+			[
+				"mar",
+				"margin-top"
+			],
+			[
+				"thumb",
+				"thumb-height"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "app/index.html",
+			"settings":
+			{
+				"buffer_size": 3267,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": ".tmp/styles/main.css",
+			"settings":
+			{
+				"buffer_size": 7044,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app/scripts/Squaretide.js",
+			"settings":
+			{
+				"buffer_size": 6850,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app/scripts/jukebox.js",
+			"settings":
+			{
+				"buffer_size": 6726,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app/scripts/TileVisualizer.js",
+			"settings":
+			{
+				"buffer_size": 1345,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app/scripts/main.js",
+			"settings":
+			{
+				"buffer_size": 1482,
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 58.0,
+		"selected_items":
+		[
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"package in",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 400.0
+	},
+	"console":
+	{
+		"height": 126.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = '7183a2d3e96f11eeadd761d777e62404' + 'e330c659d4bb41d3bdf022e94cab3cd0'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/D/Projects/squaretide",
+		"/D/Projects/squaretide/.tmp",
+		"/D/Projects/squaretide/.tmp/styles",
+		"/D/Projects/squaretide/app",
+		"/D/Projects/squaretide/app/less"
+	],
+	"file_history":
+	[
+		"/D/Projects/squaretide/node_modules/grunt-contrib-less/node_modules/less/test/less/errors/javascript-undefined-var.less",
+		"/D/Projects/squaretide/app/scripts/jukebox.js",
+		"/D/Projects/squaretide/app/scripts/Tile.js",
+		"/D/Projects/jukeboxjs/app/index.html",
+		"/D/Projects/jukeboxjs/app/scripts/main.js",
+		"/D/Projects/squaretide/app/scripts/TileVisualizer.js",
+		"/D/Projects/squaretide/app/scripts/Tileset.js",
+		"/D/Projects/squaretide/app/scripts/TileSetAnalyzer.js",
+		"/D/Projects/squaretide/app/less/main.less",
+		"/D/Projects/squaretide/node_modules/grunt-contrib-htmlmin/node_modules/html-minifier/node_modules/relateurl/lib/parse/urlstring.js",
+		"/D/Projects/squaretide/node_modules/grunt-contrib-concat/node_modules/source-map/build/prefix-utils.jsm",
+		"/D/Projects/squaretide/package.json",
+		"/D/Projects/squaretide/app/scripts/main.js",
+		"/D/Projects/squaretide/TileSetAnalyzer.as",
+		"/D/Projects/squaretide/Tileset.as",
+		"/D/Projects/squaretide/node_modules/grunt-autoprefixer/node_modules/autoprefixer-core/node_modules/caniuse-db/region-usage-json/alt-na.json",
+		"/D/Projects/squaretide/node_modules/grunt/appveyor.yml",
+		"/D/Projects/squaretide/Gruntfile.js",
+		"/D/Projects/material/dist/docs/index.html",
+		"/D/Projects/modern-webapp/app/index.html",
+		"/C/Users/Admin/Downloads/colorscheme.less",
+		"/D/Projects/squaretide/node_modules/grunt-contrib-less/node_modules/.bin/lessc",
+		"/D/Projects/squaretide/node_modules/grunt-contrib-less/node_modules/less/node_modules/request/node_modules/http-signature/.dir-locals.el",
+		"/D/Projects/squaretide/.bowerrc",
+		"/D/Projects/squaretide/Squaretide.as",
+		"/D/Projects/squaretide/app/robots.txt",
+		"/D/Projects/squaretide/node_modules/grunt/node_modules/findup-sync/node_modules/glob/test/readme-issue.js",
+		"/D/Projects/squaretide/Tile.as",
+		"/D/Projects/squaretide/.tmp/styles/main.css",
+		"/D/Projects/squaretide/node_modules/grunt-contrib-less/node_modules/less/lib/less/visitor.js",
+		"/D/Projects/squaretide/node_modules/grunt-contrib-less/node_modules/less/test/css/variables-in-at-rules.css",
+		"/D/Projects/squaretide/bower_components/jquery/src/attributes/val.js",
+		"/D/Projects/modern-webapp/Gruntfile.js",
+		"/D/Projects/squaretide/app/styles/main.css",
+		"/D/Projects/squaretide/node_modules/grunt-contrib-uglify/node_modules/uglify-js/lib/mozilla-ast.js",
+		"/D/Projects/squaretide/node_modules/grunt-mocha/node_modules/grunt-lib-phantomjs/node_modules/phantomjs/node_modules/npmconf/node_modules/ini/.npm-completion.tmp",
+		"/D/Projects/material/docs/app/js/app.js",
+		"/D/Projects/danielstern2014/Gruntfile.js",
+		"/D/Projects/material/docs/app/js/ngPanel.js",
+		"/D/Projects/material/docs/app/js/demoInclude.js",
+		"/D/Projects/material/docs/app/js/demo.js",
+		"/D/Projects/danielstern2014/app/partials/navbar.html",
+		"/D/Projects/danielstern2014/app/partials/main.html",
+		"/D/Projects/danielstern2014/.tmp/scripts/portfolio.js",
+		"/D/Projects/danielstern2014/app/partials/portfolio/cyo.html",
+		"/D/Projects/danielstern2014/app/less/shim.less",
+		"/D/Projects/danielstern2014/app/less/shim.css",
+		"/D/Projects/danielstern2014/app/typescript/main.ts",
+		"/D/Projects/danielstern2014/.tmp/scripts/main.js",
+		"/D/Projects/danielstern2014/.tmp/styles/main.css",
+		"/D/Projects/danielstern2014/app/less/old_less.less",
+		"/D/Projects/danielstern2014/app/old_index.html",
+		"/D/Projects/danielstern2014/modern-webapp.sublime-project",
+		"/D/Projects/danielstern2014/.gitignore",
+		"/D/Projects/danielstern2014/app/partials/sidenav.html",
+		"/D/Projects/danielstern2014/app/robots.txt",
+		"/D/Projects/danielstern2014/app/partials/portfolio/range-css.html",
+		"/D/Projects/danielstern2014/app/less/main.less",
+		"/D/Projects/danielstern2014/bower_components/angular-material/angular-material.js",
+		"/D/Projects/danielstern2014/app/partials/nav-old.html",
+		"/D/Projects/danielstern2014/bower.json",
+		"/D/Projects/maple-a-month/Gruntfile.js",
+		"/D/Projects/danielstern2014/app/partials/project.html",
+		"/D/Projects/danielstern2014/app/partials/portfolio/magic-circles.html",
+		"/D/Projects/danielstern2014/app/index.html",
+		"/D/Projects/danielstern2014/app/partials/portfolio.html",
+		"/D/Projects/danielstern2014/README.md",
+		"/D/Projects/danielstern2014/app/partials/portfolio/angular-audio.html",
+		"/D/Projects/danielstern2014/app/partials/portfolio/lorien-ipsum.html",
+		"/D/Projects/danielstern2014/app/typescript/portfolio.ts",
+		"/D/Projects/range.css/bower_components/bootstrap/less/responsive-embed.less",
+		"/D/Projects/danielstern2014/.editorconfig",
+		"/D/Projects/danielstern2014/app/partials/portfolio/maple-a-month.html",
+		"/D/Projects/danielstern2014/app/partials/project-image-feature.html",
+		"/D/Projects/danielstern2014/Procfile",
+		"/D/Projects/danielstern2014/package.json",
+		"/D/Projects/flashforum/server/api/post/post.model.js",
+		"/D/Projects/flashforum/server/api/thread/thread.model.js",
+		"/D/Projects/flashforum/client/bower_components/angular-socket-io/socket.spec.js",
+		"/D/Projects/flashforum/client/bower_components/angular-socket-io/socket.js",
+		"/D/Projects/flashforum/server/config/socketio.js",
+		"/D/Projects/flashforum/server/config/seed.js",
+		"/D/Projects/flashforum/client/components/socket/socket.service.js",
+		"/D/Projects/flashforum/server/api/user/user.model.js",
+		"/D/Projects/flashforum/client/bower_components/jquery/src/core/ready.js",
+		"/D/Projects/flashforum/client/robots.txt",
+		"/D/Projects/flashforum/client/bower_components/es5-shim/CHANGES",
+		"/D/Projects/flashforum/client/bower_components/bootstrap/grunt/bs-glyphicons-data-generator.js",
+		"/D/Projects/flashforum/client/bower_components/jquery/src/core/parseHTML.js",
+		"/D/Projects/flashforum/client/bower_components/jquery/src/manipulation/var/rcheckableType.js",
+		"/D/Projects/flashforum/bower.json",
+		"/D/Projects/flashforum/client/app/main/main.jade",
+		"/D/Projects/flashforum/client/app/main/main.controller.js",
+		"/D/Projects/flashforum/client/app/thread/thread.js",
+		"/D/Projects/flashforum/client/app/thread/thread.less",
+		"/D/Projects/flashforum/server/api/thing/thing.model.js",
+		"/D/Projects/flashforum/client/app/main/main.js",
+		"/D/Projects/flashforum/client/bower_components/angular-bootstrap/ui-bootstrap.js",
+		"/D/Projects/flashforum/flashforum.sublime-project",
+		"/D/Projects/flashforum/client/app/account/signup/signup.jade",
+		"/D/Projects/flashforum/client/app/thread/thread.controller.js",
+		"/D/Projects/flashforum/client/app/thread/thread.jade",
+		"/D/Projects/flashforum/server/api/post/post.controller.js",
+		"/D/Projects/flashforum/e2e/main/main.po.js",
+		"/D/Projects/flashforum/server/app.js",
+		"/D/Projects/flashforum/package.json",
+		"/D/Projects/flashforum/server/api/post/index.js",
+		"/D/Projects/flashforum/server/api/thread/index.js",
+		"/D/Projects/flashforum/server/api/thread/thread.controller.js",
+		"/D/Projects/flashforum/server/api/thread/thread.socket.js",
+		"/D/Projects/flashforum/.tmp/app/main/main.html",
+		"/D/Projects/flashforum/client/app/account/account.js",
+		"/D/Projects/flashforum/client/app/app.js",
+		"/D/Projects/flashforum/client/app/account/login/login.controller.js",
+		"/D/Projects/flashforum/server/api/thing/thing.controller.js",
+		"/D/Projects/flashforum/client/bower_components/bootstrap/less/theme.less",
+		"/D/Projects/flashforum/server/config/environment/test.js",
+		"/D/Projects/flashforum/client/components/navbar/navbar.controller.js",
+		"/D/Projects/flashforum/client/components/navbar/navbar.jade",
+		"/D/Projects/flashforum/.tmp/components/navbar/navbar.html",
+		"/D/Projects/flashforum/npm-debug.log",
+		"/D/Projects/flashforum/server/config/environment/production.js",
+		"/D/Projects/flashforum/.gitignore",
+		"/D/Projects/flashforum/x",
+		"/D/Projects/flashforum/Gruntfile.js",
+		"/D/Projects/flashforum/dist/server/config/express.js",
+		"/D/Projects/flashforum/server/config/express.js",
+		"/D/Projects/flashforum/protractor.conf.js"
+	],
+	"find":
+	{
+		"height": 34.0
+	},
+	"find_in_files":
+	{
+		"height": 90.0,
+		"where_history":
+		[
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"bower_c",
+			"bower-c",
+			"bower",
+			".synth",
+			"gain",
+			"vole",
+			"stop",
+			"tone =",
+			"tone(",
+			"switcht",
+			"tone",
+			"gamefi",
+			"purple",
+			"debugg",
+			"-webki",
+			"square",
+			"show-me",
+			"spin-out",
+			"animat",
+			"-webkit-transform: translateZ(0px) rotateX(0deg) rotateY(0deg); ",
+			"webkit",
+			"gamefi",
+			"occup",
+			"occupi",
+			"square",
+			"transit",
+			"button",
+			"instru",
+			"button",
+			"    height: @squareSide * 3;",
+			"button",
+			"butt",
+			"nav",
+			"startb",
+			"button",
+			"white1",
+			"c",
+			"h1",
+			"color: w",
+			"color: ",
+			"gamef",
+			"playfie",
+			"h1",
+			"select",
+			"score",
+			"h1",
+			"score",
+			"h1",
+			"show-men",
+			"stopT",
+			"resolved",
+			"resolve",
+			"changeColorAllTiles",
+			"populateA",
+			"getMatchingTiles",
+			"anima",
+			"aniamtion",
+			"recursivel",
+			"addTi",
+			"gameEndListener",
+			"timeRemaining",
+			"onT",
+			"ont",
+			".shift",
+			"stopG",
+			"stopg",
+			"flair",
+			"recursiv",
+			"box-s",
+			"gamef",
+			"inst",
+			"resolv",
+			"timesincela",
+			"timesince",
+			"squa",
+			"make",
+			"makes",
+			"gradie",
+			";\n",
+			"60",
+			"var tiles",
+			"var tile",
+			"click",
+			"2000",
+			"resol",
+			"new",
+			"new T",
+			"tile(",
+			"switcht",
+			"selected",
+			"switch",
+			"switchT",
+			"switch",
+			"resolved",
+			"main.js",
+			"asrows",
+			"getallasrows",
+			"ascol",
+			"colu",
+			"asC",
+			"origi",
+			"occupied",
+			"getAllAsC",
+			"getAllAs",
+			"vis",
+			"less",
+			"101",
+			"trace",
+			":",
+			": Tile",
+			": Number",
+			"public",
+			"square",
+			"updatep",
+			"diffSquare",
+			"squares",
+			"coordinagetDataAtCoordinatesgetDataAtCoordinates",
+			"coordina",
+			"coordin",
+			".squar",
+			"\n					",
+			"menu",
+			"demoapp",
+			"democtrl",
+			"sections",
+			"menu.",
+			"angulary",
+			"ga"
+		],
+		"highlight": false,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"",
+			"tile",
+			"",
+			"x-repeat",
+			"",
+			".move-animation",
+			"@speed",
+			"track",
+			"thumb-border-color",
+			"thumb-color",
+			"track-color",
+			"track-radius",
+			"color2",
+			"width: @thumb-width;",
+			"height: @thumb-height;",
+			"height: @thumb-height",
+			"@thumb-roundness",
+			"@color4",
+			"@color1",
+			"@color3",
+			"@color2",
+			"@color1",
+			"&"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 1,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "app/index.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3267,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2118,
+								2118
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 761.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": ".tmp/styles/main.css",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 7044,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								7044,
+								7044
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.tmLanguage"
+						},
+						"translation.x": 54892.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "app/scripts/Squaretide.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 6850,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								788,
+								788
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1827.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "app/scripts/jukebox.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 6726,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2784,
+								2784
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "app/scripts/TileVisualizer.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1345,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								356,
+								356
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "app/scripts/main.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1482,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								382,
+								382
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": -0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 26.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"project": "squaretide.sublime-project",
+	"replace":
+	{
+		"height": 62.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"jukebo",
+				"app\\scripts\\jukebox.js"
+			],
+			[
+				"tilevi",
+				"app\\scripts\\TileVisualizer.js"
+			],
+			[
+				"main",
+				"app\\scripts\\main.js"
+			],
+			[
+				"tileset",
+				"app\\scripts\\TileSetAnalyzer.js"
+			],
+			[
+				"tileseta",
+				"TileSetAnalyzer.as"
+			],
+			[
+				"anal",
+				"TileSetAnalyzer.as"
+			],
+			[
+				"tiles",
+				"Tileset.as"
+			],
+			[
+				"grunt",
+				"Gruntfile.js"
+			],
+			[
+				".less",
+				"app\\less\\main.less"
+			],
+			[
+				"tile",
+				"app\\scripts\\Tile.js"
+			],
+			[
+				"tilese",
+				"Tileset.as"
+			],
+			[
+				"visual",
+				"app\\scripts\\TileVisualizer.js"
+			],
+			[
+				"main.j",
+				"app\\scripts\\main.js"
+			],
+			[
+				".css",
+				".tmp\\styles\\main.css"
+			],
+			[
+				"shim",
+				"app\\less\\shim.less"
+			],
+			[
+				"gruntf",
+				"Gruntfile.js"
+			],
+			[
+				"main.h",
+				"app\\partials\\main.html"
+			],
+			[
+				"old",
+				"app\\less\\old_less.less"
+			],
+			[
+				"main.l",
+				"app\\less\\main.less"
+			],
+			[
+				"main.les",
+				"app\\less\\main.less"
+			],
+			[
+				"shim.",
+				"app\\less\\shim.less"
+			],
+			[
+				"shim.l",
+				"app\\less\\shim.less"
+			],
+			[
+				"main.t",
+				"app\\typescript\\main.ts"
+			],
+			[
+				"inde",
+				"app\\index.html"
+			],
+			[
+				"main.le",
+				"app\\less\\main.less"
+			],
+			[
+				"main.",
+				"app\\partials\\main.html"
+			],
+			[
+				"rang",
+				"app\\partials\\portfolio\\range-css.html"
+			],
+			[
+				"angular-a",
+				"app\\partials\\portfolio\\angular-audio.html"
+			],
+			[
+				"portfol",
+				"app\\typescript\\portfolio.ts"
+			],
+			[
+				"portf",
+				"app\\partials\\portfolio.html"
+			],
+			[
+				"port",
+				"app\\partials\\portfolio.html"
+			],
+			[
+				"mai",
+				"app\\partials\\main.html"
+			],
+			[
+				"por",
+				"app\\partials\\portfolio.html"
+			],
+			[
+				"mapl",
+				"app\\partials\\portfolio\\maple-a-month.html"
+			],
+			[
+				"proj",
+				"app\\partials\\project-image-feature.html"
+			],
+			[
+				"ind",
+				"app\\index.html"
+			],
+			[
+				"packa",
+				"package.json"
+			],
+			[
+				"socket.ser",
+				"client\\components\\socket\\socket.service.js"
+			],
+			[
+				"bower",
+				"bower.json"
+			],
+			[
+				"thread",
+				"client\\app\\thread\\thread.jade"
+			],
+			[
+				"threadc",
+				"client\\app\\thread\\thread.controller.js"
+			],
+			[
+				"mc",
+				"client\\app\\main\\main.controller.js"
+			],
+			[
+				"main.c",
+				"client\\app\\main\\main.controller.js"
+			],
+			[
+				"thread.j",
+				"client\\app\\thread\\thread.jade"
+			],
+			[
+				"maincon",
+				"client\\app\\main\\main.controller.js"
+			],
+			[
+				"f",
+				"flashforum.sublime-project"
+			],
+			[
+				"thing",
+				"server\\api\\thing\\thing.model.js"
+			],
+			[
+				"nav",
+				"client\\components\\navbar\\navbar.jade"
+			],
+			[
+				"navn",
+				"client\\components\\navbar\\navbar.controller.js"
+			],
+			[
+				"environm",
+				"server\\config\\environment\\production.js"
+			],
+			[
+				"grun",
+				"Gruntfile.js"
+			],
+			[
+				"colo",
+				"app\\partials\\color-picker.html"
+			],
+			[
+				"range.",
+				"app\\less\\range.less"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 228.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
