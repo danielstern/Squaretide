@@ -2,7 +2,7 @@ var synth = Jukebox.getSynth(JBSCHEMA.synthesizers['Duke Straight Up']);
 
 var game = new Squaretide();
 
-var colors = ["BLUE", 'RED', 'GREEN', 'GOLD',"PINK","ORANGE"];
+
 
 var showInstructions = false;
 

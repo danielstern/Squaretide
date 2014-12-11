@@ -35,7 +35,8 @@ function Squaretide() {
     var level = 1;
     var timeRemaining = 0;
     var tiles;
- 
+    var numColors = 8;
+
     // var colors = ["BLUE", 'RED', 'GREEN', 'GOLD',"PINK","PURPLE","ORANGE","YELLOW","VIOLET"];
     var gameEndListener;
 
@@ -45,19 +46,22 @@ function Squaretide() {
 
    
     function getRandomColor() {
-        return colors[Math.floor(Math.random() * colors.length)];
+        return Math.floor(Math.random() * numColors);
     }
 
     function getSafeColor(tile) {
         var neighbours = tiles.getAllNeighbours(tile);
-        var safeColors = colors.slice(0,colors.length);
+        var neighbourColors = [];
         neighbours.forEach(function(neighbour){
-            if (safeColors.indexOf(neighbour.color) != -1) {
-                safeColors.splice(safeColors.indexOf(neighbour.color),1);
-            }
-        })
+            neighbourColors.push(neighbour.color);
+        });
 
-        return safeColors[Math.floor(Math.random() * safeColors.length)] || "BLUE";
+        var color = 0;
+        while (neighbourColors.indexOf(color) > -1) {
+            color = Math.floor(Math.random() * numColors);
+        }
+
+        return color;
     }
 
     this.onTick = function(listener) {
@@ -171,8 +175,8 @@ function Squaretide() {
                 tile1.suspend(350);
                 tile2.suspend(350);
                 tiles.switchTiles(tile1, tile2);
-                soundManager.tone(colors.indexOf(tile1.color), 100);
-                soundManager.tone(colors.indexOf(tile2.color), 100);
+                soundManager.tone(tile1.color, 100);
+                soundManager.tone(tile2.color, 100);
                 // synth2.tone(toneFrequencies[colors.indexOf(tile2.color)], 0.5);
                 chainsSinceLastCombo = 0;
             } else {
@@ -183,8 +187,13 @@ function Squaretide() {
 
         }
 
-        var matchingSets = TileSetAnalyzer.getChains(tiles, function(originator, tile) {
-            return originator.color && originator.color === tile.color && originator.occupied && tile.occupied && originator.canInteract && tile.canInteract;
+        var matchingSets = TileSetAnalyzer.getChains(tiles, function(tile1, tile2) {
+            return tile1.color !== undefined 
+                && tile1.color === tile2.color 
+                && tile1.occupied 
+                && tile2.occupied 
+                && tile1.canInteract 
+                && tile2.canInteract;
         }, 3);
 
 
@@ -218,7 +227,7 @@ function Squaretide() {
                 chainsSoFar++;
                 var tilesSoFar = 0;
 
-                var baseTone = colors.indexOf(chain[0].color);
+                var baseTone = chain[0].color;
 
                 if (chain.every(function(tile){
                     return !tile.occupied;

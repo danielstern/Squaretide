@@ -47,7 +47,7 @@ function TileVisualizer() {
 			tile.selected = false;
 		} else {
 			tile.timeSelected = new Date().getTime();
-			soundManager.tone(colors.indexOf(tile.color), 50);
+			soundManager.tone(tile.color, 50);
 			tile.selected = true;
 		}
 	};

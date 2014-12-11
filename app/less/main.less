@@ -1,10 +1,11 @@
+@color0: #36ae6e;
 @color1: #333683;
-@color2: #34378c;
+@color2: gray;
 @color3: #943567;
 @color4: #9d9935;
-@color5: #36a56a;
-@color6: #36ae6e;
-@color7: #36b773;
+@color5: black;
+@color6: white;
+@color7: darken(@color2,10%);
 @gray1: #333;
 @gray2: rgba(0,0,0,0.83);
 @white1: rgba(255,255,255,0.83);
@@ -13,6 +14,9 @@
 @numRows: 6;
 @numColumns: 6;
 @squareSide: 48px;
+
+@numColors: 8;
+
 .pattern(@color) {
     background: radial-gradient(ellipse at center, lighten(@color, 25%) 0%, lighten(@color, 20%) 100%);
     /* W3C */
@@ -129,7 +133,7 @@ button {
     right: 0rem;
 }
 #startButton {
-    .pattern(darken(@color6,25%));
+    .pattern(darken(@color5,25%));
     left: 0rem;
 }
 button + button {
@@ -177,8 +181,8 @@ square {
     position: absolute;
     transition: 0.2s all ease-in-out;
     cursor: pointer;
-    // -webkit-transform: translate3d(0, 0, 0);
-    // -webkit-backface-visibility: hidden;
+    -webkit-transform: translate3d(0, 0, 0);
+    -webkit-backface-visibility: hidden;
     &:hover {
         transform: translateZ(2px) scale(1.05);
         z-index: 2000;
@@ -191,12 +195,9 @@ square {
     }
     &[occupied="true"] {
         box-shadow: none;
-        // transform: rotate(90deg);
-        // -webkit-transform: rotate(90deg);
         margin-top:0px;
         box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3), 0px 1px 1px rgba(0, 0, 0, 0.3);
         opacity: 1;
-        // animation: fly-in 1s;
     }
     &[selected="true"] {
         transform: translateZ(10px) scale(1.10) rotate(90deg);
@@ -204,47 +205,29 @@ square {
         z-index: 100;
     }
 
-    @colors: "BLUE", 'RED', 'GREEN', 'GOLD',"PINK","PURPLE","ORANGE","YELLOW","VIOLET";
+    .createBackgroundInAllColors (@i) when (@i >= 0) {
+        &[color="@{i}"] {
+            @name: 'color@{i}';
+            .pattern(@@name);
+        }
 
-    &[color="red"] {
-        .pattern(@color3);
+        .createBackgroundInAllColors(@i - 1);
     }
-    &[color="green"] {
-        .pattern(@color7);
+
+    .createBackgroundInAllColors(@numColors - 1);
+
+    .createPositionValue(@i) when (@i >= 0) {
+        &[x="@{i}"] {
+            left: @i * 48px;
+        }
+        &[y="@{i}"] {
+            top: @i * 48px;
+        }
+        .createPositionValue(@i - 1);
     }
-    &[color="gold"] {
-        .pattern(@color4);
-    }
-    &[color="blue"] {
-        .pattern(@color1);
-    }
-    &[color="pink"] {
-        .pattern(darken(mix(@color1, @color7), 25%));
-    }
-    &[color="purple"] {
-        .pattern(darken(mix(@color1, @color2), 15%));
-    }
-    &[color="orange"] {
-        .pattern(darken(mix(@color1, @color4), 25%));
-    }
-    &[color="yellow"] {
-        .pattern(lighten(mix(@color1, @color6), 10%));
-    }
-    &[color="violet"] {
-        .pattern(darken(mix(@color1, @color3), 25%));
-    }
+    .createPositionValue(15);
+
 }
-@iterations: 15;
-.x-loop (@i) when (@i >= 0) {
-    square[x="@{i}"] {
-        left: @i * 48px;
-    }
-    square[y="@{i}"] {
-        top: @i * 48px;
-    }
-    .x-loop(@i - 1);
-}
-.x-loop(@iterations);
 
 @keyframes fly-in {
     0% {
