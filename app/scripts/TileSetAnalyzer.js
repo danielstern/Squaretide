@@ -1,4 +1,4 @@
-var TileSetAnalyzer = {
+var Logic = {
 	getLastEmptyTile: function(col) {
 		for (var i = col.length - 1; i >= 0; i--) { 
 			var tile = col[i];
@@ -7,6 +7,14 @@ var TileSetAnalyzer = {
 			}
 		}
 	},
+	tileColorsMatch: function(tile1, tile2) {
+        return tile1.color !== undefined && 
+        tile1.color === tile2.color && 
+        tile1.occupied && 
+        tile2.occupied &&
+        tile1.canInteract && 
+        tile2.canInteract;
+    },
 	getChains:function(tiles, processor, minumum) {
 		var allSequences = [];
 		var allMatchingChains = [];
@@ -18,7 +26,6 @@ var TileSetAnalyzer = {
 		function getSegments(array) {
 			var segments = [];
 
-			// debugger;
 			for (var i = 0; i < array.length; i++) {
 				// from each position in the array
 				var maxSliceLength = array.length;
@@ -60,7 +67,6 @@ var TileSetAnalyzer = {
 				success = false;
 				return;
 			}
-			// console.log("Valid sequence..",sequence);
 			
 			for (var i = 1; i < sequence.length; i++) {
 				var current = sequence[i];

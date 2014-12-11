@@ -10,14 +10,14 @@ function Tile() {
 		tile.canInteract = true;
 	}
 
-	this.suspend = function(time,callback) {
-		tile.canInteract = false;
+	// this.suspend = function(time,callback) {
+	// 	tile.canInteract = false;
 
-		setTimeout(function() {
-		    tile.canInteract = true;
-		    if (callback) {
-		    	callback(tile);
-		    }
-		}, time || 350);
-	}
+	// 	setTimeout(function() {
+	// 	    tile.canInteract = true;
+	// 	    if (callback) {
+	// 	    	callback(tile);
+	// 	    }
+	// 	}, time || 350);
+	// }
 }
