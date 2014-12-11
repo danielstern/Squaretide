@@ -1,4 +1,5 @@
 'use strict';
+/* globals soundManager, Tileset, TileSetAnalyzer, trampoline */
 function Squaretide() {
 
     var config = {
@@ -15,7 +16,7 @@ function Squaretide() {
         chainsSinceLastCombo:0,
         timeRemaining:0,
         level:1
-    }
+    };
     
     var tickListeners = [];
     var timer;
@@ -37,20 +38,20 @@ function Squaretide() {
 
         var color = 0;
         while (neighbourColors.indexOf(color) > -1) {
-            color = Math.floor(Math.random() * config.numColors);
+            color = getRandomColor();
         }
 
         return color;
     }
 
-    this.onTick = function(listener) {
-        tickListeners.push(listener)
+    function onTick(listener) {
+        tickListeners.push(listener);
     }
 
     function purgeAllTiles() {
         tiles.getTiles().forEach(function(tile){
             tile.resolve();
-        })
+        });
     }
 
     function changeColorAllTiles() {
@@ -58,7 +59,7 @@ function Squaretide() {
             return tile.occupied;
         }).forEach(function(tile){
            tile.color = getSafeColor(tile);  
-        })
+        });
     }
 
 
@@ -75,7 +76,7 @@ function Squaretide() {
  
     // }
 
-    this.startGame = function(options) {
+    function startGame(options) {
 
         options = options || {};
 
@@ -92,11 +93,11 @@ function Squaretide() {
         startTimer();
     }
 
-    this.pauseGame = function() {
+    function pauseGame() {
         stopTimer();
     }
 
-    this.resumeGame = function() {
+    function resumeGame() {
         startTimer();
     }
 
@@ -104,7 +105,7 @@ function Squaretide() {
         stopTimer();
         if (gameEndListener) {
             gameEndListener({
-                score:score
+                score:state.score
             });
         }
     }
@@ -120,15 +121,9 @@ function Squaretide() {
         clearInterval(timer);
     }
 
-
-    function bonusMessage(message) {
-        console.info(message);
-    }
-
-
     function resolveTilesInChain(chain){
 
-        chainsSoFar++;
+        state.chainsSoFar++;
         var tilesSoFar = 0;
 
         var baseTone = chain[0].color;
@@ -143,11 +138,13 @@ function Squaretide() {
 
         function resolveTile(tile) {
             tile.resolve();
-            totalScoreForSets += tile.score || 100;
+            // totalScoreForSets += tile.score || 100;
 
             soundManager.tone(baseTone + tilesSoFar, 100);
             tilesSoFar++;
         }
+
+        trampoline(chain,resolveTile,150);
     }
 
 
@@ -164,7 +161,7 @@ function Squaretide() {
             return tile.selected;
         }).sort(function(a,b){
             return a.timeSelected - b.timeSelected;
-        })
+        });
 
         if (activetiles.length > 1) {
 
@@ -191,12 +188,12 @@ function Squaretide() {
         }
 
         var matchingSets = TileSetAnalyzer.getChains(tiles, function(tile1, tile2) {
-            return tile1.color !== undefined 
-                && tile1.color === tile2.color 
-                && tile1.occupied 
-                && tile2.occupied 
-                && tile1.canInteract 
-                && tile2.canInteract;
+            return tile1.color !== undefined && 
+            tile1.color === tile2.color && 
+            tile1.occupied && 
+            tile2.occupied &&
+            tile1.canInteract && 
+            tile2.canInteract;
         }, 3);
 
 
@@ -218,23 +215,18 @@ function Squaretide() {
         if (matchingSets[0]) {
             matchingSets = matchingSets.sort(function(a,b){
                 return b.length - a.length;
-            })
+            });
             state.chainsSinceLastCombo += 1;
             var totalScoreForSets = 0;
             var delay = 150;
             stopTimer();
-            var chainsSoFar = 0;
+            // var chainsSoFar = 0;
 
             trampoline(matchingSets,resolveTilesInChain,delay * 3.3,function(){
 
                 totalScoreForSets *= matchingSets.length || 1;
-                if (matchingSets.length > 1) {
-                    bonusMessage("Combo: " + matchingSets.length);
-                }
-                totalScoreForSets *= chainsSinceLastCombo || 1;
-                if (chainsSinceLastCombo > 1) {
-                    bonusMessage("Chain: " + chainsSinceLastCombo);
-                }
+                totalScoreForSets *= state.chainsSinceLastCombo || 1;
+
                 state.score += totalScoreForSets;
 
                 tiles.flattenBottom();
@@ -243,9 +235,9 @@ function Squaretide() {
 
                 setTimeout(function(){
                     startTimer();
-            },266);
+                },266);
 
-            })
+            });
         }
 
         document.getElementById('score').innerHTML = state.score;
@@ -253,5 +245,13 @@ function Squaretide() {
 
     }
 
+    this.onTick = onTick;
+    this.startGame = startGame;
+    this.endGame = endGame;
     this.tick = tick;
+    this.pauseGame = pauseGame;
+    this.resumeGame = resumeGame;
+
+    /*exported tick, startGame, endGame */
 }
+/* exported Squaretide */
