@@ -138,7 +138,7 @@ function Squaretide() {
 
         function resolveTile(tile) {
             tile.resolve();
-            // totalScoreForSets += tile.score || 100;
+            state.score += 100;
 
             soundManager.tone(baseTone + tilesSoFar, 100);
             tilesSoFar++;
@@ -205,8 +205,6 @@ function Squaretide() {
 
         // this is the most amazing hack.
         tiles.flattenBottom();
-        tiles.flattenBottom();
-        tiles.flattenBottom();
 
         populateAllEmptyTiles();
 
@@ -217,27 +215,9 @@ function Squaretide() {
                 return b.length - a.length;
             });
             state.chainsSinceLastCombo += 1;
-            var totalScoreForSets = 0;
             var delay = 150;
-            stopTimer();
-            // var chainsSoFar = 0;
 
-            trampoline(matchingSets,resolveTilesInChain,delay * 3.3,function(){
-
-                totalScoreForSets *= matchingSets.length || 1;
-                totalScoreForSets *= state.chainsSinceLastCombo || 1;
-
-                state.score += totalScoreForSets;
-
-                tiles.flattenBottom();
-                tiles.flattenBottom();
-                tiles.flattenBottom();
-
-                setTimeout(function(){
-                    startTimer();
-                },266);
-
-            });
+            trampoline(matchingSets,resolveTilesInChain,150);
         }
 
         document.getElementById('score').innerHTML = state.score;

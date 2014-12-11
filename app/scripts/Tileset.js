@@ -82,21 +82,23 @@ function Tileset(columns, rows, game) {
     }
 
     function flattenBottom() {
-    	var columns = getAllAsColumns();
-    	columns.forEach(function(column){
-            for (var i = column.length; i > 0;i--) {
-                var tile = column[i - 1];
-                if (tile.occupied) {
-                    for (var k = column.length; k > i; k--) {
-                        var tile2 = column[k - 1];
-                        if (!tile2.occupied) {
-                            switchTiles(tile, tile2);
-                            break;
+        for (var i = 7; i > 0; i--) {
+            var columns = getAllAsColumns();
+            columns.forEach(function(column){
+                for (var i = column.length; i > 0;i--) {
+                    var tile = column[i - 1];
+                    if (tile.occupied) {
+                        for (var k = column.length; k > i; k--) {
+                            var tile2 = column[k - 1];
+                            if (!tile2.occupied) {
+                                switchTiles(tile, tile2);
+                                break;
+                            }
                         }
                     }
                 }
-            }
-    	})
+            })
+        }
     }
 
 
