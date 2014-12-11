@@ -25,7 +25,7 @@ start.addEventListener("click", function() {
 	soundManager.tone(1,200);
 	document.getElementById('game').setAttribute("show-menu",false);  		
 	game.startGame({
-    	time: 60,
+    	duration: 30000,
     	gameEndListener:function(){
   			document.getElementById('game').setAttribute("show-instructions",false);  		
   			document.getElementById('game').setAttribute("show-menu",true);  		

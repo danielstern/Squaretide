@@ -8,8 +8,6 @@ function TileVisualizer() {
 	var visualizer = this;
 	var finished = false;
 	var isTouchDevice = false;
-	// var synth = new jukebox.Synth({volume:0.1});
-	// synth.setVolume(0.1);
 
 	div2.addEventListener("touchstart",function(){
 		isTouchDevice = true;
@@ -42,13 +40,13 @@ function TileVisualizer() {
 
 	setInterval(onTick, 33);
 	function onClick() {
-		console.log("Tile:", tile)
 		if (tile.selected) {
 			tile.selected = false;
 		} else {
 			tile.timeSelected = new Date().getTime();
-			soundManager.tone(tile.color, 50);
 			tile.selected = true;
+			
+			soundManager.tone(tile.color, 50);
 		}
 	};
 	function attachToTile(_tile) {

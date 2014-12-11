@@ -1,52 +1,31 @@
-function trampoline(array,iterator,delay,callback) {
-    function bounce() {
-        elem = array[0];
-        iterator(elem);
-        // var _delay;
-        // if (typeof delay === "number") {
-            // _delay = delay;
-        // } else {
-            // _delay = delay(elem);
-        // }
-        if (array[1]) {
-            setTimeout(bounce, delay);
-            array.shift();
-        } else {
-            setTimeout(callback, delay);
-        }
-    }
-
-    bounce();
-}
-
+'use strict';
 function Squaretide() {
 
-    var tileFrequency = 1;
-    var longTileFrequency = 20;
-    var timeSinceLasttile = 0;
-    var ROWS = 6;
-    var COLUMNS = 6;
-    var score = 0;
-    var gridSize = 48;
-    var chainsSinceLastCombo = 0;
+    var config = {
+        longTileFrequency:20,
+        ROWS:6,
+        COLUMNS:6,
+        numColors:8,
+        duration:30000,
+    };
+
+    var state = {
+        timeSinceLasttile:0,
+        score:0,
+        chainsSinceLastCombo:0,
+        timeRemaining:0,
+        level:1
+    }
+    
     var tickListeners = [];
     var timer;
     var game = this;
-    var level = 1;
-    var timeRemaining = 0;
-    var tiles;
-    var numColors = 8;
-
-    // var colors = ["BLUE", 'RED', 'GREEN', 'GOLD',"PINK","PURPLE","ORANGE","YELLOW","VIOLET"];
     var gameEndListener;
+    var tiles;
 
 
-    
-    
-
-   
     function getRandomColor() {
-        return Math.floor(Math.random() * numColors);
+        return Math.floor(Math.random() * config.numColors);
     }
 
     function getSafeColor(tile) {
@@ -58,7 +37,7 @@ function Squaretide() {
 
         var color = 0;
         while (neighbourColors.indexOf(color) > -1) {
-            color = Math.floor(Math.random() * numColors);
+            color = Math.floor(Math.random() * config.numColors);
         }
 
         return color;
@@ -100,16 +79,16 @@ function Squaretide() {
 
         options = options || {};
 
-       tiles = tiles || new Tileset(COLUMNS, ROWS, game);
+       tiles = tiles || new Tileset(config.COLUMNS, config.ROWS, game);
         // level = 1;
-        timeRemaining = (options.time || 60) * 1000;
+        state.timeRemaining = (options.time || config.duration) * 1000;
         gameEndListener = options.gameEndListener;
 
         purgeAllTiles();
         populateAllEmptyTiles();
         changeColorAllTiles(); 
 
-        score = 0;
+        state.score = 0;
         startTimer();
     }
 
@@ -147,11 +126,37 @@ function Squaretide() {
     }
 
 
-    this.tick = function() {
+    function resolveTilesInChain(chain){
 
-        timeRemaining-= 33;
+        chainsSoFar++;
+        var tilesSoFar = 0;
 
-        if (timeRemaining < 0) {
+        var baseTone = chain[0].color;
+
+        if (chain.every(function(tile){
+            return !tile.occupied;
+        })) {
+            return;
+        }
+        
+        soundManager.tone(baseTone);
+
+        function resolveTile(tile) {
+            tile.resolve();
+            totalScoreForSets += tile.score || 100;
+
+            soundManager.tone(baseTone + tilesSoFar, 100);
+            tilesSoFar++;
+        }
+    }
+
+
+
+    function tick() {
+
+        state.timeRemaining-= 33;
+
+        if (state.timeRemaining < 0) {
             endGame();
         }
 
@@ -168,17 +173,15 @@ function Squaretide() {
 
 
             if (tiles.tilesAreAdjacent(tile1, tile2)) {
-
                 tile1.selected = false;
                 tile2.selected = false;
-                timeSinceLasttile -= longTileFrequency;
+                state.timeSinceLasttile -= state.longTileFrequency;
                 tile1.suspend(350);
                 tile2.suspend(350);
                 tiles.switchTiles(tile1, tile2);
                 soundManager.tone(tile1.color, 100);
                 soundManager.tone(tile2.color, 100);
-                // synth2.tone(toneFrequencies[colors.indexOf(tile2.color)], 0.5);
-                chainsSinceLastCombo = 0;
+                state.chainsSinceLastCombo = 0;
             } else {
                 tile1.selected = false;
             }
@@ -216,40 +219,11 @@ function Squaretide() {
             matchingSets = matchingSets.sort(function(a,b){
                 return b.length - a.length;
             })
-            chainsSinceLastCombo += 1;
+            state.chainsSinceLastCombo += 1;
             var totalScoreForSets = 0;
             var delay = 150;
             stopTimer();
             var chainsSoFar = 0;
-
-            function resolveTilesInChain(chain){
-
-                chainsSoFar++;
-                var tilesSoFar = 0;
-
-                var baseTone = chain[0].color;
-
-                if (chain.every(function(tile){
-                    return !tile.occupied;
-                })) {
-                    return;
-                }
-                
-                soundManager.tone(baseTone);
-
-                function resolveTile(tile) {
-                    tile.resolve();
-                    totalScoreForSets += tile.score || 100;
-
-                    soundManager.tone(baseTone + tilesSoFar, 100);
-                    tilesSoFar++;
-                }
-
-                trampoline(chain,resolveTile,delay,function(){
-                    // synth2.stop();
-                    // synth.stop();
-                });
-            }
 
             trampoline(matchingSets,resolveTilesInChain,delay * 3.3,function(){
 
@@ -261,7 +235,7 @@ function Squaretide() {
                 if (chainsSinceLastCombo > 1) {
                     bonusMessage("Chain: " + chainsSinceLastCombo);
                 }
-                score += totalScoreForSets;
+                state.score += totalScoreForSets;
 
                 tiles.flattenBottom();
                 tiles.flattenBottom();
@@ -274,8 +248,10 @@ function Squaretide() {
             })
         }
 
-        document.getElementById('score').innerHTML = score;
-        document.getElementById('time').innerHTML = Math.floor(timeRemaining / 1000);
+        document.getElementById('score').innerHTML = state.score;
+        document.getElementById('time').innerHTML = Math.floor(state.timeRemaining / 1000);
 
     }
+
+    this.tick = tick;
 }
