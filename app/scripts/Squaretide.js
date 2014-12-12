@@ -7,7 +7,7 @@ function Squaretide() {
         ROWS:6,
         COLUMNS:6,
         numColors:8,
-        duration:5000,
+        duration:15000,
     };
 
     var state = {
@@ -15,16 +15,15 @@ function Squaretide() {
         score:0,
         chainsSinceLastCombo:0,
         timeRemaining:0,
-        level:1
+        level:1,
+        paused: true
     };
     
     var listeners = [];
-    var timer;
+    // var timer;
     var game = this;
-    var gameEndListener;
 
     var tiles = new Tileset(config.COLUMNS, config.ROWS, game);
-
 
     function getRandomColor() {
         return Math.floor(Math.random() * config.numColors);
@@ -48,19 +47,17 @@ function Squaretide() {
     function on(type, listener) {
         if (!listeners[type]) {
             listeners[type] = [];
-        };
+        }
         listeners[type].push(listener);
-        console.log("Adding listener",type,listeners[type])
     }
 
     function broadcast(type) {
 
-        console.log("broadcast",type,listeners[type])
-
+        // console.log("Broadcast",type,state);
         if (listeners[type]) {
             listeners[type].forEach(function(listener){
-                listener();
-            })
+                listener(state);
+            });
 
         }
     }
@@ -72,7 +69,7 @@ function Squaretide() {
     }
 
     function changeColorAllTiles() {
-        tiles.getMatchingTiles(function(tile){
+        tiles.getTiles(function(tile){
             return tile.occupied;
         }).forEach(function(tile){
            tile.color = getSafeColor(tile);  
@@ -81,7 +78,7 @@ function Squaretide() {
 
 
     function populateAllEmptyTiles() {
-        tiles.getMatchingTiles(function(tile){
+        tiles.getTiles(function(tile){
             return !tile.occupied;
         }).forEach(function(tile){
             tile.color = getSafeColor(tile); 
@@ -90,46 +87,30 @@ function Squaretide() {
 
     }
 
- 
-    // }
-
     function startGame() {
 
         state.level = 1;
         state.score = 0;
         state.timeRemaining = config.duration;
-        // gameEndListener = options.gameEndListener;
 
         purgeAllTiles();
         populateAllEmptyTiles();
         changeColorAllTiles(); 
 
-        startTimer();
+        resume();
     }
 
-    function pauseGame() {
-        stopTimer();
+    function pause() {
+        state.paused = true;
     }
 
-    function resumeGame() {
-        startTimer();
+    function resume() {
+        state.paused = false;
     }
 
     function endGame() {
-        stopTimer();
-        console.log("Broadcast end");
+        pause();
         broadcast('end');
-    }
-
-    function startTimer() {
-        if (timer) {
-            stopTimer();
-        }
-        timer = setInterval(game.onEnterFrame, 33);
-    }
-
-    function stopTimer() {
-        clearInterval(timer);
     }
 
     function resolveTilesInChain(chain){
@@ -156,10 +137,24 @@ function Squaretide() {
         trampoline(chain,resolveTile,150);
     }
 
+    function findAndResolveMatches(state){
+        var matchingSets = Logic.getChains(tiles, Logic.tileColorsMatch, 3);
 
+        if (matchingSets[0]) {
+            matchingSets = matchingSets.sort(function(a,b){
+                return b.length - a.length;
+            });
+
+            matchingSets.forEach(resolveTilesInChain);
+        }
+    }
 
 
     function onEnterFrame() {
+
+        if (state.paused) {
+            return;
+        }
 
         state.timeRemaining-= 33;
 
@@ -167,7 +162,7 @@ function Squaretide() {
             endGame();
         }
 
-        var activetiles = tiles.getMatchingTiles(function(tile) {
+        var activetiles = tiles.getTiles(function(tile) {
             return tile.selected;
         }).sort(function(a,b){
             return a.timeSelected - b.timeSelected;
@@ -183,48 +178,34 @@ function Squaretide() {
                 tile1.selected = false;
                 tile2.selected = false;
 
-                // console.log("Switch tiles",tile1,tile2);
-
                 tiles.switchTiles(tile1, tile2);
 
                 soundManager.tone(tile1.color, 100);
                 soundManager.tone(tile2.color, 100);
 
             } else {
-                // console.log("deselect first tl")
                 tile1.selected = false;
             }
         }
 
-        var matchingSets = Logic.getChains(tiles, Logic.tileColorsMatch, 3);
- 
-
-        broadcast("tick");
+      
 
         tiles.flattenBottom();
         populateAllEmptyTiles();
-
-
-
-        if (matchingSets[0]) {
-            matchingSets = matchingSets.sort(function(a,b){
-                return b.length - a.length;
-            });
-
-            matchingSets.forEach(resolveTilesInChain);
-        }
-
-        document.getElementById('score').innerHTML = state.score;
-        document.getElementById('time').innerHTML = Math.floor(state.timeRemaining / 1000);
+   
+        broadcast('tick');
 
     }
 
+    function init() {
+        Jukebox.timer.setInterval(onEnterFrame, 33);
+        on("tick",findAndResolveMatches);
+    }
+
+    init();
+
     this.on = on;
     this.startGame = startGame;
-    this.endGame = endGame;
-    this.onEnterFrame = onEnterFrame;
-    this.pauseGame = pauseGame;
-    this.resumeGame = resumeGame;
 
     /*exported tick, startGame, endGame */
 }

@@ -29,6 +29,11 @@ start.addEventListener("click", function() {
         document.getElementById('game').setAttribute("show-instructions", false);
         document.getElementById('game').setAttribute("show-menu", true);
     })
+});
+
+game.on("tick",function(state){
+	document.getElementById('score').innerHTML = state.score;
+	document.getElementById('time').innerHTML = Math.floor(state.timeRemaining / 1000);
 })
 
 game.startGame();

@@ -21,8 +21,12 @@ function Tileset(columns, rows, game) {
         }
     };
 
-    function getTiles() {
-        return tiles;
+    function getTiles(matcher) {
+        if (matcher) {
+            return tiles.filter(matcher);
+        } else {
+            return tiles;
+        }
     }
 
     function getRandomTile() {
@@ -133,9 +137,9 @@ function Tileset(columns, rows, game) {
     }
 
 
-    function getMatchingTiles(matcher) {
-        return tiles.filter(matcher);
-    }
+    // function getMatchingTiles(matcher) {
+      
+    // }
 
 
     function getTileAtCoordinates(x, y) {
@@ -170,7 +174,6 @@ function Tileset(columns, rows, game) {
     }
 
     return {
-    	getMatchingTiles:getMatchingTiles,
     	getAllAsColumns:getAllAsColumns,
     	tilesAreAdjacent:tilesAreAdjacent,
     	switchTiles:switchTiles,
