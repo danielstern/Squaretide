@@ -7,6 +7,38 @@ var Logic = {
 			}
 		}
 	},
+	getLastFullTile: function(col) {
+		for (var i = col.length - 1; i >= 0; i--) { 
+			var tile = col[i];
+			if (tile.occupied) {
+				return tile;
+			}
+		}
+	},
+	columnHasGap: function(col) {
+		var map = col.map(function(tile){
+			return tile.occupied;
+		});
+		if (map.indexOf(false) > map.indexOf(true)) {
+			// console.log("Found empty tile at index:",i);
+			return true;
+		}
+		// var foundEmpty = false;
+		// var hasGap = false;
+		// for (var i = col.length; i > 0; i--) { 
+		// 	var tile = col[i - 1];
+		// 	if (!tile.occupied) {
+		// 		console.log("Found empty tile at index:",i);
+		// 		foundEmpty = true;
+		// 	} else {
+		// 		if (foundEmpty) {
+		// 			hasGap = true;
+		// 		} 
+		// 	}
+		// }
+
+		// return hasGap;
+	},
 	tilesAreAdjacent:function (tile1, tile2) {
 	    var diff = this.getTileDiff(tile1, tile2);
 	    if (Math.abs(diff.x) + Math.abs(diff.y) == 1) {
@@ -24,9 +56,9 @@ var Logic = {
         return tile1.color !== undefined && 
         tile1.color === tile2.color && 
         tile1.occupied && 
-        tile2.occupied &&
-        tile1.canInteract && 
-        tile2.canInteract;
+        tile2.occupied 
+        // tile1.canInteract && 
+        // tile2.canInteract;
     },
 	getChains:function(tiles, processor, minumum) {
 		var allSequences = [];

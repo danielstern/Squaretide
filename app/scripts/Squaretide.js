@@ -1,5 +1,5 @@
 'use strict';
-/* globals soundManager, Tileset, Logic, trampoline */
+/* globals soundManager, Tileset, Logic, trampoline, Jukebox */
 function Squaretide() {
 
     var config = {
@@ -16,6 +16,7 @@ function Squaretide() {
         chainsSinceLastCombo:0,
         timeRemaining:0,
         level:1,
+        speed: 33,
         paused: true
     };
     
@@ -62,7 +63,7 @@ function Squaretide() {
 
     function purgeAllTiles() {
         tiles.getTiles().forEach(function(tile){
-            tile.resolve();
+            // tile.resolve();
         });
     }
 
@@ -80,7 +81,9 @@ function Squaretide() {
             return !tile.occupied;
         }).forEach(function(tile){
             tile.color = getSafeColor(tile); 
-            tile.activate();
+            // tile.activate();
+            tile.occupied = true;
+
         });
 
     }
@@ -110,31 +113,34 @@ function Squaretide() {
         broadcast('end');
     }
 
-    function resolveTilesInChain(chain){
 
-        var tilesSoFar = 0;
-        var baseTone = chain[0].color;
 
-        if (chain.every(function(tile){
-            return !tile.occupied;
-        })) {
-            return;
+    function findAndResolveMatches(){
+        function resolveTilesInChain(chain){
+
+            var tilesSoFar = 0;
+            var baseTone = chain[0].color;
+
+            if (chain.every(function(tile){
+                return !tile.occupied;
+            })) {
+                return;
+            }
+            
+            soundManager.tone(baseTone);
+
+            function resolveTile(tile) {
+                // tile.resolve();
+                tile.occupied = false;
+                state.score += 100;
+
+                soundManager.tone(baseTone + tilesSoFar, 100);
+                tilesSoFar++;
+            }
+
+            trampoline(chain,resolveTile,150);
         }
-        
-        soundManager.tone(baseTone);
 
-        function resolveTile(tile) {
-            tile.resolve();
-            state.score += 100;
-
-            soundManager.tone(baseTone + tilesSoFar, 100);
-            tilesSoFar++;
-        }
-
-        trampoline(chain,resolveTile,150);
-    }
-
-    function findAndResolveMatches(state){
         var matchingSets = Logic.getChains(tiles, Logic.tileColorsMatch, 3);
 
         if (matchingSets[0]) {
@@ -146,19 +152,7 @@ function Squaretide() {
         }
     }
 
-
-    function onEnterFrame() {
-
-        if (state.paused) {
-            return;
-        }
-
-        state.timeRemaining-= 33;
-
-        if (state.timeRemaining < 0) {
-            endGame();
-        }
-
+    function findAndSwitchActiveTiles() {
         var activetiles = tiles.getTiles(function(tile) {
             return tile.selected;
         }).sort(function(a,b){
@@ -184,9 +178,22 @@ function Squaretide() {
                 tile1.selected = false;
             }
         }
+    }
 
-      
 
+    function onEnterFrame() {
+
+        if (state.paused) {
+            return;
+        }
+
+        state.timeRemaining-= state.speed;
+
+        if (state.timeRemaining < 0) {
+            endGame();
+        }
+
+        
         tiles.flattenBottom();
         populateAllEmptyTiles();
    
@@ -195,8 +202,9 @@ function Squaretide() {
     }
 
     function init() {
-        Jukebox.timer.setInterval(onEnterFrame, 33);
-        on("tick",findAndResolveMatches);
+        Jukebox.timer.setInterval(onEnterFrame, 1000 / state.speed);
+        on('tick',findAndResolveMatches);
+        on('tick',findAndSwitchActiveTiles);
     }
 
     init();

@@ -81,26 +81,22 @@ function Tileset(columns, rows, game) {
         });
     }
 
-    function flattenBottom() {
-        for (var i = 7; i > 0; i--) {
-            var columns = getAllAsColumns();
-            columns.forEach(function(column){
-                for (var i = column.length; i > 0;i--) {
-                    var tile = column[i - 1];
-                    if (tile.occupied) {
-                        for (var k = column.length; k > i; k--) {
-                            var tile2 = column[k - 1];
-                            if (!tile2.occupied) {
-                                switchTiles(tile, tile2);
-                                break;
-                            }
-                        }
+    function compressColumn(column) {
+        for (var i = column.length; i > 0; i--) {
+            var tile = column[i - 1];
+            if (tile.occupied) {
+                for (var k = column.length; k > i; k--) {
+                    var tile2 = column[k - 1];
+                    if (!tile2.occupied) {
+                        switchTiles(tile, tile2);
+                        break;
                     }
                 }
-            })
+            }
         }
     }
 
+    
 
     function getAllAsColumns() {
         var allColumns = [];
@@ -109,6 +105,40 @@ function Tileset(columns, rows, game) {
         }
         return allColumns;
     }
+
+    function flattenBottom() {
+        getAllAsColumns().forEach(function(column){
+            // if (Logic.columnHasGap(column)){
+            while (Logic.columnHasGap(column)){
+                for (var i = 7; i > 0; i--) {
+                    compressColumn(column);
+                    console.log("Gap?",Logic.columnHasGap(column));
+                }
+            }
+                // for ()
+                
+            // }
+        });
+        // for (var i = 7; i > 0; i--) {
+        //     var columns = getAllAsColumns();
+        //     columns.forEach(function(column){
+        //         for (var i = column.length; i > 0;i--) {
+        //             var tile = column[i - 1];
+        //             if (tile.occupied) {
+        //                 for (var k = column.length; k > i; k--) {
+        //                     var tile2 = column[k - 1];
+        //                     if (!tile2.occupied) {
+        //                         switchTiles(tile, tile2);
+        //                         break;
+        //                     }
+        //                 }
+        //             }
+        //         }
+        //     })
+        // }
+    }
+
+
     function getAllAsDiagonals() {
         // debugger;
         var allDiagonals = [];
@@ -132,20 +162,11 @@ function Tileset(columns, rows, game) {
     	return allRows;
     }
 
-
-    // function getMatchingTiles(matcher) {
-      
-    // }
-
-
     function getTileAtCoordinates(x, y) {
         return tiles.filter(function(tile) {
             return tile.x == x && tile.y == y;
         })[0];
     }
-
-
-
 
     function switchTiles(tile1, tile2) {
         var diff = Logic.getTileDiff(tile1, tile2);
@@ -155,7 +176,6 @@ function Tileset(columns, rows, game) {
         tile2.x += diff.x;
         tile2.y += diff.y;
     }
-
 
 
     return {
