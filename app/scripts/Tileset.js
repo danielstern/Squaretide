@@ -107,13 +107,15 @@ function Tileset(columns, rows, game) {
     }
 
     function flattenBottom() {
-        getAllAsColumns().forEach(function(column){
+        getAllAsColumns().forEach(function(column,index){
             // if (Logic.columnHasGap(column)){
             while (Logic.columnHasGap(column)){
-                for (var i = 7; i > 0; i--) {
+                // f?or (var i = 7; i > 0; i--) {
                     compressColumn(column);
                     console.log("Gap?",Logic.columnHasGap(column));
-                }
+                // }
+
+                column = getColumn(index);
             }
                 // for ()
                 

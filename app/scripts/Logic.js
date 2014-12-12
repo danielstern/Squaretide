@@ -15,6 +15,22 @@ var Logic = {
 			}
 		}
 	},
+	getLastEmptyIndex: function(col) {
+		for (var i = col.length - 1; i >= 0; i--) { 
+			var tile = col[i];
+			if (!tile.occupied) {
+				return i;
+			}
+		}
+	},
+	getLastFullIndex: function(col) {
+		for (var i = col.length - 1; i >= 0; i--) { 
+			var tile = col[i];
+			if (tile.occupied) {
+				return i;
+			}
+		}
+	},
 	columnHasGap: function(col) {
 		var map = col.map(function(tile){
 			return tile.occupied;
