@@ -35,8 +35,10 @@ var Logic = {
 		var map = col.map(function(tile){
 			return tile.occupied;
 		});
+		// console.log("Found empty tile at index:",this.getLastEmptyIndex(col),this.getLastFullIndex(col));
+		// if (this.getLastFullIndex(col) > this.getLastEmptyIndex(col)) {
 		if (map.indexOf(false) > map.indexOf(true)) {
-			// console.log("Found empty tile at index:",i);
+
 			return true;
 		}
 		// var foundEmpty = false;
