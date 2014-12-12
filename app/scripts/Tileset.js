@@ -130,6 +130,68 @@ function Tileset(config) {
         return allRows;
     }
 
+    function getColumn(index) {
+        return tiles.filter(function(tile) {
+            return tile.x == index;
+        }).sort(function(a, b) {
+            return a.y - b.y;
+        });
+    }
+
+    function getColumns() {
+        var allColumns = [];
+        for (var i = 0; i < numColumns; i++) {
+            allColumns.push(getColumn(i));
+        }
+        return allColumns;
+    }
+
+    function getDiagonalLR(index) {
+        return tiles.filter(function(tile) {
+            return tile.x - tile.y == index;
+        }).sort(function(a, b) {
+            return a.x - b.x;
+        });
+    }
+
+    
+    function getDiagonalRL(index) {
+        return tiles.filter(function(tile) {
+            return tile.y + tile.x == index;
+        }).sort(function(a, b) {
+            return a.y - b.y;
+        });
+    }
+    function getDiagonals() {
+        var allDiagonals = [];
+
+        for (var i = -numColumns; i <= numColumns * 2; i++) {
+            allDiagonals.push(getDiagonalLR(i));
+            allDiagonals.push(getDiagonalRL(i));
+        }
+
+        return allDiagonals.filter(function(array){
+            return array.length > 0;
+        });
+    }
+
+    function getAllNeighbours(tile) {
+        return [
+            getTileAtCoordinates(tile.x,tile.y+1),
+            getTileAtCoordinates(tile.x,tile.y-1),
+            getTileAtCoordinates(tile.x+1,tile.y),
+            getTileAtCoordinates(tile.x-1,tile.y),
+            getTileAtCoordinates(tile.x-1,tile.y-1),
+            getTileAtCoordinates(tile.x+1,tile.y-1),
+            getTileAtCoordinates(tile.x+1,tile.y+1),
+            getTileAtCoordinates(tile.x-1,tile.y+1),
+        ].filter(function(tile){
+            return tile;
+        });
+    }
+
+
+
 
     return {
         
@@ -137,5 +199,9 @@ function Tileset(config) {
         numColumns:numColumns,
         getRows:getRows,
         getRow:getRow,
+        getColumns:getColumns,
+        getDiagonalLR:getDiagonalLR,
+        getDiagonalRL:getDiagonalRL,
+        getDiagonals:getDiagonals
     }
 }

@@ -1,11 +1,11 @@
 /* contains operations that do not modify the array of tiles. */
 
-var emptyTile = {
-    occupied: false
-}
-var fullTile = {
-    occupied: true
-}
+// var emptyTile = {
+//     occupied: false
+// }
+// var fullTile = {
+//     occupied: true
+// }
 
 function getOccupied(tile) {
 	return tile.occupied;
@@ -52,45 +52,19 @@ function getTileDiff(tile1, tile2){
 // this function just doesnt make sense
 function arrayHasEmptyTileAfterFullTile(array) {
 
-        if (getLastUnoccupiedIndex(array) === -1 || getLastOccupiedIndex(array) === -1) {
-        	return false;
-        }
-        if (getFirstOccupiedIndex(array) <= getLastUnoccupiedIndex(array)) {
-        	return true;
-        } else {
-        	return false;
-        }
+    if (getLastUnoccupiedIndex(array) === -1 || getLastOccupiedIndex(array) === -1) {
+    	return false;
+    }
+    if (getFirstOccupiedIndex(array) <= getLastUnoccupiedIndex(array)) {
+    	return true;
+    } else {
+    	return false;
+    }
         
 };
 
 
 var Logic = function(tiles) {
-
-    // function getLastEmptyTile(col) {
-    //     for (var i = col.length - 1; i >= 0; i--) {
-    //         var tile = col[i];
-    //         if (!tile.occupied) {
-    //             return tile;
-    //         }
-    //     }
-    // };
-
-    // function getLastFullTile(col) {
-    //     for (var i = col.length - 1; i >= 0; i--) {
-    //         var tile = col[i];
-    //         if (tile.occupied) {
-    //             return tile;
-    //         }
-    //     }
-    // };
-
-
-
-
-
-  
-
-        // tilesAreAdjacent: function(tile1, tile2) {
 
 	function getChains(tiles, processor, minumum) {
 		var allSequences = [];
@@ -164,102 +138,89 @@ var Logic = function(tiles) {
 		});
 	};
 
-	function getTiles(matcher) {
-	    if (matcher) {
-	        return tiles.tiles.filter(matcher);
-	    } else {
-	        return tiles.tiles;
-	    }
-	}
-
-	function getAllNeighbours(tile) {
-	    return [
-	        getTileAtCoordinates(tile.x,tile.y+1),
-	        getTileAtCoordinates(tile.x,tile.y-1),
-	        getTileAtCoordinates(tile.x+1,tile.y),
-	        getTileAtCoordinates(tile.x-1,tile.y),
-	        getTileAtCoordinates(tile.x-1,tile.y-1),
-	        getTileAtCoordinates(tile.x+1,tile.y-1),
-	        getTileAtCoordinates(tile.x+1,tile.y+1),
-	        getTileAtCoordinates(tile.x-1,tile.y+1),
-	    ].filter(function(tile){
-	        return tile;
-	    });
-	}
+	// function getTiles(matcher) {
+	//     if (matcher) {
+	//         return tiles.tiles.filter(matcher);
+	//     } else {
+	//         return tiles.tiles;
+	//     }
+	// }
 
 
-	function getColumn(index) {
-	    return tiles.tiles.filter(function(tile) {
-	        return tile.x == index;
-	    }).sort(function(a, b) {
-	        return a.y - b.y;
-	    });
-	}
-
-	function getDiagonalLR(index) {
-	    return tiles.tiles.filter(function(tile) {
-	        return tile.x - tile.y == index;
-	    }).sort(function(a, b) {
-	        return a.x - b.x;
-	    });
-	}
 
 
-	function getDiagonalRL(index) {
-	    return tiles.tiles.filter(function(tile) {
-	        return tile.y + tile.x == index;
-	    }).sort(function(a, b) {
-	        return a.y - b.y;
-	    });
-	}
+	// function getColumn(index) {
+	//     return tiles.tiles.filter(function(tile) {
+	//         return tile.x == index;
+	//     }).sort(function(a, b) {
+	//         return a.y - b.y;
+	//     });
+	// }
+
+	// function getDiagonalLR(index) {
+	//     return tiles.tiles.filter(function(tile) {
+	//         return tile.x - tile.y == index;
+	//     }).sort(function(a, b) {
+	//         return a.x - b.x;
+	//     });
+	// }
 
 
-	function getAllAsDiagonals() {
-	    // debugger;
-	    var allDiagonals = [];
-	    for (var i = 0; i < tiles.numColumns; i++) {
-	        allDiagonals.push(getDiagonalLR(i));
-	        allDiagonals.push(getDiagonalRL(i));
-	    }
-	    for (var k = 0; k < tiles.numRows; k++) {
-	        // debugger;
-
-	        allDiagonals.push(getDiagonalLR(-k - 1));
-	        allDiagonals.push(getDiagonalRL(k + tiles.numColumns));
-	    }
-	    return allDiagonals;
-	}
-	function getAllAsRows() {
-	    var allRows = [];
-	    for (var i = 0; i < tiles.numRows; i++) {
-	        allRows.push(getRow(i));                
-	    }   
-	    return allRows;
-	}
+	// function getDiagonalRL(index) {
+	//     return tiles.tiles.filter(function(tile) {
+	//         return tile.y + tile.x == index;
+	//     }).sort(function(a, b) {
+	//         return a.y - b.y;
+	//     });
+	// }
 
 
-	function getRow(index) {
-	    return tiles.tiles.filter(function(tile) {
-	        return tile.y == index;
-	    }).sort(function(a, b) {
-	        return a.x - b.x;
-	    });
-	}
+	// function getAllAsDiagonals() {
+	//     // debugger;
+	//     var allDiagonals = [];
+	//     for (var i = 0; i < tiles.numColumns; i++) {
+	//         allDiagonals.push(getDiagonalLR(i));
+	//         allDiagonals.push(getDiagonalRL(i));
+	//     }
+	//     for (var k = 0; k < tiles.numRows; k++) {
+	//         // debugger;
 
-	function getAllAsColumns() {
-	    var allColumns = [];
-	    for (var i = 0; i < tiles.numColumns; i++) {
-	        allColumns.push(getColumn(i));
-	    }
-	    return allColumns;
-	}
+	//         allDiagonals.push(getDiagonalLR(-k - 1));
+	//         allDiagonals.push(getDiagonalRL(k + tiles.numColumns));
+	//     }
+	//     return allDiagonals;
+	// }
+	// function getAllAsRows() {
+	//     var allRows = [];
+	//     for (var i = 0; i < tiles.numRows; i++) {
+	//         allRows.push(getRow(i));                
+	//     }   
+	//     return allRows;
+	// }
 
 
-	function getTileAtCoordinates(x, y) {
-	    return tiles.tiles.filter(function(tile) {
-	        return tile.x == x && tile.y == y;
-	    })[0];
-	}
+	// function getRow(index) {
+	//     return tiles.tiles.filter(function(tile) {
+	//         return tile.y == index;
+	//     }).sort(function(a, b) {
+	//         return a.x - b.x;
+	//     });
+	// }
+
+	// function getAllAsColumns() {
+	//     var allColumns = [];
+	//     for (var i = 0; i < tiles.numColumns; i++) {
+	//         allColumns.push(getColumn(i));
+	//     }
+	//     return allColumns;
+	// }
+
+
+	// function getTileAtCoordinates(x, y) {
+	//     return tiles.tiles.filter(function(tile) {
+	//         return tile.x == x && tile.y == y;
+	//     })[0];
+	// }
 
         // // },
         // // getTileDiff: function(tile1, tile2) {
@@ -285,10 +246,10 @@ var Logic = function(tiles) {
     	tileColorsMatch:tileColorsMatch,
     	getChains:getChains,
     	getTileDiff:getTileDiff,
-    	getAllAsRows:getAllAsRows,
-    	getAllAsColumns:getAllAsColumns,
-    	getAllNeighbours:getAllNeighbours,
-    	getAllAsDiagonals:getAllAsDiagonals,
-    	getTiles:getTiles
+    	// getAllAsRows:getAllAsRows,
+    	// getAllAsColumns:getAllAsColumns,
+    	// getAllNeighbours:getAllNeighbours,
+    	// getAllAsDiagonals:getAllAsDiagonals,
+    	// getTiles:getTiles
     }
 }

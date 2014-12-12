@@ -90,14 +90,5 @@
                 });
             });
         });
-
-		describe('the tile set',function(){
-			describe("initializing the tile set",function(){
-				it ("should have rows equal in number to the rows argument",function(){
-					assert.equal(new Tileset({rows:4,columns:6}).getRows().length,4);
-					assert.equal(new Tileset({rows:2,columns:2}).getRows().length,2);
-				})
-			})
-		})
     });
 })();
