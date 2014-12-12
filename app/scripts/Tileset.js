@@ -29,10 +29,6 @@ function Tileset(columns, rows, game) {
         }
     }
 
-    function getRandomTile() {
-        return tiles[Math.floor(Math.random()* tiles.length)];
-    }
-
     function getAllNeighbours(tile) {
         return [
             getTileAtCoordinates(tile.x,tile.y+1),
@@ -149,16 +145,10 @@ function Tileset(columns, rows, game) {
     }
 
 
-    function getTileDiff(tile1, tile2) {
-        var diff = {
-            x: tile1.x - tile2.x,
-            y: tile1.y - tile2.y
-        }
-        return diff;
-    }
+
 
     function switchTiles(tile1, tile2) {
-        var diff = getTileDiff(tile1, tile2);
+        var diff = Logic.getTileDiff(tile1, tile2);
         tile1.x -= diff.x;
         tile1.y -= diff.y;
 
@@ -166,21 +156,14 @@ function Tileset(columns, rows, game) {
         tile2.y += diff.y;
     }
 
-    function tilesAreAdjacent(tile1, tile2) {
-        var diff = getTileDiff(tile1, tile2);
-        if (Math.abs(diff.x) + Math.abs(diff.y) == 1) {
-            return true;
-        };
-    }
+
 
     return {
-    	getAllAsColumns:getAllAsColumns,
-    	tilesAreAdjacent:tilesAreAdjacent,
-    	switchTiles:switchTiles,
-    	getAllAsRows:getAllAsRows,
-        flattenBottom:flattenBottom,
-        getRandomTile:getRandomTile,
         getTiles:getTiles,
+        switchTiles:switchTiles,
+        getAllAsRows:getAllAsRows,
+        flattenBottom:flattenBottom,
+    	getAllAsColumns:getAllAsColumns,
         getAllNeighbours:getAllNeighbours,
     	getAllAsDiagonals:getAllAsDiagonals,
     }

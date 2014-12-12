@@ -7,6 +7,19 @@ var Logic = {
 			}
 		}
 	},
+	tilesAreAdjacent:function (tile1, tile2) {
+	    var diff = this.getTileDiff(tile1, tile2);
+	    if (Math.abs(diff.x) + Math.abs(diff.y) == 1) {
+	        return true;
+	    };
+	},
+	getTileDiff: function (tile1, tile2) {
+	    var diff = {
+	        x: tile1.x - tile2.x,
+	        y: tile1.y - tile2.y
+	    }
+	    return diff;
+	},
 	tileColorsMatch: function(tile1, tile2) {
         return tile1.color !== undefined && 
         tile1.color === tile2.color && 

@@ -20,7 +20,6 @@ function Squaretide() {
     };
     
     var listeners = [];
-    // var timer;
     var game = this;
 
     var tiles = new Tileset(config.COLUMNS, config.ROWS, game);
@@ -53,7 +52,6 @@ function Squaretide() {
 
     function broadcast(type) {
 
-        // console.log("Broadcast",type,state);
         if (listeners[type]) {
             listeners[type].forEach(function(listener){
                 listener(state);
@@ -94,7 +92,6 @@ function Squaretide() {
         state.timeRemaining = config.duration;
 
         purgeAllTiles();
-        populateAllEmptyTiles();
         changeColorAllTiles(); 
 
         resume();
@@ -173,7 +170,7 @@ function Squaretide() {
             var tile1 = activetiles[0];
             var tile2 = activetiles[1];
 
-            if (tiles.tilesAreAdjacent(tile1, tile2)) {
+            if (Logic.tilesAreAdjacent(tile1, tile2)) {
 
                 tile1.selected = false;
                 tile2.selected = false;
