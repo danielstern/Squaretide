@@ -25,15 +25,6 @@ function Squaretide() {
         tiles,
         logic;
 
-        function init() {
-            console.log("initing");
-
-            listeners = [];
-        }
-        // debugger;
-        init();
-
-
         function getRandomColor() {
             return Math.floor(Math.random() * config.numColors);
         }

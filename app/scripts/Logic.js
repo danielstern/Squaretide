@@ -1,4 +1,72 @@
 /* contains operations that do not modify the array of tiles. */
+
+var emptyTile = {
+    occupied: false
+}
+var fullTile = {
+    occupied: true
+}
+
+function getOccupied(tile) {
+	return tile.occupied;
+}
+
+function getLastUnoccupiedIndex(array) {
+	return array.map(getOccupied).lastIndexOf(false);
+};
+
+function getFirstOccupiedIndex(array) {
+   	return array.map(getOccupied).indexOf(true);
+};
+
+
+function getLastOccupiedIndex(array) {
+   	return array.map(getOccupied).lastIndexOf(true);
+};
+
+function tilesAreAdjacent(tile1, tile2){
+	var diff = getTileDiff(tile1, tile2);
+	if (Math.abs(diff.x) + Math.abs(diff.y) == 1) {
+	    return true;
+	};
+}
+
+function tileColorsMatch(tile1, tile2) {
+	return tile1.color !== undefined &&
+	    tile1.color === tile2.color &&
+	    tile1.occupied &&
+	    tile2.occupied;
+};
+
+
+function getTileDiff(tile1, tile2){
+	var diff = {
+	    x: tile1.x - tile2.x,
+	    y: tile1.y - tile2.y
+	}
+	return diff;
+}
+
+
+
+// this function just doesnt make sense
+function arrayHasEmptyTileAfterFullTile(array) {
+        // console.log("Found empty tile at index:",this.getLastEmptyIndex(col),this.getLastFullIndex(col));
+        console.log("Array has empty tile:");
+        console.log("Last full index:",getLastOccupiedIndex(array));
+        console.log("Last empty index:",getLastUnoccupiedIndex(array));
+        if (getLastUnoccupiedIndex(array) === -1 || getLastOccupiedIndex(array) === -1) {
+        	return false;
+        }
+        if (getFirstOccupiedIndex(array) <= getLastUnoccupiedIndex(array)) {
+        	return true;
+        } else {
+        	return false;
+        }
+        
+};
+
+
 var Logic = function(tiles) {
 
     // function getLastEmptyTile(col) {
@@ -19,58 +87,13 @@ var Logic = function(tiles) {
     //     }
     // };
 
-    function getLastEmptyIndex(col) {
-        for (var i = col.length - 1; i >= 0; i--) {
-            var tile = col[i];
-            if (!tile.occupied) {
-                return i;
-            }
-        }
-    };
 
-    function getLastFullIndex(col) {
-        for (var i = col.length - 1; i >= 0; i--) {
-            var tile = col[i];
-            if (tile.occupied) {
-                return i;
-            }
-        }
-    };
 
-    function columnHasGap(col) {
-            var map = col.map(function(tile) {
-                return tile.occupied;
-            });
-            // console.log("Found empty tile at index:",this.getLastEmptyIndex(col),this.getLastFullIndex(col));
-            // if (this.getLastFullIndex(col) > this.getLastEmptyIndex(col)) {
-            if (map.indexOf(false) > map.indexOf(true)) {
 
-                return true;
-            }
-        };
 
-     function tilesAreAdjacent(tile1, tile2){
-     	var diff = getTileDiff(tile1, tile2);
-     	if (Math.abs(diff.x) + Math.abs(diff.y) == 1) {
-     	    return true;
-     	};
-     }
-
-     function getTileDiff(tile1, tile2){
-     	var diff = {
-     	    x: tile1.x - tile2.x,
-     	    y: tile1.y - tile2.y
-     	}
-     	return diff;
-     }
+  
 
         // tilesAreAdjacent: function(tile1, tile2) {
-	function tileColorsMatch(tile1, tile2) {
-		return tile1.color !== undefined &&
-		    tile1.color === tile2.color &&
-		    tile1.occupied &&
-		    tile2.occupied;
-	};
 
 	function getChains(tiles, processor, minumum) {
 		var allSequences = [];
