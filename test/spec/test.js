@@ -5,47 +5,45 @@
 
     describe('The tileset logic', function() {
 
-        var emptyTile = {
-            occupied: false
-        }
-        var fullTile = {
-            occupied: true
-        }
-
-        var redTile = {
-        	occupied: true,
-        	color:0,
-        }
-
-        var blueTile = {
-        	occupied: true,
-        	color:1,
-        }
-
-        var topLeftTile = {
-        	x:0,
-        	y:0
-        }
-
-        var topRightTile = {
-        	x: 1,
-        	y: 0
-        }
-
-        var bottomLeftTile = {
-        	x: 0,
-        	y: 1,
-        }
-
-        var bottomRightTile = {
-        	x: 1,
-        	y: 1
-        }
-
-
-
-
         describe('analzing arrays of tiles', function() {
+
+        	var emptyTile = {
+        	    occupied: false
+        	};
+
+        	var fullTile = {
+        	    occupied: true
+        	};
+
+        	var redTile = {
+        		occupied: true,
+        		color:0,
+        	};
+
+        	var blueTile = {
+        		occupied: true,
+        		color:1,
+        	};
+
+        	var topLeftTile = {
+        		x:0,
+        		y:0
+        	};
+
+        	var topRightTile = {
+        		x: 1,
+        		y: 0
+        	};
+
+        	var bottomLeftTile = {
+        		x: 0,
+        		y: 1,
+        	};
+
+        	var bottomRightTile = {
+        		x: 1,
+        		y: 1
+        	};
 
             describe('get last unoccupied index', function() {
                 it('should return the member of the array with the highest index where the occupied property is false', function() {
@@ -81,19 +79,25 @@
             	})
             })
 
-            describe('arrayHasEmptyTileAfterFullTile', function() {
-                it('should return true if a tile with the occupied property has a higher index than an unoccupied one in an array', function() {
+            describe('array has a gap in it', function() {
+                it('should return true if an array has en empty tile afer a full one', function() {
                     assert.equal(arrayHasEmptyTileAfterFullTile([emptyTile]), false);
                     assert.equal(arrayHasEmptyTileAfterFullTile([fullTile]), false);
                     assert.equal(arrayHasEmptyTileAfterFullTile([emptyTile,fullTile]), false);
                     assert.equal(arrayHasEmptyTileAfterFullTile([fullTile,emptyTile]), true);
                     assert.equal(arrayHasEmptyTileAfterFullTile([fullTile, emptyTile, fullTile]), true);
                     assert.equal(arrayHasEmptyTileAfterFullTile([emptyTile, fullTile, emptyTile]), true);
-                    // assert.equal(arrayHasEmptyTileAfterFullTile([fullTile, fullTile, emptyTile,fullTile]), true);
-                    // assert.equal(arrayHasEmptyTileAfterFullTile([fullTile, fullTile, fullTile,fullTile]), false);
-                    // assert.equal(arrayHasEmptyTileAfterFullTile([fullTile, emptyTile, fullTile, emptyTile,fullTile]), true);
                 });
             });
-        })
+        });
+
+		describe('the tile set',function(){
+			describe("initializing the tile set",function(){
+				it ("should have rows equal in number to the rows argument",function(){
+					assert.equal(new Tileset({rows:4,columns:6}).getRows().length,4);
+					assert.equal(new Tileset({rows:2,columns:2}).getRows().length,2);
+				})
+			})
+		})
     });
 })();

@@ -51,10 +51,7 @@ function getTileDiff(tile1, tile2){
 
 // this function just doesnt make sense
 function arrayHasEmptyTileAfterFullTile(array) {
-        // console.log("Found empty tile at index:",this.getLastEmptyIndex(col),this.getLastFullIndex(col));
-        console.log("Array has empty tile:");
-        console.log("Last full index:",getLastOccupiedIndex(array));
-        console.log("Last empty index:",getLastUnoccupiedIndex(array));
+
         if (getLastUnoccupiedIndex(array) === -1 || getLastOccupiedIndex(array) === -1) {
         	return false;
         }

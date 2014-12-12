@@ -2,21 +2,19 @@
 column. */
 /* contains functions that modify the tiles. */
 
-function Tileset(columns, rows, logic) {
+function Tileset(config) {
 
     var tiles = [];
-    var numColumns;
-    var numRows;
 
-    numColumns = columns;
-    numRows = rows;
-    for (var i = 0; i < columns; i++) {
-        for (var k = 0; k < rows; k++) {
+    var numColumns = config.columns;
+    var numRows = config.rows;
+    for (var i = 0; i < numColumns; i++) {
+        for (var k = 0; k < numRows; k++) {
             var tile = {};
             tile.x = i;
             tile.y = k;
 
-            var square = new TileVisualizer(tile);
+            // var square = new TileVisualizer(tile);
             tiles.push(tile);
         }
     };
@@ -108,7 +106,7 @@ function Tileset(columns, rows, logic) {
 
 
     function switchTiles(tile1, tile2) {
-        var diff = logic.getTileDiff(tile1, tile2);
+        var diff = getTileDiff(tile1, tile2);
         tile1.x -= diff.x;
         tile1.y -= diff.y;
 
@@ -116,13 +114,28 @@ function Tileset(columns, rows, logic) {
         tile2.y += diff.y;
     }
 
+    function getRow(index) {
+        return tiles.filter(function(tile) {
+            return tile.y == index;
+        }).sort(function(a, b) {
+            return a.x - b.x;
+        });
+    }
+
+    function getRows() {
+        var allRows = [];
+        for (var i = 0; i < numRows; i++) {
+            allRows.push(getRow(i));                
+        }   
+        return allRows;
+    }
+
 
     return {
         
-        tiles:tiles,
         numRows:numRows,
         numColumns:numColumns,
-        switchTiles:switchTiles,
-        flattenBottom:flattenBottom,
+        getRows:getRows,
+        getRow:getRow,
     }
 }
