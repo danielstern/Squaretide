@@ -31,10 +31,15 @@ start.addEventListener("click", function() {
     })
 });
 
-game.on("tick",function(state){
-	document.getElementById('score').innerHTML = state.score;
+Jukebox.timer.setInterval(function(){
+    state = game.state;
+// game.on("tick",function(state){
+    document.getElementById('score').innerHTML = state.score;
+    document.getElementById('currentComboCount').innerHTML = state.currentComboCount;
+    document.getElementById('currentChainCount').innerHTML = state.currentComboChain;
+    document.getElementById('currentComboMultiplier').innerHTML = state.currentComboMultiplier;
 	document.getElementById('time').innerHTML = Math.floor(state.timeRemaining / 1000);
-})
+},25)
 
 // game.startGame();
 // setTimeout(function() {

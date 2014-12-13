@@ -33,14 +33,19 @@ body {
     font-family: RobotoDraft;
     perspective: 450px;
     -webkit-transform:translate3d(0,0,0);
+    height: 100%;
     
     // padding: @squareSide;
 }
 
 .game {
-    max-width: 560px;
     margin: auto;
-    position: relative;
+    position: absolute;
+    max-width: 560px;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    right: 0;
 }
 menu {
     // width: @squareSide * @numColumns;
@@ -122,6 +127,14 @@ h1 {
     right: 0;
     margin: auto;
     pointer-events: none;
+    // top: 700px;
+}
+.combo-display {
+    position: absolute;
+    z-index: 1000;
+    color: @white1;
+    font-size: 2rem;
+    top: 700px;
 }
 nav {
     width: 100%;
@@ -161,6 +174,7 @@ button + button {
     width: 100%;
     margin: auto;
     max-width: 768px;
+    height: 100%;
 }
 .gamefield {
     width: 100%;
