@@ -22,6 +22,10 @@ function TileVisualizer(tile) {
 
     function onTick() {
 
+        if (tile.deactivated) {
+            clearInterval(interval);
+        }
+
         var width = 100/_numColumns;
         var height = 100/_numRows;
 
@@ -37,7 +41,7 @@ function TileVisualizer(tile) {
         // div2.setAttribute('style','height:7%');
     };
 
-    setInterval(onTick, 33);
+    var interval = setInterval(onTick, 33);
 
     function onClick() {
         if (tile.selected) {

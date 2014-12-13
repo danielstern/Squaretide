@@ -248,6 +248,10 @@ square {
         z-index: 100;
     }
 
+    &[deactivated="true"] {
+        display: none;
+    }
+
     &[chaining='true'] {
         // border: 5px solid magenta;
         transform: translateZ(20px) scale(1.10);

@@ -117,6 +117,10 @@ function Squaretide() {
 
     function nextLevel(options){
 
+        state.level++;
+
+        alert("Entering next level.");
+
         level = options || gameSettingsFromLevel(state.level);
         console.log("respawning tiles",level);        tiles.respawn({columns:level.columns, rows: level.rows})
 
@@ -280,7 +284,8 @@ function Squaretide() {
         state.timeRemaining -= state.speed;
 
         if (state.timeRemaining < 0) {
-            endGame();
+            // endGame();
+            nextLevel();
         }
 
 

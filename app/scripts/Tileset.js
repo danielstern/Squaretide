@@ -29,9 +29,9 @@ function Tileset(config) {
     function respawn(config) {
         numColumns = config.columns;
         numRows = config.rows;
-        tiles.forEach(function(){
-            occupied = false;
-            deactivated = true;
+        tiles.forEach(function(tile){
+            tile.occupied = false;
+            tile.deactivated = true;
         });
         console.log("Respawn",config);
         tiles.length = 0;
