@@ -34,19 +34,8 @@ function Squaretide(options) {
     }
 
     function getSafeColor(tile) {
-        // var neighbours = tiles.getAllNeighbours(tile);
-        // var neighbourColors = [];
-        // neighbours.forEach(function(neighbour) {
-        //     neighbourColors.push(neighbour.color);
-        // });
 
-        // var color = 0;
-        // while (neighbourColors.indexOf(color) > -1) {
-        //     color = getRandomColor();
-        // }
-
-        // return color;
-        var allSegments = logic.getAllSegments(tiles,3)
+        var allSegments = logic.getAllSegments(tiles)
         .filter(function(segment){
             return segment.length >= config.minimumChainLength;
         })
@@ -54,7 +43,10 @@ function Squaretide(options) {
             return logic.tileInSegment(segment,tile);
         });
 
-        var safeColors = [0,1,2,3,4,5];
+        var safeColors = [];
+        for (var i = 0; i < config.numColors; i++) { 
+            safeColors.push(i);
+        }
         var unsafeColors = [];
         allSegments.forEach(function(segment){
 
