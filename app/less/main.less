@@ -33,13 +33,23 @@ body {
     font-family: RobotoDraft;
     perspective: 450px;
     -webkit-transform:translate3d(0,0,0);
-    // margin-bt
+    
+    // padding: @squareSide;
+}
+
+.game {
+    max-width: 560px;
+    margin: auto;
+    position: relative;
 }
 menu {
-    width: @squareSide * @numColumns;
-    height: @squareSide * @numRows;
-    position: absolute;
+    // width: @squareSide * @numColumns;
+    // height: @squareSide * @numRows;
     padding: 0px;
+    width: 100%;
+
+    padding-bottom: 100%;
+    position: absolute;
     top: 6rem;
     transition: all 0.2s ease-in-out;
     left: 0;
@@ -58,12 +68,15 @@ menu {
     .instructions {
         transform: translateZ(0);
         .pattern(@white1);
+        // width: 100%;
         color: @gray2;
         position: absolute;
         transition: all 0.2s ease-in-out;
         bottom: 0px;
         overflow: hidden;
-        padding: 0 1rem;
+        // padding: 0 1rem;
+        left: 0;
+        right: 0;
         height: 0px;
         box-shadow: 0px -1px 0px rgba(0, 0, 0, 0.3);
     }
@@ -110,7 +123,9 @@ h1 {
     margin: auto;
     pointer-events: none;
 }
-
+nav {
+    width: 100%;
+}
 button {
     font-size: 2.5rem;
     font-family: RobotoDraft;
@@ -120,9 +135,11 @@ button {
     font-weight: 700;
     line-height: 2.2rem;
     border: none;
-    width: @squareSide * 3;
+    // width: @squareSide * 3;
+    width: 50%;
+    padding-bottom: 50%;
     transition: 0.2s all ease-in-out;
-    height: @squareSide * 3;
+    // height: @squareSide * 3;
     cursor: pointer;
     position: absolute;
     text-transform: uppercase;
@@ -139,9 +156,17 @@ button {
 button + button {
     margin-left: 3rem;
 }
+.gamefield-container {
+    position: relative;
+    width: 100%;
+    margin: auto;
+    max-width: 768px;
+}
 .gamefield {
-    width: @squareSide * @numColumns;
-    height: @squareSide * @numRows;
+    width: 100%;
+    // width: @squareSide * @numColumns;
+    padding-bottom: 100%;
+    // height: @squareSide * @numRows;
     position: absolute;
     top: 6rem;
     left: 0;
@@ -164,16 +189,20 @@ button + button {
         background-color: darken(@fade2, 0%);
 
         button {
-          height: @squareSide * 2;
+          // height: @squareSide * 2;
+          padding-bottom: 25%;
         }
     }
 }
 .time {
     text-align: right;
 }
+@squarewidth: 100/7%;
 square {
-    width: 46px;
-    height: 46px;
+    // width: 46px;
+    // height: 46px;
+    width:  @squarewidth;
+    height:  @squarewidth;
     margin-top: 1px;
     margin-left: 1px;
     perspective: inherit;
@@ -205,6 +234,11 @@ square {
         z-index: 100;
     }
 
+    &[chaining='true'] {
+        // border: 5px solid magenta;
+        transform: translateZ(20px) scale(1.10);
+    }
+
     .createBackgroundInAllColors (@i) when (@i >= 0) {
         &[color="@{i}"] {
             @name: 'color@{i}';
@@ -218,10 +252,10 @@ square {
 
     .createPositionValue(@i) when (@i >= 0) {
         &[x="@{i}"] {
-            left: @i * 48px;
+            left: @i * @squarewidth;
         }
         &[y="@{i}"] {
-            top: @i * 48px;
+            top: @i * @squarewidth;
         }
         .createPositionValue(@i - 1);
     }

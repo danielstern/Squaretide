@@ -3,11 +3,11 @@
 function Squaretide() {
 
         var config = {
-            ROWS: 8,
-            COLUMNS: 8,
+            ROWS: 7,
+            COLUMNS: 7,
             numColors: 8,
             duration: 105000,
-            tileResolveTime:150
+            tileResolveTime:250
         };
 
 
@@ -110,9 +110,6 @@ function Squaretide() {
 
             tile.occupied = false;
             state.score += 100;
-
-            // soundManager.tone(baseTone + tileSoFar, 100);
-            // soundManager.tone(baseTone + tileSoFar, 100);
         }
 
         function resolveChain(tiles) {
@@ -123,6 +120,9 @@ function Squaretide() {
                 return;
             }
 
+            tiles.forEach(function(tile){
+                tile.chaining = true;
+            })
             soundManager.tone(baseTone);
 
 

@@ -21,15 +21,9 @@ function TileVisualizer(tile) {
 
     function onTick() {
 
-        // console.log("Visualizing tile - ",tile);
-
-        div2.setAttribute("x", tile.x);
-        div2.setAttribute("y", tile.y);
-
-        div2.setAttribute("color", tile.color);
-        div2.setAttribute("selected", tile.selected);
-        div2.setAttribute("occupied", tile.occupied);
-        
+        for (key in tile) {
+            div2.setAttribute(key, tile[key]);            
+        }
     };
 
     setInterval(onTick, 33);
