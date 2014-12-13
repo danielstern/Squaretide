@@ -36,7 +36,7 @@ function Tileset(config) {
 
     function flattenBottom() {
         getColumns().forEach(function(column,index){
-            while(arrayHasEmptyTileAfterFullTile(column)) {
+            while(logic.arrayHasEmptyTileAfterFullTile(column)) {
                 compressColumn(column);
                 column = getColumn(index);
             }
@@ -45,7 +45,7 @@ function Tileset(config) {
 
 
     function switchTiles(tile1, tile2) {
-        var diff = getTileDiff(tile1, tile2);
+        var diff = logic.getTileDiff(tile1, tile2);
         tile1.x -= diff.x;
         tile1.y -= diff.y;
 

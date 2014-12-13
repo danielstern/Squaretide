@@ -2,7 +2,9 @@ function TileVisualizer(tile) {
 
     var div1 = document.getElementById('gamefield'); //get the div element
     var div2 = document.createElement("square"); //create a new div
-    div1.appendChild(div2); // append to div
+    if (div1) {
+        div1.appendChild(div2); // append to div
+    }
 
     var visualizer = this;
     var isTouchDevice = false;
