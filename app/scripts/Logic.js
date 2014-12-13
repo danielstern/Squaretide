@@ -1,24 +1,27 @@
 /* contains operations that do not modify the array of tiles. */
 
+function getSegments(array) {
+    var segments = [];
+    var maxSubsetLength = array.length;
 
+    for (var i = 0; i < array.length; i++) {
+
+    	var subsetLength = maxSubsetLength - i;
+        var startPosition = i;
+
+        for (var k = 0; k < subsetLength; k++) {
+        	var endPosition = startPosition + k + 1;
+        	var subset = array.slice(startPosition,endPosition);
+        	segments.push(subset);
+        }
+    }
+
+    return segments;
+}
 
 var Logic = function() {
 
-	function getSegments(array) {
-	    var segments = [];
 
-	    for (var i = 0; i < array.length; i++) {
-	        // var maxSliceLength = array.length;
-	        var maxSubsetLength = array.length;
-
-	        for (var k = 1; k <= maxSubsetLength; k++) {
-	        	var subset = array.slice(i,k+1);
-	        	segments.push(subset);
-	        }
-	    }
-
-	    return segments;
-	}
 
 	function sequenceIsChain(array,processor) {
 
