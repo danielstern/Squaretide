@@ -242,6 +242,9 @@ function Squaretide() {
 
         this.on = on;
         this.startGame = startGame;
+        this.state = state;
+        this.config = config;
+        this.tiles = tiles;
 
         /*exported tick, startGame, endGame */
     }

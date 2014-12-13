@@ -158,5 +158,6 @@ function Tileset(config) {
         getTiles:getTiles,
         flattenBottom:flattenBottom,
         switchTiles:switchTiles,
+        getTileAtCoordinates:getTileAtCoordinates,
     }
 }

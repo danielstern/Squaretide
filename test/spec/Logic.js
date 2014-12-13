@@ -105,15 +105,37 @@
             	})
             });
 
-            describe("getting all chains",function(){
-            	it ('should return all chains',function(){
+            describe("identifying a chain",function(){
+            	it ('should correctly identify an array that is a chain',function(){
             		var sequenceIsChain = logic.sequenceIsChain;
             		var processor = logic.tileColorsMatch;
 
-            		assert.isTrue(sequenceIsChain( [blueTile,blueTile,blueTile],processor));
-            		assert.isTrue(sequenceIsChain( [redTile,redTile,redTile,redTile],processor));
-            		assert.isFalse(sequenceIsChain( [redTile,blueTile,redTile,redTile],processor));
+            		assert.isTrue(sequenceIsChain([blueTile,blueTile,blueTile],processor));
+            		assert.isTrue(sequenceIsChain([redTile,redTile,redTile,redTile],processor));
+            		assert.isFalse(sequenceIsChain([redTile,blueTile,redTile,redTile],processor));
             	});
+            })
+
+            describe("finding all chains",function(){
+                // errrr 
+                // it ('should correctly all the chains in a tileset',function(){
+                //     var getChains = logic.getChains;
+                //     var processor = logic.tileColorsMatch;
+                //     var tiles = new Tileset({rows:4,columns:3});
+                //     tiles.getTileAtCoordinates({x:0,y:0}).color = 1;
+                //     tiles.getTileAtCoordinates({x:0,y:0}).occupied = true;
+                //     tiles.getTileAtCoordinates({x:1,y:0}).color = 1;
+                //     tiles.getTileAtCoordinates({x:1,y:0}).occupied = true;
+                //     tiles.getTileAtCoordinates({x:2,y:0}).color = 1;
+                //     tiles.getTileAtCoordinates({x:2,y:0}).occupied = true;
+                //     // tiles.getTileAtCoordinates({x:3,y:0}).color = 1;
+                //     // tiles.getTileAtCoordinates({x:3,y:0}).occupie/d = true;
+                //     // tiles.getTileAtCoordinates({x:3,y:0}).color = 1;
+
+                //     assert.equal(getChains(tiles,processor).length, 5);
+                //     // assert.isTrue(sequenceIsChain([redTile,redTile,redTile,redTile],processor));
+                //     // assert.isFalse(sequenceIsChain([redTile,blueTile,redTile,redTile],processor));
+                // });
             })
         });
     });
