@@ -7,17 +7,37 @@ function Tileset(config) {
 
     var numColumns = config.columns;
     var numRows = config.rows;
-    for (var i = 0; i < numColumns; i++) {
-        for (var k = 0; k < numRows; k++) {
-            var tile = {};
-            tile.x = i;
-            tile.y = k;
 
-            var square = new TileVisualizer(tile);
-            tiles.push(tile);
-        }
+    function init() {
+        console.log("init...",numRows,numColumns)
+        for (var i = 0; i < numColumns; i++) {
+            for (var k = 0; k < numRows; k++) {
+                var tile = {};
+                tile.x = i;
+                tile.y = k;
+
+                // console.log("spawning tile",tile);
+
+                var square = new TileVisualizer(tile);
+                tiles.push(tile);
+            }
+        };    
     };
 
+    
+
+    function respawn(config) {
+        numColumns = config.columns;
+        numRows = config.rows;
+        tiles.forEach(function(){
+            occupied = false;
+            deactivated = true;
+        });
+        console.log("Respawn",config);
+        tiles.length = 0;
+        init();
+    }
+    
     function compressColumn(column) {
         for (var i = column.length; i > 0; i--) {
             var tile = column[i - 1];
@@ -143,11 +163,11 @@ function Tileset(config) {
         });
     }
 
+    init();
+
 
     return {
         
-        numRows:numRows,
-        numColumns:numColumns,
         getRows:getRows,
         getRow:getRow,
         getColumns:getColumns,
@@ -159,5 +179,6 @@ function Tileset(config) {
         flattenBottom:flattenBottom,
         switchTiles:switchTiles,
         getTileAtCoordinates:getTileAtCoordinates,
+        respawn:respawn,
     }
 }

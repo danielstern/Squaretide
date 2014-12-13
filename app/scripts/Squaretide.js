@@ -1,19 +1,17 @@
 'use strict';
 /* globals soundManager, Tileset, logic, trampoline, Jukebox */
-function Squaretide(options) {
-
-    options = options || {};
+function Squaretide() {
 
     var config = {
-        ROWS: options.rows || 3,
-        COLUMNS: options. columns || 3,
         chainGracePeriod: 15,
         tileResolveTime:250
     };
 
     var level = {
-        colors: options.colors || 6,
+        colors: 6,
         minimumChainLength: 3,
+        rows: 3,
+        columns: 3,
         duration: 105000,
         pointsPerTile: 100,
     }
@@ -34,8 +32,7 @@ function Squaretide(options) {
     var listeners = [],
     tiles;
 
-    window._numRows = config.ROWS;
-    window._numColumns = config.COLUMNS;
+
 
     var timer = Jukebox.timer;
 
@@ -53,14 +50,16 @@ function Squaretide(options) {
             return logic.tileInSegment(segment,tile);
         });
 
+        var colors = level.colors;
+
         var safeColors = [];
-        for (var i = 0; i < level.colors; i++) { 
+        for (var i = 0; i < colors; i++) { 
             safeColors.push(i);
         }
         var unsafeColors = [];
         allSegments.forEach(function(segment){
 
-            for (var i = 0; i < level.colors; i++) {
+            for (var i = 0; i < colors; i++) {
                 tile.color = i;
                 if (logic.sequenceIsChain(segment,logic.tileColorsMatch)) {
                     unsafeColors.push(i);
@@ -116,23 +115,27 @@ function Squaretide(options) {
         });
     }
 
-    function nextLevel(){
-        var settings = gameSettingsFromLevel(state.level);
+    function nextLevel(options){
 
-        level = settings;
+        level = options || gameSettingsFromLevel(state.level);
+        console.log("respawning tiles",level);        tiles.respawn({columns:level.columns, rows: level.rows})
 
         state.timeRemaining = level.duration;
         changeColorAllTiles();
         populateAllEmptyTiles();
+
+        window._numRows = level.rows;
+        window._numColumns = level.columns;
+
         resume();        
     }
 
-    function startGame() {
+    function startGame(options) {
 
-        state.level = 0;
+        state.level = 1;
         state.score = 0;
 
-        nextLevel();
+        nextLevel(options);
     }
 
     function pause() {

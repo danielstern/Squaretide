@@ -13,17 +13,19 @@ function gameSettingsFromLevel(level){
 
 
 	var colors = 3 + everyThird(level); // more colors is more hard	
-	var chainLength = 3 + level; // more combo is more hard	
+	var chainLength = 3 + everyFifth(level); // more combo is more hard	
 	var targetScore = powerOf(level) * 1000; // higher target score is more hard
 	var scorePerTile = 100 + 10 * powerOf(level); // more score per tile is more awesome
 	var duration = 60 - level * 2; // shorter duration is more hard
-	var rows = 6; // always 6
-	var columns = 6; // ever 6
+	var rows = 3 + everyThird(level);
+	var columns = 3 + everyThird(level);
 	var chainGracePeriod = 15; // doesnt change
 
 
 	var config = {
 	    colors: colors,
+	    rows: rows,
+	    columns:columns,
 	    minimumChainLength: chainLength,
 	    duration: duration * 1000,
 	    pointsPerTile: scorePerTile,
