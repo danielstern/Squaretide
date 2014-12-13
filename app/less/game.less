@@ -1,0 +1,61 @@
+@import 'square.less';
+@import 'home-screen.less';
+@import 'game-screen.less';
+
+.game {
+    width: 95%;
+    height:100%;
+    max-width: 560px;
+    max-height: 560px;
+
+    .centerAbsolute();
+
+    h1 {
+        .centerAbsolute();
+        transition: 0.6s all;
+        text-transform: uppercase;
+        font-size: @sq * 6;
+        color: @white1;
+        text-shadow: 1px 1px 1px @fade, 0px 1px 1px @fade;
+
+        
+    }
+
+}
+
+@media (max-width:400px) {
+    .game {
+        h1 {
+            font-size:@sq * 3;
+        }
+    }
+}
+
+.game[mode="main-menu"] {
+
+    section[name='home-screen'] {
+        display: block;
+    }
+
+    section[name='game-screen'] {
+        display: none;
+    }
+}
+
+.game[mode="game"] {
+    section[name='home-screen'] {
+        display: none;
+    }
+
+    h1 {
+        top: 0.5rem;
+        font-size: 1rem;
+        width: 100%;
+    }
+
+    menu {
+        opacity: 0;
+        pointer-events: none;
+    }
+
+}

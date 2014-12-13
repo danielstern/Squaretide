@@ -1,0 +1,37 @@
+section[name='game-screen'] {
+    .flexfit();
+    .centerAbsolute();
+
+    .gamefield {
+        width: 100%;
+        padding-bottom: 100%;
+        .centerAbsolute();
+        .radialGradient(lighten(@color1, 30%), lighten(@color1, 50%));
+        top: @sq *8;
+        overflow: hidden;
+    }
+
+    .score, .time {
+        position: absolute;
+        z-index: 1000;
+        color: @white1;
+        font-size: 2.5rem;
+        width: 100%;
+        left: 0;
+        right: 0;
+        top: @sq*3;
+        margin: auto;
+        pointer-events: none;
+        // top: 700px;
+    }
+    .time {
+        text-align: right;
+    }
+    .combo-display {
+        position: absolute;
+        z-index: 1000;
+        color: @white1;
+        font-size: 2rem;
+        top: 700px;
+    }
+}

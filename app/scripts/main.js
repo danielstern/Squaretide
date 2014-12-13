@@ -12,6 +12,8 @@ var soundManager = {
     }
 }
 
+document.getElementById('game').setAttribute("mode", "main-menu");
+
 var instructions = document.getElementById("instructionsButton");
 var start = document.getElementById("startButton");
 instructions.addEventListener("click", function() {

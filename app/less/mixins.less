@@ -1,0 +1,16 @@
+.pattern(@color) {
+    background: radial-gradient(ellipse at center, lighten(@color, 25%) 0%, lighten(@color, 20%) 100%);
+}
+.flexfit() {
+    width: 100%;
+    height: 100%;
+}
+.centerAbsolute() {
+    left: 0;
+    right: 0;
+    margin: auto;
+    position: absolute;
+}
+.radialGradient(@colorA,@colorB) {
+    background: radial-gradient(ellipse at center, @colorA 0%, @colorB 100%);
+}

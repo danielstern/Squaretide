@@ -1,0 +1,53 @@
+square {
+    display: block;
+    position: absolute;
+
+    width:  @sq;
+    height:  @sq;
+    border: 1px solid rgba(0,0,0,0);
+    cursor: pointer;
+
+    perspective: inherit;
+    transition: 0.2s all ease-in-out;
+    -webkit-transform: translate3d(0, 0, 0);
+    -webkit-backface-visibility: hidden;
+    &:hover {
+        transform: translateZ(2px) scale(1.05);
+        z-index: 2000;
+    }
+    &[occupied="false"] {
+        box-shadow: none;
+        animation: spin-out 0.5s;
+        z-index: 3000;
+        opacity: 0;
+    }
+    &[occupied="true"] {
+        box-shadow: none;
+        margin-top:0px;
+        box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3), 0px 1px 1px rgba(0, 0, 0, 0.3);
+        opacity: 1;
+    }
+    &[selected="true"] {
+        transform: translateZ(10px) scale(1.10) rotate(90deg);
+        -webkit-transform: translateZ(10px) scale(1.10) rotate(90deg);
+        z-index: 100;
+    }
+
+    &[deactivated="true"] {
+        display: none;
+    }
+
+    &[chaining='true'] {
+        transform: translateZ(20px) scale(1.10);
+    }
+
+    .createBackgroundInAllColors (@i) when (@i >= 0) {
+        &[color="@{i}"] {
+            @name: 'color@{i}';
+            .pattern(@@name);
+        }
+        .createBackgroundInAllColors(@i - 1);
+    }
+
+    .createBackgroundInAllColors(@numColors - 1);
+}

@@ -24,43 +24,45 @@
     <div id="game" class=game>
 
         <h1>
-          Squaretide
+           Squaretide
         </h1>
-        <section name=home-screen id=home>
-          <nav>
-            <button id='startButton'>
-                New Game
-            </button>
-            <button id='instructionsButton'>
-                Help
-            </button>
-          </nav>
-          <article class="instructions">
-              <p>
-                  <strong>
-                    Tap 
-                  </strong> 
-                  two adjacent squares to switch them.
-              </p>
-              <p>
-                  Line up 3 or more squares of the same color to collect points.
-              </p>
-          </article>
+        <section name=home-screen id='home'>
+            <nav>
+                <button id='startButton'>
+                    New Game
+                </button>
+                <button id='instructionsButton'>
+                    Help
+                </button>
+            </nav>
+            <article class="instructions">
+                <p>
+                    <strong>
+                  Tap 
+                </strong> two adjacent squares to switch them.
+                </p>
+                <p>
+                    Line up 3 or more squares of the same color to collect points.
+                </p>
+            </article>
         </section>
 
-      <section name=game-screen>
-        
-        <div class=gamefield id="gamefield">
+        <section name=game-screen>
 
-        </div>
-        <div id="score" class='score'></div>
-        <div id="time" class='time'>60</div>
-        <div class="combo-display">  
-          Combo: <div id="currentComboCount" class='currentComboCount'></div>
-          Multiplier: <div id="currentComboMultiplier" class='currentComboMultiplier'></div>
-          Chain: <div id="currentChainCount" class='currentChainCount'></div>
-        </div>
-      </section>        
+            <div class=gamefield id="gamefield">
+
+            </div>
+            <div id="score" class='score'></div>
+            <div id="time" class='time'>60</div>
+            <div class="combo-display">
+                Combo:
+                <div id="currentComboCount" class='currentComboCount'></div>
+                Multiplier:
+                <div id="currentComboMultiplier" class='currentComboMultiplier'></div>
+                Chain:
+                <div id="currentChainCount" class='currentChainCount'></div>
+            </div>
+        </section>
 
     </div>
 
@@ -73,26 +75,32 @@
     <!-- endbuild -->
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
-   <script>
-     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-     m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-     })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    <script>
+    (function(i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function() {
+            (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
 
-     ga('create', 'UA-40501021-6', 'auto');
-     ga('send', 'pageview');
-
-   </script>
+    ga('create', 'UA-40501021-6', 'auto');
+    ga('send', 'pageview');
+    </script>
 
     <!-- build:js({app,.tmp}) scripts/main.js -->
-<!--     // <script src="scripts/web-audio-shim.js"></script>
+    <!--     // <script src="scripts/web-audio-shim.js"></script>
     // <script src="scripts/actionTimer.js"></script>
     // <script src="scripts/webAudioFilterPack.js"></script>
     // <script src="scripts/jukebox.js"></script> -->
-    
+
     <script src="scripts/trampoline.js"></script>
     <script src="scripts/Logic.js"></script>
-    
+
     <!-- // <script src="scripts/Tile.js"></script> -->
     <script src="scripts/TileVisualizer.js"></script>
     <script src="scripts/Tileset.js"></script>
