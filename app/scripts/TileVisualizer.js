@@ -19,6 +19,8 @@ function TileVisualizer(tile) {
 
     function onTick() {
 
+        // console.log("Visualizing tile - ",tile);
+
         div2.setAttribute("x", tile.x);
         div2.setAttribute("y", tile.y);
 

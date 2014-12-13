@@ -70,9 +70,9 @@ var Logic = function(tiles) {
 		var allSequences = [];
 		var allMatchingChains = [];
 
-		var columns = getAllAsColumns();
-		var rows = getAllAsRows();
-		var diagonals = getAllAsDiagonals();
+		var columns = tiles.getColumns();
+		var rows = tiles.getRows();
+		var diagonals = tiles.getDiagonals();
 
 		function getSegments(array) {
 		    var segments = [];
@@ -245,11 +245,6 @@ var Logic = function(tiles) {
     	tilesAreAdjacent:tilesAreAdjacent,
     	tileColorsMatch:tileColorsMatch,
     	getChains:getChains,
-    	getTileDiff:getTileDiff,
-    	// getAllAsRows:getAllAsRows,
-    	// getAllAsColumns:getAllAsColumns,
-    	// getAllNeighbours:getAllNeighbours,
-    	// getAllAsDiagonals:getAllAsDiagonals,
-    	// getTiles:getTiles
+    	getTileDiff:getTileDiff
     }
 }

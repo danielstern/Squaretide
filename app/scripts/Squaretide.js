@@ -30,7 +30,7 @@ function Squaretide() {
         }
 
         function getSafeColor(tile) {
-            var neighbours = logic.getAllNeighbours(tile);
+            var neighbours = tiles.getAllNeighbours(tile);
             var neighbourColors = [];
             neighbours.forEach(function(neighbour) {
                 neighbourColors.push(neighbour.color);
@@ -63,7 +63,7 @@ function Squaretide() {
 
 
         function changeColorAllTiles() {
-            logic.getTiles(function(tile) {
+            tiles.getTiles(function(tile) {
                 return tile.occupied;
             }).forEach(function(tile) {
                 tile.color = getSafeColor(tile);
@@ -72,11 +72,15 @@ function Squaretide() {
 
 
         function populateAllEmptyTiles() {
-            logic.getTiles(function(tile) {
+            // console.log('Populate empties',tiles.getTiles(function(tile) {
+            //     return !tile.occupied;
+            // }));
+            tiles.getTiles(function(tile) {
                 return !tile.occupied;
             }).forEach(function(tile) {
                 tile.color = getSafeColor(tile);
                 tile.occupied = true;
+                // console.log("Pop tile",tile);
             });
         }
 
@@ -139,7 +143,7 @@ function Squaretide() {
         }
 
         function findAndSwitchActiveTiles() {
-            var activetiles = logic.getTiles(function(tile) {
+            var activetiles = tiles.getTiles(function(tile) {
                 return tile.selected;
             }).sort(function(a, b) {
                 return a.timeSelected - b.timeSelected;
@@ -190,7 +194,7 @@ function Squaretide() {
         function init() {
             Jukebox.timer.setInterval(onEnterFrame, 1000 / state.speed);
 
-            tiles = new Tileset(config.COLUMNS, config.ROWS, logic);
+            tiles = new Tileset({columns:config.COLUMNS, rows:config.ROWS});
             logic = new Logic(tiles);
 
             on('tick', findAndResolveMatches);

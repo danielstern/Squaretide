@@ -14,7 +14,7 @@ function Tileset(config) {
             tile.x = i;
             tile.y = k;
 
-            // var square = new TileVisualizer(tile);
+            var square = new TileVisualizer(tile);
             tiles.push(tile);
         }
     };
@@ -114,6 +114,12 @@ function Tileset(config) {
         tile2.y += diff.y;
     }
 
+    function getTileAtCoordinates(options) {
+        return tiles.filter(function(tile) {
+            return tile.x == options.x && tile.y == options.y;
+        })[0];
+    }
+
     function getRow(index) {
         return tiles.filter(function(tile) {
             return tile.y == index;
@@ -154,6 +160,15 @@ function Tileset(config) {
         });
     }
 
+
+    function getTiles(matcher) {
+        if (matcher) {
+            return tiles.filter(matcher);
+        } else {
+            return tiles;
+        }
+    }
+
     
     function getDiagonalRL(index) {
         return tiles.filter(function(tile) {
@@ -177,14 +192,14 @@ function Tileset(config) {
 
     function getAllNeighbours(tile) {
         return [
-            getTileAtCoordinates(tile.x,tile.y+1),
-            getTileAtCoordinates(tile.x,tile.y-1),
-            getTileAtCoordinates(tile.x+1,tile.y),
-            getTileAtCoordinates(tile.x-1,tile.y),
-            getTileAtCoordinates(tile.x-1,tile.y-1),
-            getTileAtCoordinates(tile.x+1,tile.y-1),
-            getTileAtCoordinates(tile.x+1,tile.y+1),
-            getTileAtCoordinates(tile.x-1,tile.y+1),
+            getTileAtCoordinates({x:tile.x,y:tile.y+1  }),
+            getTileAtCoordinates({x:tile.x,y:tile.y-1  }),
+            getTileAtCoordinates({x:tile.x+1,y:tile.y  }),
+            getTileAtCoordinates({x:tile.x-1,y:tile.y  }),
+            getTileAtCoordinates({x:tile.x-1,y:tile.y-1}),
+            getTileAtCoordinates({x:tile.x+1,y:tile.y-1}),
+            getTileAtCoordinates({x:tile.x+1,y:tile.y+1}),
+            getTileAtCoordinates({x:tile.x-1,y:tile.y+1}),
         ].filter(function(tile){
             return tile;
         });
@@ -202,6 +217,10 @@ function Tileset(config) {
         getColumns:getColumns,
         getDiagonalLR:getDiagonalLR,
         getDiagonalRL:getDiagonalRL,
-        getDiagonals:getDiagonals
+        getDiagonals:getDiagonals,
+        getAllNeighbours:getAllNeighbours,
+        getTiles:getTiles,
+        flattenBottom:flattenBottom,
+        switchTiles:switchTiles,
     }
 }
