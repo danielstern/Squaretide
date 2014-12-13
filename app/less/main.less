@@ -43,236 +43,240 @@ body {
     -webkit-transform:translate3d(0,0,0);
 }
 
+.game {
+ width: 100%;
+ max-width: 560px;
+ max-height: 560px;
+ .centerAbsolute();
 
-h1 {
-    position: absolute;
-    width: 100%;
-    left: 0;
-    right: 0;
-    top: 0.5rem;
-    transition: 0.6s all;
-    margin: auto;
-    text-transform: uppercase;
-    font-size: 4rem;
-    color: @white1;
-    text-shadow: 1px 1px 1px @fade, 0px 1px 1px @fade;
-}
-
-
-section[name='home-screen'] {
-
-    .centerAbsolute();
-    .flexfit();
-    top: 6rem;
-    width: 100%;
-    padding: 0px 0px 100% 0px;
-    
-    transition: all 0.2s ease-in-out;
-
-    .radialGradient(lighten(@fade, 33%), lighten(@fade, 20%));
-    z-index: 10000;
-    nav {
-        transform: translateZ(0);
-        .centerAbsolute();
-        top: 0rem;
-        transition: top 0.2s ease-in-out;
-        text-align: center;
-    }
-
-    .instructions {
-        transform: translateZ(0);
-        .pattern(@white1);
-        // width: 100%;
-        color: @gray2;
-        position: absolute;
-        transition: all 0.2s ease-in-out;
-        bottom: 0px;
-        overflow: hidden;
-        // padding: 0 1rem;
-        left: 0;
-        right: 0;
-        height: 0px;
-        box-shadow: 0px -1px 0px @fade;
-    }
-
-    button {
-        font-family: RobotoDraft;
-        padding: 1rem;
-        background-color: lighten(@gray1, 83%);
-        color: @white1;
-        font-weight: 700;
-        border: none;
-        width: 50%;
-        height:50%;
-        transition: 0.2s all ease-in-out;
-        display: inline-block;
-        cursor: pointer;
-        position: absolute;
-        text-transform: uppercase;
-        box-shadow: 0px 1px 0px @fade;
-    }
-
-    #instructionsButton {
-        .pattern(darken(@color3,25%));
-        right: 0rem;
-    }
-    #startButton {
-        .pattern(darken(@color5,25%));
-        left: 0rem;
-    }
-    button + button {
-        margin-left: 3rem;
-    }
-}
-section[name='game-screen'] {
-    .flexfit();
-    .centerAbsolute();
-    max-width: 560px;
-    max-height: 560px;
-
-    .gamefield {
-        width: 100%;
-        padding-bottom: 100%;
-        .centerAbsolute();
-        .radialGradient(lighten(@color1, 30%), lighten(@color1, 50%));
-        top: 6rem;
-        overflow: hidden;
-    }
-    
-
-    .score, .time {
-        position: absolute;
-        z-index: 1000;
-        color: @white1;
-        font-size: 2.5rem;
-        width: 100%;
-        left: 0;
-        right: 0;
-        margin: auto;
-        pointer-events: none;
-        // top: 700px;
-    }
-    .time {
-        text-align: right;
-    }
-    .combo-display {
-        position: absolute;
-        z-index: 1000;
-        color: @white1;
-        font-size: 2rem;
-        top: 700px;
-    }
-}
-
-[show-menu="false"] {
-    menu {
-        opacity: 0;
-        pointer-events: none;
-    }
     h1 {
+        position: absolute;
+        width: 100%;
+        left: 0;
+        right: 0;
         top: 0.5rem;
-        font-size: 1rem;
+        transition: 0.6s all;
+        margin: auto;
+        text-transform: uppercase;
+        font-size: 4rem;
+        color: @white1;
+        text-shadow: 1px 1px 1px @fade, 0px 1px 1px @fade;
     }
-    .score, .time {
+
+
+
+
+    section[name='home-screen'] {
+
+        .centerAbsolute();
+        .flexfit();
+        top: 6rem;
+        width: 100%;
+        padding: 0px 0px 100% 0px;
+        
+        transition: all 0.2s ease-in-out;
+
+        .radialGradient(lighten(@fade, 33%), lighten(@fade, 20%));
+        z-index: 10000;
+        nav {
+            transform: translateZ(0);
+            .centerAbsolute();
+            width: 100%;
+            top: 0rem;
+            transition: top 0.2s ease-in-out;
+            text-align: center;
+
+            button {
+                font-family: RobotoDraft;
+                padding: 1rem;
+                background-color: lighten(@gray1, 83%);
+                color: @white1;
+                font-weight: 700;
+                border: none;
+                width: 50%;
+                height:50%;
+                transition: 0.2s all ease-in-out;
+                display: inline-block;
+                cursor: pointer;
+                position: absolute;
+                text-transform: uppercase;
+                box-shadow: 0px 1px 0px @fade;
+            }
+        }
+
+        .instructions {
+            transform: translateZ(0);
+            .pattern(@white1);
+            // width: 100%;
+            color: @gray2;
+            position: absolute;
+            transition: all 0.2s ease-in-out;
+            bottom: 0px;
+            overflow: hidden;
+            // padding: 0 1rem;
+            left: 0;
+            right: 0;
+            height: 0px;
+            box-shadow: 0px -1px 0px @fade;
+        }
+
+
+        #instructionsButton {
+            .pattern(darken(@color3,25%));
+            right: 0rem;
+        }
+        #startButton {
+            .pattern(darken(@color5,25%));
+            left: 0rem;
+        }
+        button + button {
+            margin-left: 3rem;
+        }
+    }
+    section[name='game-screen'] {
+        .flexfit();
+        .centerAbsolute();
+        // max-width: 560px;
+        // max-height: 560px;
+
+        .gamefield {
+            width: 100%;
+            padding-bottom: 100%;
+            .centerAbsolute();
+            .radialGradient(lighten(@color1, 30%), lighten(@color1, 50%));
+            top: 6rem;
+            overflow: hidden;
+        }
+        
+
+        .score, .time {
+            position: absolute;
+            z-index: 1000;
+            color: @white1;
+            font-size: 2.5rem;
+            width: 100%;
+            left: 0;
+            right: 0;
+            margin: auto;
+            pointer-events: none;
+            // top: 700px;
+        }
+        .time {
+            text-align: right;
+        }
+        .combo-display {
+            position: absolute;
+            z-index: 1000;
+            color: @white1;
+            font-size: 2rem;
+            top: 700px;
+        }
+    }
+
+    [show-menu="false"] {
+        menu {
+            opacity: 0;
+            pointer-events: none;
+        }
+        h1 {
+            top: 0.5rem;
+            font-size: 1rem;
+        }
+        .score, .time {
+            display: block;
+            top: 2rem;
+        }
+    }
+
+
+    [show-instructions="true"] {
+        .instructions {
+            height: 80px;
+            padding: 1rem;
+        }
+        #instructionsButton {
+            transform: translateZ(10px);
+        }
+        menu {
+            background-color: darken(@fade, 0%);
+
+            button {
+              // height: @squareSide * 2;
+              padding-bottom: 25%;
+            }
+        }
+    }
+
+    square {
         display: block;
-        top: 2rem;
-    }
-}
+        position: absolute;
 
+        width:  @sq;
+        height:  @sq;
+        border: 1px solid rgba(0,0,0,0);
+        cursor: pointer;
 
-[show-instructions="true"] {
-    .instructions {
-        height: 80px;
-        padding: 1rem;
-    }
-    #instructionsButton {
-        transform: translateZ(10px);
-    }
-    menu {
-        background-color: darken(@fade, 0%);
+        perspective: inherit;
+        transition: 0.2s all ease-in-out;
+        -webkit-transform: translate3d(0, 0, 0);
+        -webkit-backface-visibility: hidden;
+        &:hover {
+            transform: translateZ(2px) scale(1.05);
+            z-index: 2000;
+        }
+        &[occupied="false"] {
+            box-shadow: none;
+            animation: spin-out 0.5s;
+            z-index: 3000;
+            opacity: 0;
+        }
+        &[occupied="true"] {
+            box-shadow: none;
+            margin-top:0px;
+            box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3), 0px 1px 1px rgba(0, 0, 0, 0.3);
+            opacity: 1;
+        }
+        &[selected="true"] {
+            transform: translateZ(10px) scale(1.10) rotate(90deg);
+            -webkit-transform: translateZ(10px) scale(1.10) rotate(90deg);
+            z-index: 100;
+        }
 
-        button {
-          // height: @squareSide * 2;
-          padding-bottom: 25%;
+        &[deactivated="true"] {
+            display: none;
+        }
+
+        &[chaining='true'] {
+            transform: translateZ(20px) scale(1.10);
+        }
+
+        .createBackgroundInAllColors (@i) when (@i >= 0) {
+            &[color="@{i}"] {
+                @name: 'color@{i}';
+                .pattern(@@name);
+            }
+            .createBackgroundInAllColors(@i - 1);
+        }
+
+        .createBackgroundInAllColors(@numColors - 1);
+    }
+
+    @keyframes fly-in {
+        0% {
+            margin-top: -900px;
+        }
+        100% {
+            margin: top: 0px;
         }
     }
-}
 
-square {
-    display: block;
-    position: absolute;
-
-    width:  @sq;
-    height:  @sq;
-    border: 1px solid rgba(0,0,0,0);
-    cursor: pointer;
-
-    perspective: inherit;
-    transition: 0.2s all ease-in-out;
-    -webkit-transform: translate3d(0, 0, 0);
-    -webkit-backface-visibility: hidden;
-    &:hover {
-        transform: translateZ(2px) scale(1.05);
-        z-index: 2000;
-    }
-    &[occupied="false"] {
-        box-shadow: none;
-        animation: spin-out 0.5s;
-        z-index: 3000;
-        opacity: 0;
-    }
-    &[occupied="true"] {
-        box-shadow: none;
-        margin-top:0px;
-        box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3), 0px 1px 1px rgba(0, 0, 0, 0.3);
-        opacity: 1;
-    }
-    &[selected="true"] {
-        transform: translateZ(10px) scale(1.10) rotate(90deg);
-        -webkit-transform: translateZ(10px) scale(1.10) rotate(90deg);
-        z-index: 100;
-    }
-
-    &[deactivated="true"] {
-        display: none;
-    }
-
-    &[chaining='true'] {
-        transform: translateZ(20px) scale(1.10);
-    }
-
-    .createBackgroundInAllColors (@i) when (@i >= 0) {
-        &[color="@{i}"] {
-            @name: 'color@{i}';
-            .pattern(@@name);
+    @keyframes spin-out {
+        0% {
+            transform: rotate(0deg) translateZ(0px) rotateY(0deg);
         }
-        .createBackgroundInAllColors(@i - 1);
+        100% {
+            transform: rotate(115deg) translateZ(10px);
+        }
     }
-
-    .createBackgroundInAllColors(@numColors - 1);
-}
-
-@keyframes fly-in {
-    0% {
-        margin-top: -900px;
-        // transform: rotate(0deg) translateZ(10px);
-        // opacity: 0;
-        // transform: translateZ(0px) rotateX(0deg) rotateY(0deg); 
-    }
-    100% {
-        margin: top: 0px;
-        // transform: rotate(0deg) translateZ(0px);
-        // transform: translateZ(0px) rotateX(0deg) rotateY(0deg); 
-        // opacity: 1;
-    }
-}
-
-@keyframes spin-out {
-    0% {
-        transform: rotate(0deg) translateZ(0px) rotateY(0deg);
-    }
-    100% {
-        transform: rotate(115deg) translateZ(10px);
-    }
-}
 @media screen and (min-width: 960px) {}
+}
