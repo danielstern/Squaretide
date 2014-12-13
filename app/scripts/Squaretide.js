@@ -7,7 +7,7 @@ function Squaretide(options) {
     var config = {
         ROWS: options.rows || 6,
         COLUMNS: options. columns || 6,
-        numColors: options.numColors || 4,
+        numColors: options.colors || 4,
         minimumChainLength: 3,
         duration: 105000,
         tileResolveTime:250
@@ -53,12 +53,8 @@ function Squaretide(options) {
             for (var i = 0; i < config.numColors; i++) {
                 tile.color = i;
                 if (logic.sequenceIsChain(segment,logic.tileColorsMatch)) {
-                    console.log("this color would cause a sequence",i,segment);
                     unsafeColors.push(i);
-                } else {
-                    // console.log("this is a safe color",i);
-                    // safeColors.push(i);
-                }
+                } 
             }
         });
 
@@ -66,13 +62,10 @@ function Squaretide(options) {
             return unsafeColors.indexOf(color) === -1;
         });
 
-        console.log("Good colors?",goodColors);
-
         if (goodColors.length < 1) {
             throw new Error("The number of colors and the size of this field are not compatible. It is not possible to find a safe color");
         }
 
-        // return getRandomColor();
         return goodColors[Math.floor(Math.random() * goodColors.length)];
     }
 
@@ -145,7 +138,7 @@ function Squaretide(options) {
 
         tile.occupied = false;
         state.currentComboCount += 1;
-        state.currentComboScore += 100 * state.currentComboMultiplier * state.currentComboCount;
+        state.currentComboScore += 100 * state.currentComboMultiplier;
     }
 
     function resolveChain(tiles) {
@@ -189,7 +182,6 @@ function Squaretide(options) {
 
         trampoline(chains,resolveChain,getTotalTimeToResolveChain,function(){
             var totalComboScore = state.currentComboScore *= state.currentComboMultiplier;
-
             state.score += totalComboScore;
             resetCombo();
             resume();
