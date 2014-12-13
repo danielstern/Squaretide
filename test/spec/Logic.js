@@ -105,6 +105,27 @@
             	})
             });
 
+            describe('getting the index of a tile in a segment',function(){
+                it('should return the right index',function(){
+                    var indexOfTile = logic.indexOfTile;
+                    assert.equal(indexOfTile([topLeftTile],topLeftTile), 0);
+                    assert.equal(indexOfTile([topLeftTile,topRightTile],topRightTile), 1);
+                    assert.equal(indexOfTile([topRightTile,topRightTile],topLeftTile), -1);
+                    // assert.isTrue(tileInSegment(topRightTile,[topRightTile,topLeftTile]));
+                    // assert.isFalse(tileInSegment(topRightTile,[topLeftTile,topLeftTile]));
+                })
+            });
+
+            describe('seeing if a tile is an array',function(){
+                it('say whether the tile is in the array',function(){
+                    var tileInSegment = logic.tileInSegment;
+                    assert.isTrue(tileInSegment([topLeftTile],topLeftTile));
+                    assert.isTrue(tileInSegment([topRightTile,topLeftTile],topRightTile));
+                    assert.isFalse(tileInSegment([topLeftTile,topLeftTile],topRightTile));
+                })
+            });
+
+
             describe("identifying a chain",function(){
             	it ('should correctly identify an array that is a chain',function(){
             		var sequenceIsChain = logic.sequenceIsChain;

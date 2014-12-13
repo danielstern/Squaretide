@@ -1,5 +1,5 @@
 'use strict';
-/* globals soundManager, Tileset, Logic, trampoline, Jukebox */
+/* globals soundManager, Tileset, logic, trampoline, Jukebox */
 function Squaretide(options) {
 
     options = options || {};
@@ -7,7 +7,8 @@ function Squaretide(options) {
     var config = {
         ROWS: options.rows || 6,
         COLUMNS: options. columns || 6,
-        numColors: 8,
+        numColors: options.numColors || 4,
+        minimumChainLength: 3,
         duration: 105000,
         tileResolveTime:250
     };
@@ -24,8 +25,7 @@ function Squaretide(options) {
     };
 
     var listeners = [],
-    tiles,
-    logic;
+    tiles;
 
     var timer = Jukebox.timer;
 
@@ -34,18 +34,54 @@ function Squaretide(options) {
     }
 
     function getSafeColor(tile) {
-        var neighbours = tiles.getAllNeighbours(tile);
-        var neighbourColors = [];
-        neighbours.forEach(function(neighbour) {
-            neighbourColors.push(neighbour.color);
+        // var neighbours = tiles.getAllNeighbours(tile);
+        // var neighbourColors = [];
+        // neighbours.forEach(function(neighbour) {
+        //     neighbourColors.push(neighbour.color);
+        // });
+
+        // var color = 0;
+        // while (neighbourColors.indexOf(color) > -1) {
+        //     color = getRandomColor();
+        // }
+
+        // return color;
+        var allSegments = logic.getAllSegments(tiles,3)
+        .filter(function(segment){
+            return segment.length >= config.minimumChainLength;
+        })
+        .filter(function(segment){
+            return logic.tileInSegment(segment,tile);
         });
 
-        var color = 0;
-        while (neighbourColors.indexOf(color) > -1) {
-            color = getRandomColor();
+        var safeColors = [0,1,2,3,4,5];
+        var unsafeColors = [];
+        allSegments.forEach(function(segment){
+
+            for (var i = 0; i < config.numColors; i++) {
+                tile.color = i;
+                if (logic.sequenceIsChain(segment,logic.tileColorsMatch)) {
+                    console.log("this color would cause a sequence",i,segment);
+                    unsafeColors.push(i);
+                } else {
+                    // console.log("this is a safe color",i);
+                    // safeColors.push(i);
+                }
+            }
+        });
+
+        var goodColors = safeColors.filter(function(color){
+            return unsafeColors.indexOf(color) === -1;
+        });
+
+        console.log("Good colors?",goodColors);
+
+        if (goodColors.length < 1) {
+            throw new Error("The number of colors and the size of this field are not compatible. It is not possible to find a safe color");
         }
 
-        return color;
+        // return getRandomColor();
+        return goodColors[Math.floor(Math.random() * goodColors.length)];
     }
 
     function on(type, listener) {
@@ -79,8 +115,8 @@ function Squaretide(options) {
         tiles.getTiles(function(tile) {
             return !tile.occupied;
         }).forEach(function(tile) {
-            tile.color = getSafeColor(tile);
             tile.occupied = true;
+            tile.color = getSafeColor(tile);
             tile.chaining = false;
         });
     }
@@ -93,6 +129,8 @@ function Squaretide(options) {
 
         changeColorAllTiles();
         resume();
+
+        console.log("startin game")
 
         populateAllEmptyTiles();
     }
@@ -169,7 +207,7 @@ function Squaretide(options) {
 
 
     function findAndResolveMatches() {
-        var chains = logic.getChains(tiles, logic.tileColorsMatch, 3);
+        var chains = logic.getChains(tiles, logic.tileColorsMatch, config.minimumChainLength);
         if (chains.length > 0) {
            resolveChains(chains);
         }
@@ -233,7 +271,6 @@ function Squaretide(options) {
         Jukebox.timer.setInterval(onEnterFrame, 1000 / state.speed);
 
         tiles = new Tileset({columns:config.COLUMNS, rows:config.ROWS});
-        logic = new Logic(tiles);
 
         on('tick', findAndResolveMatches);
         on('tick', findAndSwitchActiveTiles);
@@ -247,6 +284,7 @@ function Squaretide(options) {
     this.state = state;
     this.config = config;
     this.tiles = tiles;
+    this.getSafeColor = getSafeColor;
 
     /*exported tick, startGame, endGame */
 }

@@ -36,7 +36,7 @@ game.on("tick",function(state){
 	document.getElementById('time').innerHTML = Math.floor(state.timeRemaining / 1000);
 })
 
-game.startGame();
-setTimeout(function() {
+// game.startGame();
+// setTimeout(function() {
     // game.pauseGame();
-}, 100);
+// }, 100);

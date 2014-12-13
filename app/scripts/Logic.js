@@ -40,10 +40,9 @@ var Logic = function() {
 		return success;
 	}
 
-
-	function getChains(tiles, processor, minimum) {
+	function getAllSegments(tiles) {
 		var allSequences = [];
-		var allMatchingChains = [];
+
 
 		var array = tiles.getColumns()
 		.concat(tiles.getRows())
@@ -53,6 +52,30 @@ var Logic = function() {
 		array.forEach(function(column) {
 		    allSequences = allSequences.concat(getSegments(column));
 		});
+
+		return allSequences;
+	}
+
+	function tileInSegment(segment,tile) {
+		return indexOfTile(segment,tile) > -1;
+	}
+
+	function indexOfTile(segment,tile) {
+		var index = -1;
+		var matches = segment.filter(function(element,_index){
+			if (element.x === tile.x && element.y === tile.y) {
+				index = _index;
+			}
+		})
+
+		return index;
+	}
+
+
+	function getChains(tiles, processor, minimum) {
+		var allMatchingChains = [];
+
+		var allSequences = getAllSegments(tiles);
 
 		allSequences.forEach(function(sequence) {
 		    if (sequenceIsChain(sequence,processor)) {
@@ -138,6 +161,9 @@ var Logic = function() {
     	getSegments:getSegments,
     	sequenceIsChain:sequenceIsChain,
     	getOccupied:getOccupied,
+    	getAllSegments:getAllSegments,
+    	tileInSegment:tileInSegment,
+    	indexOfTile:indexOfTile,
     }
 }
 
