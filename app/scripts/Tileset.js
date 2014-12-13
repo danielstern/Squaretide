@@ -1,6 +1,5 @@
 /* Comprises an array of tiles with a number of members equal to row times
-column. */
-/* contains functions that modify the tiles. */
+column. contains functions that modify the tiles. */
 
 function Tileset(config) {
 

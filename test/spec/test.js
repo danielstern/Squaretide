@@ -108,10 +108,11 @@
             describe("getting all chains",function(){
             	it ('should return all chains',function(){
             		var sequenceIsChain = logic.sequenceIsChain;
+            		var processor = logic.tileColorsMatch;
 
-            		var goodChain = [blueTile,blueTile,blueTile];
-            		var badChain = [redTile,blueTile,redTile];
-            		assert.isTrue(sequenceIsChain(goodChain,logic.tileColorsMatch));
+            		assert.isTrue(sequenceIsChain( [blueTile,blueTile,blueTile],processor));
+            		assert.isTrue(sequenceIsChain( [redTile,redTile,redTile,redTile],processor));
+            		assert.isFalse(sequenceIsChain( [redTile,blueTile,redTile,redTile],processor));
             	});
             })
         });

@@ -9,7 +9,7 @@ var Logic = function() {
 
 	    for (var i = 0; i < array.length; i++) {
 	        // var maxSliceLength = array.length;
-	        var maxSubsetLength = array.length - i;
+	        var maxSubsetLength = array.length;
 
 	        for (var k = 1; k <= maxSubsetLength; k++) {
 	        	var subset = array.slice(i,k+1);
@@ -40,62 +40,20 @@ var Logic = function() {
 		var allSequences = [];
 		var allMatchingChains = [];
 
-		var columns = tiles.getColumns();
-		var rows = tiles.getRows();
-		var diagonals = tiles.getDiagonals();
+		var array = tiles.getColumns()
+		.concat(tiles.getRows())
+		.concat(tiles.getDiagonals());
 
 
-		columns.forEach(function(column) {
+		array.forEach(function(column) {
 		    allSequences = allSequences.concat(getSegments(column));
-		})
-
-
-		rows.forEach(function(row) {
-		    allSequences = allSequences.concat(getSegments(row));
-		})
-
-		diagonals.forEach(function(diagonal) {
-		    allSequences = allSequences.concat(getSegments(diagonal));
-		})
-
+		});
 
 		allSequences.forEach(function(sequence) {
 		    if (sequenceIsChain(sequence,processor)) {
 		        allMatchingChains.push(sequence);
 		    }
 		});
-
-		// tiles.getColumns()
-		// .concat(tiles.getRows())
-		// .concat(tiles.getDiagonals())
-		// .forEach(function(sequence) {
-		// 	// console.log("Found a matching chain",sequence[0])
-		//     var success = true;
-		//     var originator = sequence[0];
-
-		//     if (!originator) {
-		//         return;
-		//     }
-
-		//     if (!originator.occupied || sequence.length < minumum) {
-		//         success = false;
-		//         return;
-		//     }
-
-		//     for (var i = 1; i < sequence.length; i++) {
-		//         var current = sequence[i];
-		//         if (current && processor(originator, current)) {
-
-		//         } else {
-		//             success = false;
-		//         }
-		//     }
-
-		//     if (success) {
-		//         allMatchingChains.push(sequence);
-		//     }
-		// });
-
 
 		return allMatchingChains
 		.filter(function(chain){
