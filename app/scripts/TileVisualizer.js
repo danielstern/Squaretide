@@ -21,10 +21,18 @@ function TileVisualizer(tile) {
 
     function onTick() {
 
+        var width = 100/_numColumns;
+        var height = 100/_numRows;
+
         for (key in tile) {
             div2.setAttribute(key, tile[key]);            
         }
-        // div2.setAttribute('style','width:7%');
+        div2.setAttribute('style',
+            'width:'+width+'%;'
+            + 'height:'+height+'%;'
+            + 'top:'+height *tile.y+'%;'
+            + 'left:'+width *tile.x+'%;'
+            );
         // div2.setAttribute('style','height:7%');
     };
 

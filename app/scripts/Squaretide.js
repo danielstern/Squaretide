@@ -5,14 +5,18 @@ function Squaretide(options) {
     options = options || {};
 
     var config = {
-        ROWS: options.rows || 6,
-        COLUMNS: options. columns || 6,
-        numColors: options.colors || 6,
-        minimumChainLength: 3,
-        duration: 105000,
+        ROWS: options.rows || 3,
+        COLUMNS: options. columns || 3,
         chainGracePeriod: 15,
         tileResolveTime:250
     };
+
+    var level = {
+        colors: options.colors || 6,
+        minimumChainLength: 3,
+        duration: 105000,
+        pointsPerTile: 100,
+    }
 
     var state = {
         score: 0,
@@ -30,6 +34,9 @@ function Squaretide(options) {
     var listeners = [],
     tiles;
 
+    window._numRows = config.ROWS;
+    window._numColumns = config.COLUMNS;
+
     var timer = Jukebox.timer;
 
     function bonusMessage(message) {
@@ -40,20 +47,20 @@ function Squaretide(options) {
 
         var allSegments = logic.getAllSegments(tiles)
         .filter(function(segment){
-            return segment.length >= config.minimumChainLength;
+            return segment.length >= level.minimumChainLength;
         })
         .filter(function(segment){
             return logic.tileInSegment(segment,tile);
         });
 
         var safeColors = [];
-        for (var i = 0; i < config.numColors; i++) { 
+        for (var i = 0; i < level.colors; i++) { 
             safeColors.push(i);
         }
         var unsafeColors = [];
         allSegments.forEach(function(segment){
 
-            for (var i = 0; i < config.numColors; i++) {
+            for (var i = 0; i < level.colors; i++) {
                 tile.color = i;
                 if (logic.sequenceIsChain(segment,logic.tileColorsMatch)) {
                     unsafeColors.push(i);
@@ -109,18 +116,23 @@ function Squaretide(options) {
         });
     }
 
+    function nextLevel(){
+        var settings = gameSettingsFromLevel(state.level);
+
+        level = settings;
+
+        state.timeRemaining = level.duration;
+        changeColorAllTiles();
+        populateAllEmptyTiles();
+        resume();        
+    }
+
     function startGame() {
 
-        state.level = 1;
+        state.level = 0;
         state.score = 0;
-        state.timeRemaining = config.duration;
 
-        changeColorAllTiles();
-        resume();
-
-        console.log("startin game")
-
-        populateAllEmptyTiles();
+        nextLevel();
     }
 
     function pause() {
@@ -167,7 +179,7 @@ function Squaretide(options) {
 
         tile.occupied = false;
         state.currentComboCount += 1;
-        var tileScore = 100 * state.currentComboCount;
+        var tileScore = level.pointsPerTile * state.currentComboCount;
         // var tileScore = 100 * state.currentComboMultiplier * state.currentComboCount;
         console.log("TILE POINTS!:",tileScore);
         state.currentComboScore +=  tileScore;
@@ -216,7 +228,7 @@ function Squaretide(options) {
 
 
     function findAndResolveMatches() {
-        var chains = logic.getChains(tiles, logic.tileColorsMatch, config.minimumChainLength);
+        var chains = logic.getChains(tiles, logic.tileColorsMatch, level.minimumChainLength);
         if (chains.length > 0) {
            resolveChains(chains);
         }
