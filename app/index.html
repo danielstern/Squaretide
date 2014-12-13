@@ -20,16 +20,13 @@
 </head>
 
 <body>
-    <!--[if lt IE 10]>
-      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
 
     <div id="game" class=game>
 
-        <!-- <div class="hero-unit">
-      <h1>Amusing Game</h1>
-    </div> -->
-        <menu>
+        <h1>
+          Squaretide
+        </h1>
+        <section name=home-screen>
           <nav>
             <button id='startButton'>
                 New Game
@@ -48,18 +45,14 @@
               <p>
                   Line up 3 or more squares of the same color to collect points.
               </p>
-
           </article>
-        </menu>
-        <h1>
-          Squaretide
-        </h1>
-      <!-- <div class="gamefield-container"> -->
+        </section>
+
+      <section name=game-screen>
         
         <div class=gamefield id="gamefield">
 
         </div>
-      <!-- </div> -->
         <div id="score" class='score'></div>
         <div id="time" class='time'>60</div>
         <div class="combo-display">  
@@ -67,6 +60,7 @@
           Multiplier: <div id="currentComboMultiplier" class='currentComboMultiplier'></div>
           Chain: <div id="currentChainCount" class='currentChainCount'></div>
         </div>
+      </section>        
 
     </div>
 

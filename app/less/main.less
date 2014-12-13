@@ -9,67 +9,76 @@
 @gray1: #333;
 @gray2: rgba(0,0,0,0.83);
 @white1: rgba(255,255,255,0.83);
-@fade1: rgba(0, 0, 0, 0.2);
-@fade2: rgba(0, 0, 0, 0.3);
-@numRows: 6;
-@numColumns: 6;
-@squareSide: 48px;
+@fade: rgba(0, 0, 0, 0.3);
+@sq: 12px;
 
 @numColors: 8;
 
 .pattern(@color) {
     background: radial-gradient(ellipse at center, lighten(@color, 25%) 0%, lighten(@color, 20%) 100%);
-    /* W3C */
 }
-html {
-    font-size: 12px;
-
-    background: radial-gradient(ellipse at center, darken(@color1, 25%) 0%, darken(@color1, 20%) 100%);
+.flexfit() {
     width: 100%;
     height: 100%;
+}
+.centerAbsolute() {
+    left: 0;
+    right: 0;
+    margin: auto;
+    position: absolute;
+}
+.radialGradient(@colorA,@colorB) {
+    background: radial-gradient(ellipse at center, @colorA 0%, @colorB 100%);
+}
+html {
+    .radialGradient(darken(@color1, 25%), darken(@color1, 20%));
+    .flexfit();
+    font-size: @sq;
     color: @white1;
 }
 body {
     font-family: RobotoDraft;
+    .flexfit();
     perspective: 450px;
     -webkit-transform:translate3d(0,0,0);
-    height: 100%;
-    
-    // padding: @squareSide;
 }
 
-.game {
-    margin: auto;
+
+h1 {
     position: absolute;
-    max-width: 560px;
     width: 100%;
-    height: 100%;
     left: 0;
     right: 0;
+    top: 0.5rem;
+    transition: 0.6s all;
+    margin: auto;
+    text-transform: uppercase;
+    font-size: 4rem;
+    color: @white1;
+    text-shadow: 1px 1px 1px @fade, 0px 1px 1px @fade;
 }
-menu {
-    // width: @squareSide * @numColumns;
-    // height: @squareSide * @numRows;
-    padding: 0px;
-    width: 100%;
 
-    padding-bottom: 100%;
-    position: absolute;
+
+section[name='home-screen'] {
+
+    .centerAbsolute();
+    .flexfit();
     top: 6rem;
+    width: 100%;
+    padding: 0px 0px 100% 0px;
+    
     transition: all 0.2s ease-in-out;
-    left: 0;
-    background: radial-gradient(ellipse at center, lighten(rgba(0, 0, 0, 0.3), 33%) 0%, lighten(rgba(22, 22, 22, 0.3), 20%) 100%);
-    right: 0;
-    margin: auto;
+
+    .radialGradient(lighten(@fade, 33%), lighten(@fade, 20%));
     z-index: 10000;
     nav {
         transform: translateZ(0);
-        position: absolute;
-        width: 100%;
+        .centerAbsolute();
         top: 0rem;
         transition: top 0.2s ease-in-out;
         text-align: center;
     }
+
     .instructions {
         transform: translateZ(0);
         .pattern(@white1);
@@ -83,26 +92,78 @@ menu {
         left: 0;
         right: 0;
         height: 0px;
-        box-shadow: 0px -1px 0px rgba(0, 0, 0, 0.3);
+        box-shadow: 0px -1px 0px @fade;
+    }
+
+    button {
+        font-family: RobotoDraft;
+        padding: 1rem;
+        background-color: lighten(@gray1, 83%);
+        color: @white1;
+        font-weight: 700;
+        border: none;
+        width: 50%;
+        height:50%;
+        transition: 0.2s all ease-in-out;
+        display: inline-block;
+        cursor: pointer;
+        position: absolute;
+        text-transform: uppercase;
+        box-shadow: 0px 1px 0px @fade;
+    }
+
+    #instructionsButton {
+        .pattern(darken(@color3,25%));
+        right: 0rem;
+    }
+    #startButton {
+        .pattern(darken(@color5,25%));
+        left: 0rem;
+    }
+    button + button {
+        margin-left: 3rem;
     }
 }
-.score, .time {
-    top: -300px;
-    transition: 0.2s all;
+section[name='game-screen'] {
+    .flexfit();
+    .centerAbsolute();
+    max-width: 560px;
+    max-height: 560px;
+
+    .gamefield {
+        width: 100%;
+        padding-bottom: 100%;
+        .centerAbsolute();
+        .radialGradient(lighten(@color1, 30%), lighten(@color1, 50%));
+        top: 6rem;
+        overflow: hidden;
+    }
+    
+
+    .score, .time {
+        position: absolute;
+        z-index: 1000;
+        color: @white1;
+        font-size: 2.5rem;
+        width: 100%;
+        left: 0;
+        right: 0;
+        margin: auto;
+        pointer-events: none;
+        // top: 700px;
+    }
+    .time {
+        text-align: right;
+    }
+    .combo-display {
+        position: absolute;
+        z-index: 1000;
+        color: @white1;
+        font-size: 2rem;
+        top: 700px;
+    }
 }
-h1 {
-    position: absolute;
-    width: @squareSide * @numColumns;
-    left: 0;
-    right: 0;
-    top: 0.5rem;
-    transition: 0.6s all;
-    margin: auto;
-    text-transform: uppercase;
-    font-size: 4rem;
-    color: @white1;
-    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3), 0px 1px 1px rgba(0, 0, 0, 0.3);
-}
+
 [show-menu="false"] {
     menu {
         opacity: 0;
@@ -117,80 +178,8 @@ h1 {
         top: 2rem;
     }
 }
-.score, .time {
-    position: absolute;
-    z-index: 1000;
-    color: @white1;
-    font-size: 2.5rem;
-    width: @squareSide * @numColumns;
-    left: 0;
-    right: 0;
-    margin: auto;
-    pointer-events: none;
-    // top: 700px;
-}
-.combo-display {
-    position: absolute;
-    z-index: 1000;
-    color: @white1;
-    font-size: 2rem;
-    top: 700px;
-}
-nav {
-    width: 100%;
-}
-button {
-    font-size: 100%;
-    font-family: RobotoDraft;
-    padding: 1rem;
-    background-color: lighten(@gray1, 83%);
-    color: @white1;
-    font-weight: 700;
-    line-height: 2.2rem;
-    border: none;
-    // width: @squareSide * 3;
-    width: 50%;
-    padding-bottom: 50%;
-    transition: 0.2s all ease-in-out;
-    // height: @squareSide * 3;
-    cursor: pointer;
-    position: absolute;
-    text-transform: uppercase;
-    box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.3);
-}
-#instructionsButton {
-    .pattern(darken(@color3,25%));
-    right: 0rem;
-}
-#startButton {
-    .pattern(darken(@color5,25%));
-    left: 0rem;
-}
-button + button {
-    margin-left: 3rem;
-}
-.gamefield-container {
-    position: relative;
-    width: 100%;
-    margin: auto;
-    max-width: 768px;
-    height: 100%;
-}
-.gamefield {
-    width: 100%;
-    // width: @squareSide * @numColumns;
-    padding-bottom: 100%;
-    // height: @squareSide * @numRows;
-    position: absolute;
-    top: 6rem;
-    left: 0;
-    right: 0;
-    margin: auto;
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-    overflow: hidden;
-    background: radial-gradient(ellipse at center, lighten(@color1, 30%) 0%, lighten(@color1, 50%) 100%);
-}
+
+
 [show-instructions="true"] {
     .instructions {
         height: 80px;
@@ -200,7 +189,7 @@ button + button {
         transform: translateZ(10px);
     }
     menu {
-        background-color: darken(@fade2, 0%);
+        background-color: darken(@fade, 0%);
 
         button {
           // height: @squareSide * 2;
@@ -208,22 +197,18 @@ button + button {
         }
     }
 }
-.time {
-    text-align: right;
-}
-@squarewidth: 100/6%;
+
 square {
-    // width: 46px;
-    // height: 46px;
-    width:  @squarewidth;
-    height:  @squarewidth;
-    margin-top: 1px;
-    margin-left: 1px;
-    perspective: inherit;
     display: block;
     position: absolute;
-    transition: 0.2s all ease-in-out;
+
+    width:  @sq;
+    height:  @sq;
+    border: 1px solid rgba(0,0,0,0);
     cursor: pointer;
+
+    perspective: inherit;
+    transition: 0.2s all ease-in-out;
     -webkit-transform: translate3d(0, 0, 0);
     -webkit-backface-visibility: hidden;
     &:hover {
@@ -253,7 +238,6 @@ square {
     }
 
     &[chaining='true'] {
-        // border: 5px solid magenta;
         transform: translateZ(20px) scale(1.10);
     }
 
@@ -262,23 +246,10 @@ square {
             @name: 'color@{i}';
             .pattern(@@name);
         }
-
         .createBackgroundInAllColors(@i - 1);
     }
 
     .createBackgroundInAllColors(@numColors - 1);
-
-    .createPositionValue(@i) when (@i >= 0) {
-        &[x="@{i}"] {
-            left: @i * @squarewidth;
-        }
-        &[y="@{i}"] {
-            top: @i * @squarewidth;
-        }
-        .createPositionValue(@i - 1);
-    }
-    .createPositionValue(15);
-
 }
 
 @keyframes fly-in {
@@ -295,6 +266,7 @@ square {
         // opacity: 1;
     }
 }
+
 @keyframes spin-out {
     0% {
         transform: rotate(0deg) translateZ(0px) rotateY(0deg);
