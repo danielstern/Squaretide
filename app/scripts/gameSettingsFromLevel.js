@@ -25,6 +25,7 @@ function gameSettingsFromLevel(level){
 
 	var config = {
 	    colors: colors,
+	    targetScore: targetScore,
 	    rows: rows,
 	    columns:columns,
 	    minimumChainLength: chainLength,

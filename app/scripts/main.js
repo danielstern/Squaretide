@@ -34,7 +34,7 @@ start.addEventListener("click", function() {
 Jukebox.timer.setInterval(function(){
     state = game.state;
 // game.on("tick",function(state){
-    document.getElementById('score').innerHTML = state.score;
+    document.getElementById('score').innerHTML = parseInt(state.scoreThisLevel,10);
     document.getElementById('currentComboCount').innerHTML = state.currentComboCount;
     document.getElementById('currentChainCount').innerHTML = state.currentComboChain;
     document.getElementById('currentComboMultiplier').innerHTML = state.currentComboMultiplier;

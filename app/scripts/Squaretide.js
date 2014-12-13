@@ -26,6 +26,7 @@ function Squaretide() {
         currentComboMultiplier: 0,
         currentComboChain: 0,
         currentComboScore: 0,
+        scoreThisLevel: 0,
         paused: true
     };
 
@@ -119,12 +120,13 @@ function Squaretide() {
 
         state.level++;
 
-        alert("Entering next level.");
+        console.info("Entering next level.");
 
         level = options || gameSettingsFromLevel(state.level);
         console.log("respawning tiles",level);        tiles.respawn({columns:level.columns, rows: level.rows})
 
         state.timeRemaining = level.duration;
+        state.scoreThisLevel = 0;
         changeColorAllTiles();
         populateAllEmptyTiles();
 
@@ -178,6 +180,7 @@ function Squaretide() {
         // var totalComboScore = state.currentComboScore *= state.currentComboMultiplier *= state.currentComboChain;
         console.log("TOTAL COMBO SCORE!",totalComboScore);
         state.score += totalComboScore;
+        state.scoreThisLevel += totalComboScore;
         resetCombo();
     }
 
@@ -285,7 +288,11 @@ function Squaretide() {
 
         if (state.timeRemaining < 0) {
             // endGame();
-            nextLevel();
+            if (state.scoreThisLevel >= level.targetScore) {
+                nextLevel();
+            } else {
+                endGame();
+            }
         }
 
 
