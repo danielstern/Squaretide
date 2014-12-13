@@ -7,7 +7,8 @@ function Squaretide() {
             ROWS: 6,
             COLUMNS: 6,
             numColors: 8,
-            duration: 15000,
+            duration: 105000,
+            tileResolveTime:150
         };
 
 
@@ -24,6 +25,8 @@ function Squaretide() {
         var listeners = [],
         tiles,
         logic;
+
+        var timer = Jukebox.timer;
 
         function getRandomColor() {
             return Math.floor(Math.random() * config.numColors);
@@ -93,10 +96,12 @@ function Squaretide() {
         }
 
         function pause() {
+            console.log("pausing")
             state.paused = true;
         }
 
         function resume() {
+            console.log("resuming")
             state.paused = false;
         }
 
@@ -105,37 +110,57 @@ function Squaretide() {
             broadcast('end');
         }
 
-        function resolveTiles(tiles) {
+
+        function resolveTile(tile) {
+
+            tile.occupied = false;
+            state.score += 100;
+
+            // soundManager.tone(baseTone + tileSoFar, 100);
+            // soundManager.tone(baseTone + tileSoFar, 100);
+        }
+
+        // function () {
+        //     return !tile.occupied;
+        // }
+
+        function resolveChain(tiles) {
 
             var tilesSoFar = 0;
             var baseTone = tiles[0].color;
 
-            if (tiles.every(function(tile) {
-                    return !tile.occupied;
-                })) {
+            if (!tiles.every(logic.getOccupied)) {
                 return;
             }
 
             soundManager.tone(baseTone);
 
-            function resolveTile(tile) {
 
-                tile.occupied = false;
-                state.score += 100;
+            trampoline(tiles, resolveTile, config.tileResolveTime);
+        }
 
-                soundManager.tone(baseTone + tilesSoFar, 100);
-                tilesSoFar++;
+        function resolveChains(chains) {
+
+            pause();
+
+            function getTotalTimeToResolveChain(chain) {
+                if (!chain.every(logic.getOccupied)) {
+                    return 0;
+                };
+                var totalResolveTime = chain.length * config.tileResolveTime;
+                return totalResolveTime;
             }
 
-            trampoline(tiles, resolveTile, 150);
+            trampoline(chains,resolveChain,getTotalTimeToResolveChain,resume);
+
         }
 
 
         function findAndResolveMatches() {
-
-
-            logic.getChains(tiles, logic.tileColorsMatch, 3)
-                .forEach(resolveTiles);
+            var chains = logic.getChains(tiles, logic.tileColorsMatch, 3);
+            if (chains.length > 0) {
+               resolveChains(chains);
+            }
         }
 
         function findAndSwitchActiveTiles() {
@@ -150,7 +175,10 @@ function Squaretide() {
                 var tile1 = activetiles[0];
                 var tile2 = activetiles[1];
 
+
                 if (logic.tilesAreAdjacent(tile1, tile2)) {
+
+                    pause();
 
                     tile1.selected = false;
                     tile2.selected = false;
@@ -159,6 +187,8 @@ function Squaretide() {
 
                     soundManager.tone(tile1.color, 100);
                     soundManager.tone(tile2.color, 100);
+
+                    timer.setTimeout(resume,100);
 
                 } else {
                     tile1.selected = false;
@@ -172,6 +202,8 @@ function Squaretide() {
             if (state.paused) {
                 return;
             }
+
+            console.log("Enter frame");
 
             state.timeRemaining -= state.speed;
 

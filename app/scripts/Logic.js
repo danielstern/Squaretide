@@ -137,6 +137,7 @@ var Logic = function() {
     	tileColorsMatch:tileColorsMatch,
     	getSegments:getSegments,
     	sequenceIsChain:sequenceIsChain,
+    	getOccupied:getOccupied,
     }
 }
 
