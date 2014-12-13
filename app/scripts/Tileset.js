@@ -22,26 +22,33 @@ function Tileset(config) {
    
 
 
-    // function compressColumn(column) {
-    //     for (var i = column.length; i > 0; i--) {
-    //         var tile = column[i - 1];
-    //         if (tile.occupied) {
-    //             for (var k = column.length; k > i; k--) {
-    //                 var tile2 = column[k - 1];
-    //                 if (!tile2.occupied) {
-    //                     switchTiles(tile, tile2);
-    //                     break;
-    //                 }
-    //             }
-    //         }
-    //     }
-    // }
+    function compressColumn(column) {
+        for (var i = column.length; i > 0; i--) {
+            var tile = column[i - 1];
+            if (tile.occupied) {
+                for (var k = column.length; k > i; k--) {
+                    var tile2 = column[k - 1];
+                    if (!tile2.occupied) {
+                        switchTiles(tile, tile2);
+                        break;
+                    }
+                }
+            }
+        }
+    }
 
     
 
     function flattenBottom() {
 
         // the code graveyard
+
+        getColumns().forEach(function(column,index){
+            while(arrayHasEmptyTileAfterFullTile(column)) {
+                compressColumn(column);
+                column = getColumn(index);
+            }
+        })
 
 
         // getAllAsColumns().forEach(function(column,index){
@@ -204,8 +211,6 @@ function Tileset(config) {
             return tile;
         });
     }
-
-
 
 
     return {

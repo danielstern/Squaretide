@@ -244,6 +244,7 @@ var Logic = function(tiles) {
     return {
     	tilesAreAdjacent:tilesAreAdjacent,
     	tileColorsMatch:tileColorsMatch,
+    	arrayHasEmptyTileAfterFullTile:arrayHasEmptyTileAfterFullTile,
     	getChains:getChains,
     	getTileDiff:getTileDiff
     }
