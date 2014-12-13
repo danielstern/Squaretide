@@ -72,15 +72,11 @@ function Squaretide() {
 
 
         function populateAllEmptyTiles() {
-            // console.log('Populate empties',tiles.getTiles(function(tile) {
-            //     return !tile.occupied;
-            // }));
             tiles.getTiles(function(tile) {
                 return !tile.occupied;
             }).forEach(function(tile) {
                 tile.color = getSafeColor(tile);
                 tile.occupied = true;
-                // console.log("Pop tile",tile);
             });
         }
 

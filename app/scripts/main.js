@@ -8,7 +8,7 @@ var showInstructions = false;
 
 var soundManager = {
     tone: function(tone, duration) {
-        synth.play(tone * 4 + 12, 100);
+        // synth.play(tone * 4 + 12, 100);
     }
 }
 

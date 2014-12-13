@@ -1,12 +1,5 @@
 /* contains operations that do not modify the array of tiles. */
 
-// var emptyTile = {
-//     occupied: false
-// }
-// var fullTile = {
-//     occupied: true
-// }
-
 function getOccupied(tile) {
 	return tile.occupied;
 }
@@ -47,9 +40,6 @@ function getTileDiff(tile1, tile2){
 	return diff;
 }
 
-
-
-// this function just doesnt make sense
 function arrayHasEmptyTileAfterFullTile(array) {
 
     if (getLastUnoccupiedIndex(array) === -1 || getLastOccupiedIndex(array) === -1) {
@@ -63,6 +53,23 @@ function arrayHasEmptyTileAfterFullTile(array) {
         
 };
 
+function getSegments(array) {
+    var segments = [];
+
+    for (var i = 0; i < array.length; i++) {
+        // from each position in the array
+        var maxSliceLength = array.length;
+
+        // get all possible slices
+        for (var sliceLength = 0; sliceLength <= maxSliceLength; sliceLength++) {
+            var slice = array.slice(i, sliceLength + 1);
+            segments.push(slice);
+        }
+    }
+
+    return segments;
+}
+
 
 var Logic = function(tiles) {
 
@@ -74,23 +81,6 @@ var Logic = function(tiles) {
 		var rows = tiles.getRows();
 		var diagonals = tiles.getDiagonals();
 
-		function getSegments(array) {
-		    var segments = [];
-
-		    for (var i = 0; i < array.length; i++) {
-		        // from each position in the array
-		        var maxSliceLength = array.length;
-
-		        // get all possible slices
-		        for (var sliceLength = 0; sliceLength <= maxSliceLength; sliceLength++) {
-		            var slice = array.slice(i, sliceLength + 1);
-		            segments.push(slice);
-		        }
-		    }
-
-
-		    return segments;
-		}
 
 		columns.forEach(function(column) {
 		    allSequences = allSequences.concat(getSegments(column));
@@ -133,113 +123,42 @@ var Logic = function(tiles) {
 		    }
 		});
 
+		// tiles.getColumns()
+		// .concat(tiles.getRows())
+		// .concat(tiles.getDiagonals())
+		// .forEach(function(sequence) {
+		// 	// console.log("Found a matching chain",sequence[0])
+		//     var success = true;
+		//     var originator = sequence[0];
+
+		//     if (!originator) {
+		//         return;
+		//     }
+
+		//     if (!originator.occupied || sequence.length < minumum) {
+		//         success = false;
+		//         return;
+		//     }
+
+		//     for (var i = 1; i < sequence.length; i++) {
+		//         var current = sequence[i];
+		//         if (current && processor(originator, current)) {
+
+		//         } else {
+		//             success = false;
+		//         }
+		//     }
+
+		//     if (success) {
+		//         allMatchingChains.push(sequence);
+		//     }
+		// });
+
+
 		return allMatchingChains.sort(function(a, b) {
 		    return b.length - a.length;
 		});
 	};
-
-	// function getTiles(matcher) {
-	//     if (matcher) {
-	//         return tiles.tiles.filter(matcher);
-	//     } else {
-	//         return tiles.tiles;
-	//     }
-	// }
-
-
-
-
-	// function getColumn(index) {
-	//     return tiles.tiles.filter(function(tile) {
-	//         return tile.x == index;
-	//     }).sort(function(a, b) {
-	//         return a.y - b.y;
-	//     });
-	// }
-
-	// function getDiagonalLR(index) {
-	//     return tiles.tiles.filter(function(tile) {
-	//         return tile.x - tile.y == index;
-	//     }).sort(function(a, b) {
-	//         return a.x - b.x;
-	//     });
-	// }
-
-
-	// function getDiagonalRL(index) {
-	//     return tiles.tiles.filter(function(tile) {
-	//         return tile.y + tile.x == index;
-	//     }).sort(function(a, b) {
-	//         return a.y - b.y;
-	//     });
-	// }
-
-
-	// function getAllAsDiagonals() {
-	//     // debugger;
-	//     var allDiagonals = [];
-	//     for (var i = 0; i < tiles.numColumns; i++) {
-	//         allDiagonals.push(getDiagonalLR(i));
-	//         allDiagonals.push(getDiagonalRL(i));
-	//     }
-	//     for (var k = 0; k < tiles.numRows; k++) {
-	//         // debugger;
-
-	//         allDiagonals.push(getDiagonalLR(-k - 1));
-	//         allDiagonals.push(getDiagonalRL(k + tiles.numColumns));
-	//     }
-	//     return allDiagonals;
-	// }
-	// function getAllAsRows() {
-	//     var allRows = [];
-	//     for (var i = 0; i < tiles.numRows; i++) {
-	//         allRows.push(getRow(i));                
-	//     }   
-	//     return allRows;
-	// }
-
-
-	// function getRow(index) {
-	//     return tiles.tiles.filter(function(tile) {
-	//         return tile.y == index;
-	//     }).sort(function(a, b) {
-	//         return a.x - b.x;
-	//     });
-	// }
-
-	// function getAllAsColumns() {
-	//     var allColumns = [];
-	//     for (var i = 0; i < tiles.numColumns; i++) {
-	//         allColumns.push(getColumn(i));
-	//     }
-	//     return allColumns;
-	// }
-
-
-	// function getTileAtCoordinates(x, y) {
-	//     return tiles.tiles.filter(function(tile) {
-	//         return tile.x == x && tile.y == y;
-	//     })[0];
-	// }
-
-        // // },
-        // // getTileDiff: function(tile1, tile2) {
-        // //     var diff = {
-        // //         x: tile1.x - tile2.x,
-        // //         y: tile1.y - tile2.y
-        // //     }
-        // //     return diff;
-        // // },
-        // tileColorsMatch: function(tile1, tile2) {
-            
-        //         // tile1.canInteract && 
-        //         // tile2.canInteract;
-        // },
-        // getChains: function(tiles, processor, minumum) {
-
-
-          
-        // }
 
     return {
     	tilesAreAdjacent:tilesAreAdjacent,

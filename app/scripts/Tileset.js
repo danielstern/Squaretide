@@ -19,9 +19,6 @@ function Tileset(config) {
         }
     };
 
-   
-
-
     function compressColumn(column) {
         for (var i = column.length; i > 0; i--) {
             var tile = column[i - 1];
@@ -37,78 +34,13 @@ function Tileset(config) {
         }
     }
 
-    
-
     function flattenBottom() {
-
-        // the code graveyard
-
         getColumns().forEach(function(column,index){
             while(arrayHasEmptyTileAfterFullTile(column)) {
                 compressColumn(column);
                 column = getColumn(index);
             }
         })
-
-
-        // getAllAsColumns().forEach(function(column,index){
-        //     // if (Logic.columnHasGap(column)){
-        //     while (Logic.columnHasGap(column)){
-        //         // f?or (var i = 7; i > 0; i--) {
-        //             compressColumn(column);
-        //             console.log("Gap?",Logic.columnHasGap(column));
-        //         // }
-
-        //         column = getColumn(index);
-        //     }
-        //         // for ()
-                
-        //     // }
-        // });
-        //     for (var i = 0; i < numColumns; i++) {
-        //         var column = getColumn(i);
-        //         // console.log("Getting collumn...",column,i);
-        //         while (Logic.columnHasGap(column)){
-        //             column.forEach(function(tile){
-
-        //                 // var tile = column[i - 1];
-        //                 if (tile.occupied) {
-        //                     for (var k = column.length; k > i; k--) {
-        //                         var tile2 = column[k - 1];
-        //                         if (!tile2.occupied) {
-        //                             switchTiles(tile, tile2);
-        //                             break;
-        //                         }
-        //                     }
-        //                 }
-        //             })
-        //             column = getColumn[i];
-        //         }
-
-
-        //     // var columns = getAllAsColumns();
-        //     // columns.forEach(function(column){
-        //         // for (var i = column.length; i > 0;i--) {
-        //     // })
-        //     }
-        // // }
-        // for (var i = 7; i > 0; i--) {
-        //     var columns = getAllAsColumns();
-        //     columns.forEach(function(column){
-        //         for (var i = column.length; i > 0;i--) {
-        //             var tile = column[i - 1];
-        //             if (tile.occupied) {
-        //                 for (var k = column.length; k > i; k--) {
-        //                     var tile2 = column[k - 1];
-        //                     if (!tile2.occupied) {
-        //                         switchTiles(tile, tile2);
-        //                         break;
-        //                     }
-        //                 }
-        //             }
-        //         }
-        //     })
-        // }
     }
 
 
