@@ -15,6 +15,9 @@ function Squaretide() {
             timeRemaining: 0,
             level: 1,
             speed: 33,
+            currentComboCount: 0,
+            currentComboScore: 0,
+            currentComboMultiplier: 0,
             paused: true
         };
 
@@ -109,10 +112,13 @@ function Squaretide() {
         function resolveTile(tile) {
 
             tile.occupied = false;
-            state.score += 100;
+            state.currentComboCount += 1;
+            state.currentComboScore += 100 * state.currentComboMultiplier * state.currentComboCount;
         }
 
         function resolveChain(tiles) {
+
+            state.currentComboMultiplier +=1;
 
             var baseTone = tiles[0].color;
 
@@ -129,9 +135,17 @@ function Squaretide() {
             trampoline(tiles, resolveTile, config.tileResolveTime);
         }
 
+        function resetCombo() {
+            state.currentComboScore = 0;
+            state.currentComboCount = 0;
+            state.currentComboMultiplier = 0;
+        }
+
         function resolveChains(chains) {
 
             pause();
+
+            state.currentComboScore = 0;
 
             function getTotalTimeToResolveChain(chain) {
                 if (!chain.every(logic.getOccupied)) {
@@ -141,7 +155,13 @@ function Squaretide() {
                 return totalResolveTime;
             }
 
-            trampoline(chains,resolveChain,getTotalTimeToResolveChain,resume);
+            trampoline(chains,resolveChain,getTotalTimeToResolveChain,function(){
+                var totalComboScore = state.currentComboScore *= state.currentComboMultiplier;
+
+                state.score += totalComboScore;
+                resetCombo();
+                resume();
+            });
 
         }
 
