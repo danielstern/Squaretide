@@ -3,9 +3,8 @@
 function Squaretide() {
 
         var config = {
-            longTileFrequency: 20,
-            ROWS: 6,
-            COLUMNS: 6,
+            ROWS: 8,
+            COLUMNS: 8,
             numColors: 8,
             duration: 105000,
             tileResolveTime:150
@@ -13,9 +12,7 @@ function Squaretide() {
 
 
         var state = {
-            timeSinceLasttile: 0,
             score: 0,
-            chainsSinceLastCombo: 0,
             timeRemaining: 0,
             level: 1,
             speed: 33,
@@ -96,12 +93,10 @@ function Squaretide() {
         }
 
         function pause() {
-            console.log("pausing")
             state.paused = true;
         }
 
         function resume() {
-            console.log("resuming")
             state.paused = false;
         }
 
@@ -120,13 +115,8 @@ function Squaretide() {
             // soundManager.tone(baseTone + tileSoFar, 100);
         }
 
-        // function () {
-        //     return !tile.occupied;
-        // }
-
         function resolveChain(tiles) {
 
-            var tilesSoFar = 0;
             var baseTone = tiles[0].color;
 
             if (!tiles.every(logic.getOccupied)) {
@@ -146,7 +136,7 @@ function Squaretide() {
             function getTotalTimeToResolveChain(chain) {
                 if (!chain.every(logic.getOccupied)) {
                     return 0;
-                };
+                }
                 var totalResolveTime = chain.length * config.tileResolveTime;
                 return totalResolveTime;
             }
@@ -202,8 +192,6 @@ function Squaretide() {
             if (state.paused) {
                 return;
             }
-
-            console.log("Enter frame");
 
             state.timeRemaining -= state.speed;
 
