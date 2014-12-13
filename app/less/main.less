@@ -35,16 +35,19 @@ html {
     .flexfit();
     font-size: @sq;
     color: @white1;
+    padding:0px;
 }
 body {
     font-family: RobotoDraft;
     .flexfit();
+    // padding: @sq;
+    margin: 0;
     perspective: 450px;
     -webkit-transform:translate3d(0,0,0);
 }
 
 .game {
- width: 100%;
+ width: 95%;
 height:100%;
  max-width: 560px;
  max-height: 560px;
@@ -70,7 +73,7 @@ height:100%;
     section[name='home-screen'] {
 
         .centerAbsolute();
-        .flexfit();
+        // .flexfit();
         top: 6rem;
         width: 100%;
         padding: 0px 0px 100% 0px;
@@ -96,7 +99,7 @@ height:100%;
                 font-weight: 700;
                 border: none;
                 width: 50%;
-                height:50%;
+                height:100%;
                 transition: 0.2s all ease-in-out;
                 display: inline-block;
                 cursor: pointer;
@@ -107,17 +110,13 @@ height:100%;
         }
 
         .instructions {
-            transform: translateZ(0);
             .pattern(@white1);
-            // width: 100%;
+            .centerAbsolute();
+            transform: translateZ(0);
             color: @gray2;
-            position: absolute;
             transition: all 0.2s ease-in-out;
             bottom: 0px;
             overflow: hidden;
-            // padding: 0 1rem;
-            left: 0;
-            right: 0;
             height: 0px;
             box-shadow: 0px -1px 0px @fade;
         }
@@ -133,6 +132,22 @@ height:100%;
         }
         button + button {
             margin-left: 3rem;
+        }
+
+        &[show-instructions="true"] {
+            background-color: darken(@fade, 0%);
+
+            .instructions {
+                height: 50%;
+                padding: @sq;
+            }
+            #instructionsButton {
+                transform: translateZ(10px);
+            }
+            button {
+                height: 50%;
+            }
+                
         }
     }
     section[name='game-screen'] {
@@ -191,23 +206,7 @@ height:100%;
     }
 
 
-    [show-instructions="true"] {
-        .instructions {
-            height: 80px;
-            padding: 1rem;
-        }
-        #instructionsButton {
-            transform: translateZ(10px);
-        }
-        menu {
-            background-color: darken(@fade, 0%);
 
-            button {
-              // height: @squareSide * 2;
-              padding-bottom: 25%;
-            }
-        }
-    }
 
     square {
         display: block;
@@ -281,4 +280,16 @@ height:100%;
         }
     }
 @media screen and (min-width: 960px) {}
+}
+
+.game[mode="main-menu"] {
+    section[name='home-screen'] {
+        display: block;
+    }
+}
+
+.game[mode="game"] {
+    section[name='home-screen'] {
+        display: none;
+    }
 }
