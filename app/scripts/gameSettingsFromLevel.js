@@ -18,8 +18,8 @@ function gameSettingsFromLevel(level){
 	var scorePerTile = 100 + 10 * powerOf(level); // more score per tile is more awesome
 	var duration = 25 + level / 2; // shorter duration is more hard
 	// var duration = 60 - level * 2; // shorter duration is more hard
-	var rows = 3 + everyThird(level);
-	var columns = 3 + everyThird(level);
+	var rows = 4 + everyThird(level);
+	var columns = 4 + everyThird(level);
 	var chainGracePeriod = 15; // doesnt change
 
 
