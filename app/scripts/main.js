@@ -27,8 +27,7 @@ start.addEventListener("click", function() {
     document.getElementById('game').setAttribute("mode", "game");
     game.startGame();
     game.on("end", function() {
-        document.getElementById('home').setAttribute("show-instructions", false);
-        document.getElementById('game').setAttribute("show-menu", true);
+        document.getElementById('game').setAttribute("mode", "main-menu");
     })
 });
 
