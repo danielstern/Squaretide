@@ -4,6 +4,106 @@
 		"selected_items":
 		[
 			[
+				"square",
+				"squareSide"
+			],
+			[
+				"resolv",
+				"resolveChains"
+			],
+			[
+				"til",
+				"tileResolveTime"
+			],
+			[
+				"dela",
+				"delayValue"
+			],
+			[
+				"e",
+				"endPosition"
+			],
+			[
+				"pro",
+				"processor"
+			],
+			[
+				"se",
+				"sequence"
+			],
+			[
+				"seq",
+				"sequenceIsChain"
+			],
+			[
+				"get",
+				"getLastOccupiedIndex"
+			],
+			[
+				"getCo",
+				"getColumn"
+			],
+			[
+				"co",
+				"column"
+			],
+			[
+				"tile",
+				"tileset"
+			],
+			[
+				"getLast",
+				"getLastUnoccupiedIndex"
+			],
+			[
+				"tiles",
+				"tilesAreAdjacent"
+			],
+			[
+				"col",
+				"column"
+			],
+			[
+				"getLas",
+				"getLastFullIndex"
+			],
+			[
+				"getLa",
+				"getLastFullIndex"
+			],
+			[
+				"getA",
+				"getAllAsColumns"
+			],
+			[
+				"foun",
+				"foundFull"
+			],
+			[
+				"found",
+				"foundEmpty"
+			],
+			[
+				"findAn",
+				"findAndSwitchActiveTiles"
+			],
+			[
+				"res",
+				"resumeGame"
+			],
+			[
+				"paus",
+				"pauseGame"
+			],
+			[
+				"lis",
+				"listener"
+			],
+			[
+				"neigh",
+				"neighbour"
+			],
+			[
 				"sy",
 				"synth"
 			],
@@ -32,10 +132,6 @@
 				"resolveTilesRecursively"
 			],
 			[
-				"get",
-				"getElementById"
-			],
-			[
 				"game",
 				"gameEndListener"
 			],
@@ -44,16 +140,8 @@
 				"chainsSinceLastCombo"
 			],
 			[
-				"col",
-				"columns"
-			],
-			[
 				"min",
 				"minumum"
-			],
-			[
-				"co",
-				"columns"
 			],
 			[
 				"slice",
@@ -200,50 +288,51 @@
 	"buffers":
 	[
 		{
-			"file": "app/index.html",
-			"settings":
-			{
-				"buffer_size": 3267,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": ".tmp/styles/main.css",
-			"settings":
-			{
-				"buffer_size": 7044,
-				"line_ending": "Windows"
-			}
-		},
-		{
 			"file": "app/scripts/Squaretide.js",
 			"settings":
 			{
-				"buffer_size": 6850,
+				"buffer_size": 5356,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "app/scripts/jukebox.js",
+			"file": "app/scripts/gameSettingsFromLevel.js",
 			"settings":
 			{
-				"buffer_size": 6726,
-				"line_ending": "Windows"
+				"buffer_size": 36,
+				"line_ending": "Windows",
+				"name": "function gameSettingFromLevel(){"
 			}
 		},
 		{
 			"file": "app/scripts/TileVisualizer.js",
 			"settings":
 			{
-				"buffer_size": 1345,
+				"buffer_size": 958,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "app/scripts/main.js",
+			"file": "app/less/main.less",
 			"settings":
 			{
-				"buffer_size": 1482,
+				"buffer_size": 6507,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "Gruntfile.js",
+			"settings":
+			{
+				"buffer_size": 10204,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app/index.html",
+			"settings":
+			{
+				"buffer_size": 3541,
 				"line_ending": "Windows"
 			}
 		}
@@ -251,9 +340,17 @@
 	"build_system": "",
 	"command_palette":
 	{
-		"height": 58.0,
+		"height": 380.0,
 		"selected_items":
 		[
+			[
+				"pack",
+				"Package Control: Install Package"
+			],
+			[
+				"packi",
+				"Package Control: Install Package"
+			],
 			[
 				"instal",
 				"Package Control: Install Package"
@@ -271,15 +368,11 @@
 				"Package Control: Install Package"
 			]
 		],
-		"width": 400.0
+		"width": 416.0
 	},
 	"console":
 	{
-		"height": 126.0,
-		"history":
-		[
-			"import urllib.request,os,hashlib; h = '7183a2d3e96f11eeadd761d777e62404' + 'e330c659d4bb41d3bdf022e94cab3cd0'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
-		]
+		"height": 126.0
 	},
 	"distraction_free":
 	{
@@ -290,34 +383,43 @@
 		"side_bar_visible": false,
 		"status_bar_visible": false
 	},
-	"expanded_folders":
-	[
-		"/D/Projects/squaretide",
-		"/D/Projects/squaretide/.tmp",
-		"/D/Projects/squaretide/.tmp/styles",
-		"/D/Projects/squaretide/app",
-		"/D/Projects/squaretide/app/less"
-	],
 	"file_history":
 	[
-		"/D/Projects/squaretide/node_modules/grunt-contrib-less/node_modules/less/test/less/errors/javascript-undefined-var.less",
-		"/D/Projects/squaretide/app/scripts/jukebox.js",
-		"/D/Projects/squaretide/app/scripts/Tile.js",
-		"/D/Projects/jukeboxjs/app/index.html",
-		"/D/Projects/jukeboxjs/app/scripts/main.js",
-		"/D/Projects/squaretide/app/scripts/TileVisualizer.js",
+		"/D/Projects/squaretide/dist/index.html",
+		"/D/Projects/squaretide/test/index.html",
+		"/D/Projects/squaretide/app/index.html",
+		"/D/Projects/squaretide/Gruntfile.js",
+		"/D/Projects/squaretide/app/scripts/trampoline.js",
+		"/D/Projects/squaretide/app/scripts/Logic.js",
+		"/D/Projects/squaretide/app/scripts/main.js",
+		"/D/Projects/squaretide/test/spec/Logic.js",
 		"/D/Projects/squaretide/app/scripts/Tileset.js",
-		"/D/Projects/squaretide/app/scripts/TileSetAnalyzer.js",
 		"/D/Projects/squaretide/app/less/main.less",
+		"/D/Projects/squaretide/app/scripts/Squaretide.js",
+		"/D/Projects/squaretide/dist/scripts/f1e0094b.main.js",
+		"/D/Projects/squaretide/app/scripts/TileVisualizer.js",
+		"/D/Projects/squaretide/test/spec/Tileset.js",
+		"/D/Projects/squaretide/squaretide.sublime-project",
+		"/D/Projects/squaretide/node_modules/load-grunt-tasks/load-grunt-tasks.js",
+		"/D/Projects/squaretide/node_modules/grunt-contrib-uglify/node_modules/uglify-js/node_modules/optimist/example/line_count_options.js",
+		"/D/Projects/squaretide/node_modules/grunt-autoprefixer/LICENSE",
+		"/D/Projects/squaretide/app/scripts/Tile.js",
+		"/D/Projects/squaretide/Tileset.as",
+		"/D/Projects/squaretide/TileSetAnalyzer.as",
+		"/D/Projects/squaretide/node_modules/grunt-contrib-less/node_modules/less/.idea/inspectionProfiles/profiles_settings.xml",
+		"/D/Projects/squaretide/app/scripts/TileSetAnalyzer.js",
+		"/D/Projects/squaretide/.tmp/styles/main.css",
+		"/D/Projects/squaretide/app/styles/main.css",
+		"/D/Projects/jukeboxjs/app/index.html",
+		"/D/Projects/jukeboxjs/Gruntfile.js",
+		"/D/Projects/squaretide/app/scripts/jukebox.js",
+		"/D/Projects/squaretide/node_modules/grunt-contrib-less/node_modules/less/test/less/errors/javascript-undefined-var.less",
+		"/D/Projects/jukeboxjs/app/scripts/main.js",
 		"/D/Projects/squaretide/node_modules/grunt-contrib-htmlmin/node_modules/html-minifier/node_modules/relateurl/lib/parse/urlstring.js",
 		"/D/Projects/squaretide/node_modules/grunt-contrib-concat/node_modules/source-map/build/prefix-utils.jsm",
 		"/D/Projects/squaretide/package.json",
-		"/D/Projects/squaretide/app/scripts/main.js",
-		"/D/Projects/squaretide/TileSetAnalyzer.as",
-		"/D/Projects/squaretide/Tileset.as",
 		"/D/Projects/squaretide/node_modules/grunt-autoprefixer/node_modules/autoprefixer-core/node_modules/caniuse-db/region-usage-json/alt-na.json",
 		"/D/Projects/squaretide/node_modules/grunt/appveyor.yml",
-		"/D/Projects/squaretide/Gruntfile.js",
 		"/D/Projects/material/dist/docs/index.html",
 		"/D/Projects/modern-webapp/app/index.html",
 		"/C/Users/Admin/Downloads/colorscheme.less",
@@ -328,12 +430,10 @@
 		"/D/Projects/squaretide/app/robots.txt",
 		"/D/Projects/squaretide/node_modules/grunt/node_modules/findup-sync/node_modules/glob/test/readme-issue.js",
 		"/D/Projects/squaretide/Tile.as",
-		"/D/Projects/squaretide/.tmp/styles/main.css",
 		"/D/Projects/squaretide/node_modules/grunt-contrib-less/node_modules/less/lib/less/visitor.js",
 		"/D/Projects/squaretide/node_modules/grunt-contrib-less/node_modules/less/test/css/variables-in-at-rules.css",
 		"/D/Projects/squaretide/bower_components/jquery/src/attributes/val.js",
 		"/D/Projects/modern-webapp/Gruntfile.js",
-		"/D/Projects/squaretide/app/styles/main.css",
 		"/D/Projects/squaretide/node_modules/grunt-contrib-uglify/node_modules/uglify-js/lib/mozilla-ast.js",
 		"/D/Projects/squaretide/node_modules/grunt-mocha/node_modules/grunt-lib-phantomjs/node_modules/phantomjs/node_modules/npmconf/node_modules/ini/.npm-completion.tmp",
 		"/D/Projects/material/docs/app/js/app.js",
@@ -412,22 +512,7 @@
 		"/D/Projects/flashforum/server/api/thread/thread.socket.js",
 		"/D/Projects/flashforum/.tmp/app/main/main.html",
 		"/D/Projects/flashforum/client/app/account/account.js",
-		"/D/Projects/flashforum/client/app/app.js",
-		"/D/Projects/flashforum/client/app/account/login/login.controller.js",
-		"/D/Projects/flashforum/server/api/thing/thing.controller.js",
-		"/D/Projects/flashforum/client/bower_components/bootstrap/less/theme.less",
-		"/D/Projects/flashforum/server/config/environment/test.js",
-		"/D/Projects/flashforum/client/components/navbar/navbar.controller.js",
-		"/D/Projects/flashforum/client/components/navbar/navbar.jade",
-		"/D/Projects/flashforum/.tmp/components/navbar/navbar.html",
-		"/D/Projects/flashforum/npm-debug.log",
-		"/D/Projects/flashforum/server/config/environment/production.js",
-		"/D/Projects/flashforum/.gitignore",
-		"/D/Projects/flashforum/x",
-		"/D/Projects/flashforum/Gruntfile.js",
-		"/D/Projects/flashforum/dist/server/config/express.js",
-		"/D/Projects/flashforum/server/config/express.js",
-		"/D/Projects/flashforum/protractor.conf.js"
+		"/D/Projects/flashforum/client/app/app.js"
 	],
 	"find":
 	{
@@ -435,7 +520,7 @@
 	},
 	"find_in_files":
 	{
-		"height": 90.0,
+		"height": 0.0,
 		"where_history":
 		[
 			""
@@ -446,6 +531,88 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"Tileset",
+			"instructions",
+			"px\\",
+			"px",
+			"speed",
+			"chainss",
+			"chains",
+			"timesin",
+			"longti",
+			"console",
+			"switch",
+			"flatt",
+			"75",
+			"timer",
+			"jukebo",
+			"logic",
+			"tiles",
+			"tiles.ti",
+			"getTiles",
+			"getTi",
+			"getTileD",
+			"getTileat",
+			"init(",
+			"0.0.0",
+			"test",
+			"logic",
+			"init",
+			"game.",
+			"game",
+			"getColumn",
+			"resolveTi",
+			"purgeal",
+			"switch",
+			"can",
+			"canIn",
+			"occupied",
+			"getLastEmpty",
+			"33",
+			"tilesA",
+			"getRandomTi",
+			"changeColorAllTiles",
+			"populateAllEmptyTiles",
+			"onEnterFrame",
+			"getMatch",
+			"broad",
+			"onTic",
+			"startT",
+			"startG",
+			"onEnt",
+			"tick",
+			"TileSetAnalyzer",
+			"flattenb",
+			"flatten",
+			"score",
+			"delay",
+			"resolveTi",
+			"delay",
+			"trampo",
+			"resolvet",
+			"getRandomColor",
+			"totals",
+			"score",
+			"gameEndListener",
+			"durati",
+			"durati.",
+			"durati",
+			"gridSize",
+			"adjac",
+			"tileFrequency",
+			"trampolin",
+			"colors",
+			"spin-",
+			"color6",
+			"color=",
+			"color",
+			"color=",
+			"[",
+			"js",
+			"colors",
+			"synth",
+			"juke",
+			"open",
 			"bower_c",
 			"bower-c",
 			"bower",
@@ -491,89 +658,7 @@
 			"h1",
 			"select",
 			"score",
-			"h1",
-			"score",
-			"h1",
-			"show-men",
-			"stopT",
-			"resolved",
-			"resolve",
-			"changeColorAllTiles",
-			"populateA",
-			"getMatchingTiles",
-			"anima",
-			"aniamtion",
-			"recursivel",
-			"addTi",
-			"gameEndListener",
-			"timeRemaining",
-			"onT",
-			"ont",
-			".shift",
-			"stopG",
-			"stopg",
-			"flair",
-			"recursiv",
-			"box-s",
-			"gamef",
-			"inst",
-			"resolv",
-			"timesincela",
-			"timesince",
-			"squa",
-			"make",
-			"makes",
-			"gradie",
-			";\n",
-			"60",
-			"var tiles",
-			"var tile",
-			"click",
-			"2000",
-			"resol",
-			"new",
-			"new T",
-			"tile(",
-			"switcht",
-			"selected",
-			"switch",
-			"switchT",
-			"switch",
-			"resolved",
-			"main.js",
-			"asrows",
-			"getallasrows",
-			"ascol",
-			"colu",
-			"asC",
-			"origi",
-			"occupied",
-			"getAllAsC",
-			"getAllAs",
-			"vis",
-			"less",
-			"101",
-			"trace",
-			":",
-			": Tile",
-			": Number",
-			"public",
-			"square",
-			"updatep",
-			"diffSquare",
-			"squares",
-			"coordinagetDataAtCoordinatesgetDataAtCoordinates",
-			"coordina",
-			"coordin",
-			".squar",
-			"\n					",
-			"menu",
-			"demoapp",
-			"democtrl",
-			"sections",
-			"menu.",
-			"angulary",
-			"ga"
+			"h1"
 		],
 		"highlight": false,
 		"in_selection": false,
@@ -581,6 +666,7 @@
 		"regex": false,
 		"replace_history":
 		[
+			"Logic",
 			"",
 			"tile",
 			"",
@@ -614,82 +700,23 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 4,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "app/index.html",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3267,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2118,
-								2118
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 761.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": ".tmp/styles/main.css",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 7044,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								7044,
-								7044
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/CSS/CSS.tmLanguage"
-						},
-						"translation.x": 54892.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
 					"file": "app/scripts/Squaretide.js",
-					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 6850,
+						"buffer_size": 5356,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								788,
-								788
+								367,
+								367
 							]
 						],
 						"settings":
@@ -699,27 +726,108 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1827.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
 					"type": "text"
 				},
 				{
-					"buffer": 3,
-					"file": "app/scripts/jukebox.js",
-					"semi_transient": false,
+					"buffer": 1,
+					"file": "app/scripts/gameSettingsFromLevel.js",
 					"settings":
 					{
-						"buffer_size": 6726,
+						"buffer_size": 36,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2784,
-								2784
+								34,
+								34
+							]
+						],
+						"settings":
+						{
+							"auto_name": "function gameSettingFromLevel(){",
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "app/scripts/TileVisualizer.js",
+					"settings":
+					{
+						"buffer_size": 958,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								562,
+								562
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "app/less/main.less",
+					"settings":
+					{
+						"buffer_size": 6507,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								671,
+								671
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/LESS/LESS.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 141.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "Gruntfile.js",
+					"settings":
+					{
+						"buffer_size": 10204,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
 							]
 						],
 						"settings":
@@ -732,64 +840,34 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "app/scripts/TileVisualizer.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1345,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								356,
-								356
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 5,
 					"type": "text"
 				},
 				{
 					"buffer": 5,
-					"file": "app/scripts/main.js",
-					"semi_transient": false,
+					"file": "app/index.html",
 					"settings":
 					{
-						"buffer_size": 1482,
+						"buffer_size": 3541,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								382,
-								382
+								3393,
+								3393
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
 						},
-						"translation.x": -0.0,
-						"translation.y": 0.0,
+						"translation.x": 0.0,
+						"translation.y": 1615.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
 					"type": "text"
 				}
 			]
@@ -830,7 +908,6 @@
 	{
 		"height": 0.0
 	},
-	"project": "squaretide.sublime-project",
 	"replace":
 	{
 		"height": 62.0
@@ -841,6 +918,58 @@
 		"height": 0.0,
 		"selected_items":
 		[
+			[
+				".less",
+				"app/less/main.less"
+			],
+			[
+				"index",
+				"app\\index.html"
+			],
+			[
+				"main.l",
+				"app\\less\\main.less"
+			],
+			[
+				"gruntf",
+				"Gruntfile.js"
+			],
+			[
+				"sqa",
+				"app\\scripts\\Squaretide.js"
+			],
+			[
+				"grun",
+				"Gruntfile.js"
+			],
+			[
+				"ind",
+				"app\\index.html"
+			],
+			[
+				"squar",
+				"app\\scripts\\Squaretide.js"
+			],
+			[
+				"squ",
+				"app\\scripts\\Squaretide.js"
+			],
+			[
+				"logic",
+				"app\\scripts\\Logic.js"
+			],
+			[
+				"tileset",
+				"app\\scripts\\Tileset.js"
+			],
+			[
+				"tiles",
+				"Tileset.as"
+			],
+			[
+				"main.j",
+				"app\\scripts\\main.js"
+			],
 			[
 				"jukebo",
 				"app\\scripts\\jukebox.js"
@@ -854,10 +983,6 @@
 				"app\\scripts\\main.js"
 			],
 			[
-				"tileset",
-				"app\\scripts\\TileSetAnalyzer.js"
-			],
-			[
 				"tileseta",
 				"TileSetAnalyzer.as"
 			],
@@ -866,16 +991,8 @@
 				"TileSetAnalyzer.as"
 			],
 			[
-				"tiles",
-				"Tileset.as"
-			],
-			[
 				"grunt",
 				"Gruntfile.js"
-			],
-			[
-				".less",
-				"app\\less\\main.less"
 			],
 			[
 				"tile",
@@ -890,10 +1007,6 @@
 				"app\\scripts\\TileVisualizer.js"
 			],
 			[
-				"main.j",
-				"app\\scripts\\main.js"
-			],
-			[
 				".css",
 				".tmp\\styles\\main.css"
 			],
@@ -902,20 +1015,12 @@
 				"app\\less\\shim.less"
 			],
 			[
-				"gruntf",
-				"Gruntfile.js"
-			],
-			[
 				"main.h",
 				"app\\partials\\main.html"
 			],
 			[
 				"old",
 				"app\\less\\old_less.less"
-			],
-			[
-				"main.l",
-				"app\\less\\main.less"
 			],
 			[
 				"main.les",
@@ -982,10 +1087,6 @@
 				"app\\partials\\project-image-feature.html"
 			],
 			[
-				"ind",
-				"app\\index.html"
-			],
-			[
 				"packa",
 				"package.json"
 			],
@@ -1042,10 +1143,6 @@
 				"server\\config\\environment\\production.js"
 			],
 			[
-				"grun",
-				"Gruntfile.js"
-			],
-			[
 				"colo",
 				"app\\partials\\color-picker.html"
 			],
@@ -1064,25 +1161,10 @@
 		],
 		"width": 0.0
 	},
-	"select_symbol":
-	{
-		"height": 0.0,
-		"selected_items":
-		[
-		],
-		"width": 0.0
-	},
-	"selected_group": 0,
-	"settings":
-	{
-	},
-	"show_minimap": true,
+	"show_minimap": false,
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
 	"side_bar_width": 228.0,
-	"status_bar_visible": true,
-	"template_settings":
-	{
-	}
+	"status_bar_visible": true
 }

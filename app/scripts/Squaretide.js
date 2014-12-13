@@ -10,7 +10,6 @@ function Squaretide() {
             tileResolveTime:250
         };
 
-
         var state = {
             score: 0,
             timeRemaining: 0,
@@ -77,6 +76,7 @@ function Squaretide() {
             }).forEach(function(tile) {
                 tile.color = getSafeColor(tile);
                 tile.occupied = true;
+                tile.chaining = false;
             });
         }
 
@@ -122,7 +122,7 @@ function Squaretide() {
 
             tiles.forEach(function(tile){
                 tile.chaining = true;
-            })
+            });
             soundManager.tone(baseTone);
 
 
