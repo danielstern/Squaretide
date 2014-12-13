@@ -7,9 +7,10 @@ function Squaretide(options) {
     var config = {
         ROWS: options.rows || 6,
         COLUMNS: options. columns || 6,
-        numColors: options.colors || 4,
+        numColors: options.colors || 5,
         minimumChainLength: 3,
         duration: 105000,
+        chainGracePeriod: 15,
         tileResolveTime:250
     };
 
@@ -18,9 +19,11 @@ function Squaretide(options) {
         timeRemaining: 0,
         level: 1,
         speed: 33,
+        chainTimeRemaining: 0,
         currentComboCount: 0,
-        currentComboScore: 0,
         currentComboMultiplier: 0,
+        currentComboChain: 0,
+        currentComboScore: 0,
         paused: true
     };
 
@@ -29,8 +32,8 @@ function Squaretide(options) {
 
     var timer = Jukebox.timer;
 
-    function getRandomColor() {
-        return Math.floor(Math.random() * config.numColors);
+    function bonusMessage(message) {
+        console.log(message);
     }
 
     function getSafeColor(tile) {
@@ -133,12 +136,41 @@ function Squaretide(options) {
         broadcast('end');
     }
 
+    function resetCombo() {
+        state.currentComboScore = 0;
+        state.currentComboCount = 0;
+        state.currentComboMultiplier = 0;
+        state.currentComboChain = 0;
+    }
+
+
+    function resolveCurrentCombo() {
+        // console.log("Resolving combo",state.currentComboCount,state.currentComboMultiplier,state.currentComboChain);
+        console.log("BASE SCORE! ",state.currentComboScore);
+        console.log("TOTAL TILES! ",state.currentComboCount);
+
+        if (state.currentComboMultiplier > 1) {
+            console.log("COMBO! ",state.currentComboMultiplier);
+        }
+        if (state.currentComboChain > 1) {
+            console.log("CHAIN! ",state.currentComboChain);
+        }
+        var totalComboScore = state.currentComboScore *= state.currentComboChain;
+        // var totalComboScore = state.currentComboScore *= state.currentComboMultiplier *= state.currentComboChain;
+        console.log("TOTAL COMBO SCORE!",totalComboScore);
+        state.score += totalComboScore;
+        resetCombo();
+    }
+
 
     function resolveTile(tile) {
 
         tile.occupied = false;
         state.currentComboCount += 1;
-        state.currentComboScore += 100 * state.currentComboMultiplier;
+        var tileScore = 100 * state.currentComboMultiplier * state.currentComboCount;
+        console.log("TILE POINTS!:",tileScore);
+        state.currentComboScore +=  tileScore;
+        state.chainTimeRemaining = config.chainGracePeriod;
     }
 
     function resolveChain(tiles) {
@@ -160,17 +192,14 @@ function Squaretide(options) {
         trampoline(tiles, resolveTile, config.tileResolveTime);
     }
 
-    function resetCombo() {
-        state.currentComboScore = 0;
-        state.currentComboCount = 0;
-        state.currentComboMultiplier = 0;
-    }
-
+ 
     function resolveChains(chains) {
 
         pause();
 
-        state.currentComboScore = 0;
+        // state.currentComboScore = 0;
+
+        state.currentComboChain += 1;
 
         function getTotalTimeToResolveChain(chain) {
             if (!chain.every(logic.getOccupied)) {
@@ -180,12 +209,7 @@ function Squaretide(options) {
             return totalResolveTime;
         }
 
-        trampoline(chains,resolveChain,getTotalTimeToResolveChain,function(){
-            var totalComboScore = state.currentComboScore *= state.currentComboMultiplier;
-            state.score += totalComboScore;
-            resetCombo();
-            resume();
-        });
+        trampoline(chains,resolveChain,getTotalTimeToResolveChain,resume);
 
     }
 
@@ -246,6 +270,14 @@ function Squaretide(options) {
 
         tiles.flattenBottom();
 
+        if (state.chainTimeRemaining >= 0) {
+            state.chainTimeRemaining -= 1;
+        } else {
+            if (state.currentComboCount > 0) {
+                resolveCurrentCombo();
+                populateAllEmptyTiles();
+            }
+        }
 
         broadcast('tick');
 
