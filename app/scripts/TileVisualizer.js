@@ -24,6 +24,8 @@ function TileVisualizer(tile) {
         for (key in tile) {
             div2.setAttribute(key, tile[key]);            
         }
+        // div2.setAttribute('style','width:7%');
+        // div2.setAttribute('style','height:7%');
     };
 
     setInterval(onTick, 33);

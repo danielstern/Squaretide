@@ -7,7 +7,7 @@ function Squaretide(options) {
     var config = {
         ROWS: options.rows || 6,
         COLUMNS: options. columns || 6,
-        numColors: options.colors || 5,
+        numColors: options.colors || 6,
         minimumChainLength: 3,
         duration: 105000,
         chainGracePeriod: 15,
@@ -167,7 +167,8 @@ function Squaretide(options) {
 
         tile.occupied = false;
         state.currentComboCount += 1;
-        var tileScore = 100 * state.currentComboMultiplier * state.currentComboCount;
+        var tileScore = 100 * state.currentComboCount;
+        // var tileScore = 100 * state.currentComboMultiplier * state.currentComboCount;
         console.log("TILE POINTS!:",tileScore);
         state.currentComboScore +=  tileScore;
         state.chainTimeRemaining = config.chainGracePeriod;
