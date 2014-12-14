@@ -293,7 +293,9 @@ function Squaretide() {
             if (state.timeRemaining < 0) {
                 // endGame();
                 if (state.scoreThisLevel >= level.targetScore) {
-                    nextLevel();
+                    broadcast('level.complete');
+                    pause();
+                    // nextLevel();
                 } else {
                     endGame();
                 }
@@ -340,6 +342,7 @@ function Squaretide() {
         this.pause = pause;
         this.getLevel = getLevel;
         this.resume = resume;
+        this.nextLevel = nextLevel;
 
         /*exported tick, startGame, endGame */
     }
