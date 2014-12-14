@@ -432,6 +432,7 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('mocha', [
-    'connect:mocha'
+    'connect:mocha',
+    'watch'
     ])
 };

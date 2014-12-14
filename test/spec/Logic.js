@@ -139,21 +139,39 @@
 
             // describe("finding all chains")
 
-            describe("finding intersection",function(){
-                it("should return a tile where two chains intersect if it exsit",function(){
-                    var chain1 = [topLeftTile,topRightTile];
-                    var chain2 = [topRightTile,bottomRightTile];
-                    var chain3 = [bottomRightTile,bottomLeftTile];
-                    assert.equal(logic.getIntersection(chain1,chain2),topRightTile);
-                    assert.equal(logic.getIntersection(chain1,chain3),null);
-                    assert.equal(logic.getIntersection(chain2,chain3),bottomRightTile);
-                })
-            })
+            // describe("finding intersection",function(){
+            //     it("should return a tile where two chains intersect if it exsit",function(){
+            //         var chain1 = [topLeftTile,topRightTile];
+            //         var chain2 = [topRightTile,bottomRightTile];
+            //         var chain3 = [bottomRightTile,bottomLeftTile];
+            //         assert.equal(logic.getIntersection(chain1,chain2),topRightTile);
+            //         assert.equal(logic.getIntersection(chain1,chain3),null);
+            //         assert.equal(logic.getIntersection(chain2,chain3),bottomRightTile);
+            //     })
+            // })
             
             describe('consolidating chains',function(){
-                it("should take all chains with similar elements and return an array of chains that are effectively combined",function(){
-                    var chains = [[topLeftTile,topRightTile],[topRightTile,bottomRightTile]];
-                    assert.equal(logic.consolidateChains(chains).length,1);
+                it("should reduce the chains to the minumum possible number of groups",function(){
+                    var chain1 = [topLeftTile,topRightTile];
+                    var chain2 = [topRightTile,bottomRightTile];
+                    assert.equal(logic.consolidateChains([chain1,chain2]).length,1);
+                });
+                it("should take two chains with similar elements and return an array of chains that are effectively combined",function(){
+                    var chain1 = [topLeftTile,topRightTile];
+                    var chain2 = [topRightTile,bottomRightTile];
+                    assert.deepEqual(logic.consolidateChains([chain1,chain2]),[[topLeftTile,topRightTile,bottomRightTile]]);
+                });
+                it("should take three chains with similar elements and return an array of chains that are combined",function(){
+                    var chain1 = [topLeftTile,topRightTile];
+                    var chain2 = [topRightTile,bottomRightTile];
+                    var chain3 = [bottomLeftTile,bottomRightTile];
+                    assert.deepEqual(logic.consolidateChains([chain1,chain2,chain3]),[[topLeftTile,topRightTile,bottomRightTile,bottomLeftTile]]);
+                })
+                it("should not modify the chains",function(){
+                    var chain1 = [topLeftTile,topRightTile];
+                    var chain2 = [topRightTile,bottomRightTile];
+                    logic.consolidateChains([chain1,chain2]);
+                    assert.deepEqual(chain2,[topRightTile,bottomRightTile]);
                 })
             })
 
