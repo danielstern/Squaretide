@@ -59,7 +59,6 @@ describe("the trampoline",function(){
 			var delay = 25;
 			var lastTime;
 			var array = [0,1,2];
-			var expectedTotalDelay = delay * array.length;
 
 			trampoline(array,function(elem){
 				var timeNow = new Date().getTime();

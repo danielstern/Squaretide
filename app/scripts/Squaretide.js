@@ -27,6 +27,7 @@ function Squaretide() {
             currentComboChain: 0,
             currentComboScore: 0,
             scoreThisLevel: 0,
+            gameTime: 0,
             paused: true
         };
 
@@ -120,10 +121,8 @@ function Squaretide() {
 
             state.level++;
 
-            console.info("Entering next level.");
 
             level = options || gameSettingsFromLevel(state.level);
-            console.log("respawning tiles", level);
             tiles.respawn({
                 columns: level.columns,
                 rows: level.rows
@@ -142,7 +141,7 @@ function Squaretide() {
 
         function startGame(options) {
 
-            state.level = 1;
+            state.level = 0;
             state.score = 0;
 
             nextLevel(options);
@@ -154,7 +153,6 @@ function Squaretide() {
 
         function resume() {
             state.paused = false;
-            console.log("Resuming");
         }
 
         function endGame() {
@@ -204,43 +202,56 @@ function Squaretide() {
 
         function resolveChain(tiles) {
 
+            // console.log("Resolving chain",tiles);
+
             state.currentComboMultiplier += 1;
 
             var baseTone = tiles[0].color;
 
-            if (!tiles.every(logic.getOccupied)) {
-                return;
-            }
+            // if (!tiles.every(logic.getOccupied)) {
+            //     return;
+            // }
             // console.log("Resolve chain...",tiles);
 
             tiles.forEach(function(tile) {
                 tile.chaining = true;
             });
             soundManager.tone(baseTone);
+            
+            trampoline(tiles, resolveTile, config.tileResolveTime);
 
-            timer.setTimeout(function(){
-                trampoline(tiles, resolveTile, config.tileResolveTime);
-            },1000);
+            // timer.setTimeout(function(){
+            // },1000);
 
         }
 
 
         function resolveChains(chains) {
+            console.log("resolve chains");
+
+            var consolidatedChains = logic.consolidateChains(chains);
 
             pause();
 
             state.currentComboChain += 1;
+            // console.log("resolve chains",chains);
 
             function getTotalTimeToResolveChain(chain) {
-                if (!chain.every(logic.getOccupied)) {
-                    return 0;
-                }
-                var totalResolveTime = chain.length * config.tileResolveTime;
+                // if (!chain.every(logic.getOccupied)) {
+                //     return 0;
+                // }
+                var totalResolveTime = chain.length * config.tileResolveTime * 2;
+                // console.log("Total resolve time?",totalResolveTime);
                 return totalResolveTime;
             }
 
-            // trampoline(chains, resolveChain, getTotalTimeToResolveChain, resume);
-            trampoline(chains, resolveChain, 1000, resume);
+            console.log("Consolidated chains?",consolidatedChains);
+
+            trampoline(consolidatedChains, resolveChain, getTotalTimeToResolveChain, function(){
+                console.log("final resolve callback");
+                resume();
+            });
+            // trampoline(chains, resolveChain, 1000, resume);
 
         }
 
@@ -288,10 +299,12 @@ function Squaretide() {
 
         function onEnterFrame() {
 
+
             if (state.paused) {
                 return;
             }
 
+            state.gameTime++;
             state.timeRemaining -= state.speed;
 
             if (state.timeRemaining < 0) {
@@ -311,6 +324,7 @@ function Squaretide() {
             } else {
                 if (state.currentComboCount > 0) {
                     resolveCurrentCombo();
+                    console.log("Pop empty");
                     populateAllEmptyTiles();
                 }
             }
@@ -340,6 +354,8 @@ function Squaretide() {
         this.config = config;
         this.tiles = tiles;
         this.getSafeColor = getSafeColor;
+        this.pause = pause;
+        this.resume = resume;
 
         /*exported tick, startGame, endGame */
     }

@@ -9,14 +9,11 @@ function Tileset(config) {
     var numRows = config.rows;
 
     function init() {
-        // console.log("init...",numRows,numColumns)
         for (var i = 0; i < numColumns; i++) {
             for (var k = 0; k < numRows; k++) {
                 var tile = {};
                 tile.x = i;
                 tile.y = k;
-
-                // console.log("spawning tile",tile);
 
                 var square = new TileVisualizer(tile);
                 tiles.push(tile);
@@ -33,7 +30,6 @@ function Tileset(config) {
             tile.occupied = false;
             tile.deactivated = true;
         });
-        console.log("Respawn",config);
         tiles.length = 0;
         init();
     }

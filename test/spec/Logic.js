@@ -137,27 +137,28 @@
             	});
             })
 
-            describe("finding all chains",function(){
-                // errrr 
-                // it ('should correctly all the chains in a tileset',function(){
-                //     var getChains = logic.getChains;
-                //     var processor = logic.tileColorsMatch;
-                //     var tiles = new Tileset({rows:4,columns:3});
-                //     tiles.getTileAtCoordinates({x:0,y:0}).color = 1;
-                //     tiles.getTileAtCoordinates({x:0,y:0}).occupied = true;
-                //     tiles.getTileAtCoordinates({x:1,y:0}).color = 1;
-                //     tiles.getTileAtCoordinates({x:1,y:0}).occupied = true;
-                //     tiles.getTileAtCoordinates({x:2,y:0}).color = 1;
-                //     tiles.getTileAtCoordinates({x:2,y:0}).occupied = true;
-                //     // tiles.getTileAtCoordinates({x:3,y:0}).color = 1;
-                //     // tiles.getTileAtCoordinates({x:3,y:0}).occupie/d = true;
-                //     // tiles.getTileAtCoordinates({x:3,y:0}).color = 1;
+            // describe("finding all chains")
 
-                //     assert.equal(getChains(tiles,processor).length, 5);
-                //     // assert.isTrue(sequenceIsChain([redTile,redTile,redTile,redTile],processor));
-                //     // assert.isFalse(sequenceIsChain([redTile,blueTile,redTile,redTile],processor));
-                // });
+            describe("finding intersection",function(){
+                it("should return a tile where two chains intersect if it exsit",function(){
+                    var chain1 = [topLeftTile,topRightTile];
+                    var chain2 = [topRightTile,bottomRightTile];
+                    var chain3 = [bottomRightTile,bottomLeftTile];
+                    assert.equal(logic.getIntersection(chain1,chain2),topRightTile);
+                    assert.equal(logic.getIntersection(chain1,chain3),null);
+                    assert.equal(logic.getIntersection(chain2,chain3),bottomRightTile);
+                })
             })
+            
+            describe('consolidating chains',function(){
+                it("should take all chains with similar elements and return an array of chains that are effectively combined",function(){
+                    var chains = [[topLeftTile,topRightTile],[topRightTile,bottomRightTile]];
+                    assert.equal(logic.consolidateChains(chains).length,1);
+                })
+            })
+
+
+
         });
     });
 })();

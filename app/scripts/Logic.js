@@ -22,7 +22,32 @@ var Logic = function() {
 	    return segments;
 	}
 
+	function consolidateChains(arrays) {
+		var consolidatedArrays = [];
+		arrays.forEach(function(array){
+			arrays.forEach(function(innerArray){
+				var intersection = getIntersection(array,innerArray);
+				if (intersection) {
+					innerArray.splice(indexOfTile(innerArray,tile),1);
+					consolidatedArrays.push(array.concat(innerArray));
+				}
+			})
+		});
 
+		return consolidatedArrays;
+	}
+
+	function getIntersection(array1,array2) {
+		var intersection = null;
+			array1.forEach(function(tile){
+				if (array1 !== array2 && tileInSegment(array2,tile))  {
+					console.log("these chains intersect");
+					intersection = tile;
+				}
+			})
+
+		return intersection;
+	}
 
 
 	function sequenceIsChain(array,processor) {
@@ -118,6 +143,16 @@ var Logic = function() {
 		}
 	}
 
+	function isSameTile(tile1, tile2){
+		var diff = getTileDiff(tile1, tile2);
+		if (Math.abs(diff.x) + Math.abs(diff.y) === 0) {
+		    return true;
+		} else {
+			return false;
+		}
+	}
+
+
 	function tileColorsMatch(tile1, tile2) {
 		return tile1.color !== undefined &&
 		    tile1.color === tile2.color &&
@@ -164,6 +199,8 @@ var Logic = function() {
     	getAllSegments:getAllSegments,
     	tileInSegment:tileInSegment,
     	indexOfTile:indexOfTile,
+    	consolidateChains:consolidateChains,
+    	getIntersection:getIntersection,
     }
 }
 
