@@ -78,6 +78,19 @@ if (document.getElementById('game')) {
         if (comboScore > 1000) message = 'Weak'
         if (comboScore > 1500) message = 'Soft'
         if (comboScore > 2000) message = 'Mediocre'
+        if (comboScore > 3000) message = 'Not Bad'
+        if (comboScore > 4000) message = 'OK'
+        if (comboScore > 5000) message = 'Alright'
+        if (comboScore > 6000) message = 'Cool'
+        if (comboScore > 7000) message = 'Good'
+        if (comboScore > 8500) message = 'Very Good'
+        if (comboScore > 10000) message = 'Great!'
+        if (comboScore > 12500) message = 'Awesome!'
+        if (comboScore > 15000) message = 'Amazing!'
+        if (comboScore > 17500) message = 'Incredible!'
+        if (comboScore > 20000) message = 'Excellent!!'
+        if (comboScore > 25000) message = 'Viewtiful!!'
+        if (comboScore > 30000) message = 'Unbelievable!!!'
         document.getElementById('messageDisplay').innerHTML = message;
     })
 
