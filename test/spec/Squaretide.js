@@ -33,7 +33,7 @@ describe("the squaretide game engine",function(){
 				})
 				it("should return a valid color if one is possible",function(){
 					// assert.equal
-					var game = new Squaretide(});
+					var game = new Squaretide();
 					var getSafeColor = game.getSafeColor;
 					var tiles = game.tiles;
 					game.startGame({rows:3,columns:3,colors:3,minimumChainLength:3});

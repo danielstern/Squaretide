@@ -12,7 +12,7 @@ function gameSettingsFromLevel(level){
 
 
 
-	var colors = 3 + everyThird(level); // more colors is more hard	
+	var colors = 4 + everyThird(level); // more colors is more hard	
 	var chainLength = 3 + everyFifth(level); // more combo is more hard	
 	var targetScore = powerOf(level) * 1000; // higher target score is more hard
 	var scorePerTile = 100 + 10 * powerOf(level); // more score per tile is more awesome

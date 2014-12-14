@@ -1,5 +1,8 @@
 function trampoline(array,iterator,delay,callback) {
 
+    array = array.slice(0);
+    
+
     function bounce() {
         var delayValue;
         var elem = array[0];
@@ -11,7 +14,7 @@ function trampoline(array,iterator,delay,callback) {
         }
         iterator(elem);
 
-        if (array[1]) {
+        if (array.length > 1) {
             setTimeout(bounce, delayValue);
             array.shift();
         } else {

@@ -9,7 +9,7 @@ function Tileset(config) {
     var numRows = config.rows;
 
     function init() {
-        console.log("init...",numRows,numColumns)
+        // console.log("init...",numRows,numColumns)
         for (var i = 0; i < numColumns; i++) {
             for (var k = 0; k < numRows; k++) {
                 var tile = {};

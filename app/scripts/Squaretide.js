@@ -154,6 +154,7 @@ function Squaretide() {
 
         function resume() {
             state.paused = false;
+            console.log("Resuming");
         }
 
         function endGame() {
@@ -190,6 +191,7 @@ function Squaretide() {
 
 
         function resolveTile(tile) {
+            // console.log("Resolvign tiles")
 
             tile.occupied = false;
             state.currentComboCount += 1;
@@ -216,16 +218,16 @@ function Squaretide() {
             });
             soundManager.tone(baseTone);
 
+            timer.setTimeout(function(){
+                trampoline(tiles, resolveTile, config.tileResolveTime);
+            },1000);
 
-            trampoline(tiles, resolveTile, config.tileResolveTime);
         }
 
 
         function resolveChains(chains) {
 
             pause();
-
-            // state.currentComboScore = 0;
 
             state.currentComboChain += 1;
 
@@ -237,7 +239,8 @@ function Squaretide() {
                 return totalResolveTime;
             }
 
-            trampoline(chains, resolveChain, getTotalTimeToResolveChain, resume);
+            // trampoline(chains, resolveChain, getTotalTimeToResolveChain, resume);
+            trampoline(chains, resolveChain, 1000, resume);
 
         }
 

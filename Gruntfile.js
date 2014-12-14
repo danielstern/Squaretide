@@ -95,7 +95,10 @@ module.exports = function (grunt) {
       },
       test: {
         options: {
-          open: false,
+          open: {
+            target:"http://localhost:9001",
+          },
+          // open: false,
           port: 9001,
           middleware: function(connect) {
             return [
