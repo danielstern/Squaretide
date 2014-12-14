@@ -4,48 +4,59 @@ function difference(num1,num2){
 
 describe("the trampoline",function(){
 
-	it("should call the callback after operating on the elements",function(done){
-		var callback = sinon.spy();
-		var delay = 5;
-		var array = [0,1,2,4,5,6];
+	describe("calling the callback after the right amount of time",function(){		
 
-		trampoline(array,callback,delay,function(){
-			done();
+		it("should call the callback after the expected amount of time",function(done){
+			var callback = sinon.spy();
+			var delay = 25;
+			var array = [0,1,2];
+			var timeStart = new Date().getTime();
+			var expectedDelay = delay * array.length;
+			var expectedEndTime = timeStart + expectedDelay;
+
+			trampoline(array,callback,delay,function(){
+				console.log("diff...",new Date().getTime()-expectedEndTime);
+				assert.isTrue(difference(new Date().getTime(),expectedEndTime) < 25);
+				done();
+			});
 		});
 	});
+	describe("calling the callback",function(){
 
-	it("should be called once for each item in the array",function(done){
-		var callback = sinon.spy();
-		var delay = 5;
-		var array = [0,1,2,4,5,6];
+		it("should call the callback after operating on the elements",function(done){
+			var callback = sinon.spy();
+			var delay = 5;
+			var array = [0,1,2,4,5,6];
 
-		trampoline(array,callback,delay,function(){
-			assert.equal(callback.callCount, array.length);
-			done();
-		});
+			trampoline(array,callback,delay,function(){
+				callback();
+				assert(callback.called);
+				done();
+			});
+		})
+
 	});
 
-	it("should call the callback after the expected amount of time",function(done){
-		var callback = sinon.spy();
-		var delay = 100;
-		var array = [0,1,2,4,5];
-		var expectedTotalDelay = delay * array.length;
-		var timeStart = new Date().getTime();
+	describe("the amount of times to call the callback",function(){	
 
-		trampoline(array,callback,delay,function(){
-			var timeEnd = new Date().getTime();
-			var diff = timeEnd - timeStart;
-			console.log("Diff?",diff);
-			assert.closeTo(diff, expectedTotalDelay,50,"Total delay");
-			done();
+		it("should be called once for each item in the array",function(done){
+			var callback = sinon.spy();
+			var delay = 5;
+			var array = [0,1,2,4,5,6];
+
+			trampoline(array,callback,delay,function(){
+				assert.equal(callback.callCount, array.length);
+				done();
+			});
 		});
-	});
+	})
+
 
 	describe("how delay is determined",function(){
 		it("should wait that long if delay is a number",function(done){
 			
 			var callback = sinon.spy();
-			var delay = 100;
+			var delay = 25;
 			var lastTime;
 			var array = [0,1,2];
 			var expectedTotalDelay = delay * array.length;
@@ -65,7 +76,7 @@ describe("the trampoline",function(){
 			
 			var callback = sinon.spy();
 			var delay = function(elem){
-				return elem;
+				return elem * 0.5;
 			};
 			var lastTime;
 			var array = [50,150,250];
@@ -87,6 +98,5 @@ describe("the trampoline",function(){
 				done();
 			});
 		});
-		it("should wait the duration of the number returned by the delay function if it's a function")
 	})
 })
