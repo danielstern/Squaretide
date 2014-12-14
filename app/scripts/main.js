@@ -91,6 +91,9 @@ if (document.getElementById('game')) {
         if (comboScore > 20000) message = 'Excellent!!'
         if (comboScore > 25000) message = 'Viewtiful!!'
         if (comboScore > 30000) message = 'Unbelievable!!!'
+        if (comboScore > 35000) message = 'Killing Spree!!!'
+        if (comboScore > 40000) message = 'Wicked Sick!!!'
+        if (comboScore > 50000) message = 'GODLIKE!!!!'
         document.getElementById('messageDisplay').innerHTML = message;
     })
 
