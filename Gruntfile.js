@@ -95,10 +95,29 @@ module.exports = function (grunt) {
       },
       test: {
         options: {
+          // open: {
+          //   target:"http://localhost:9001",
+          // },
+          open: false,
+          port: 9001,
+          middleware: function(connect) {
+            return [
+              connect.static('.tmp'),
+              connect.static('test'),
+              connect().use('/bower_components', connect.static('./bower_components')),
+              connect.static(config.app)
+            ];
+          }
+        }
+      },
+      mocha: {
+        options: {
           open: {
             target:"http://localhost:9001",
           },
           // open: false,
+          keepalive:true,
+          livereload: 35729,
           port: 9001,
           middleware: function(connect) {
             return [
@@ -411,4 +430,8 @@ module.exports = function (grunt) {
     'test',
     'build'
   ]);
+
+  grunt.registerTask('mocha', [
+    'connect:mocha'
+    ])
 };

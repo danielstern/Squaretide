@@ -25,11 +25,12 @@ var Logic = function() {
 	function consolidateChains(arrays) {
 		var consolidatedArrays = [];
 		arrays.forEach(function(array){
-			arrays.forEach(function(innerArray){
+			arrays.forEach(function(innerArray,innerIndex){
 				var intersection = getIntersection(array,innerArray);
 				if (intersection) {
-					innerArray.splice(indexOfTile(innerArray,tile),1);
+					innerArray.splice(indexOfTile(innerArray,intersection),1);
 					consolidatedArrays.push(array.concat(innerArray));
+					arrays[innerIndex] = undefined;
 				}
 			})
 		});
