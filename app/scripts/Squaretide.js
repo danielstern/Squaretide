@@ -240,7 +240,7 @@ function Squaretide() {
                 // if (!chain.every(logic.getOccupied)) {
                 //     return 0;
                 // }
-                var totalResolveTime = chain.length * config.tileResolveTime * 2;
+                var totalResolveTime = chain.length * config.tileResolveTime + 1;
                 // console.log("Total resolve time?",totalResolveTime);
                 return totalResolveTime;
             }
