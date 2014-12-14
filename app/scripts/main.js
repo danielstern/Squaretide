@@ -69,7 +69,11 @@ if (document.getElementById('game')) {
         document.getElementById('currentComboCount').innerHTML = state.currentComboCount;
         document.getElementById('currentChainCount').innerHTML = state.currentComboChain;
         document.getElementById('currentComboMultiplier').innerHTML = state.currentComboMultiplier;
-        document.getElementById('comboScore').innerHTML = parseInt(state.currentComboScore);
+        document.getElementById('comboScore').innerHTML = parseInt(state.currentComboScore) + " ";
+        if (state.currentComboMultiplier > 1) {
+             document.getElementById('comboScore').innerHTML +="x" + state.currentComboMultiplier;
+        }
+
         showComboElements();
 
         var comboScore = state.currentComboScore;
