@@ -20,7 +20,7 @@ describe("the trampoline",function(){
 		var array = [0,1,2,4,5,6];
 
 		trampoline(array,callback,delay,function(){
-			assert.equal(spy.callCount, array.length);
+			assert.equal(callback.callCount, array.length);
 			done();
 		});
 	});
@@ -46,19 +46,44 @@ describe("the trampoline",function(){
 			
 			var callback = sinon.spy();
 			var delay = 100;
-			var lastTime = new Date().getTime();
+			var lastTime;
 			var array = [0,1,2];
 			var expectedTotalDelay = delay * array.length;
 
+			trampoline(array,function(elem){
+				var timeNow = new Date().getTime();
+				if (lastTime) {
+					assert.closeTo(timeNow-lastTime,delay,10);
+				}
+				lastTime = timeNow;
+			},delay,function(){
+				done();
+			});
+		});
+
+		it("should wait for what is returned if delay is a function",function(done){
+			
+			var callback = sinon.spy();
+			var delay = function(elem){
+				return elem;
+			};
+			var lastTime;
+			var array = [50,150,250];
+			var startTime = new Date().getTime();
+			var nextExpectedTime;
 
 			trampoline(array,function(elem){
 				var timeNow = new Date().getTime();
-				callback(timeNow - lastTime);
+				var expectedDelay = delay(elem);
+				if (nextExpectedTime) {
+					assert.closeTo(timeNow,nextExpectedTime,10);
+				};
+				nextExpectedTime = timeNow + expectedDelay;
+				lastTime = timeNow;
 				lastTime = timeNow;
 			},delay,function(){
-				// assert.equal(spy.callCount, array.length);
-				// assert.equal(spy.callCount, array.length);
-				console.log("Spy oh my?",callback.args)
+				var timeNow = new Date().getTime();
+				assert.closeTo(timeNow,nextExpectedTime,10);
 				done();
 			});
 		});
