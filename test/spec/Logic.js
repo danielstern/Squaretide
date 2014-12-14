@@ -137,18 +137,17 @@
             	});
             })
 
-            // describe("finding all chains")
 
-            // describe("finding intersection",function(){
-            //     it("should return a tile where two chains intersect if it exsit",function(){
-            //         var chain1 = [topLeftTile,topRightTile];
-            //         var chain2 = [topRightTile,bottomRightTile];
-            //         var chain3 = [bottomRightTile,bottomLeftTile];
-            //         assert.equal(logic.getIntersection(chain1,chain2),topRightTile);
-            //         assert.equal(logic.getIntersection(chain1,chain3),null);
-            //         assert.equal(logic.getIntersection(chain2,chain3),bottomRightTile);
-            //     })
-            // })
+            describe("finding intersection",function(){
+                it("should return a tile where two chains intersect if it exsit",function(){
+                    var chain1 = [topLeftTile,topRightTile];
+                    var chain2 = [topRightTile,bottomRightTile];
+                    var chain3 = [bottomRightTile,bottomLeftTile];
+                    assert.equal(logic.getIntersection(chain1,chain2),topRightTile);
+                    assert.equal(logic.getIntersection(chain1,chain3),null);
+                    assert.equal(logic.getIntersection(chain2,chain3),bottomRightTile);
+                })
+            })
             
             describe('consolidating chains',function(){
                 it("should reduce the chains to the minumum possible number of groups",function(){

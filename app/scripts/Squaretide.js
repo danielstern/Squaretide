@@ -257,9 +257,11 @@ function Squaretide() {
 
 
         function findAndResolveMatches() {
-            var chains = logic.getChains(tiles, logic.tileColorsMatch, level.minimumChainLength);
-            if (chains.length > 0) {
-                resolveChains(chains);
+            if (state.chainTimeRemaining < 1) {
+                var chains = logic.getChains(tiles, logic.tileColorsMatch, level.minimumChainLength);
+                if (chains.length > 0) {
+                    resolveChains(chains);
+                }
             }
         }
 

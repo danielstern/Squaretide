@@ -28,8 +28,8 @@ function TileVisualizer(tile) {
 
         // console.log("Columns?",window._numColumns)
 
-        var width = 75/_numColumns;
-        var height = 75/_numRows;
+        var width = 100/_numColumns;
+        var height = 100/_numRows;
 
         for (key in tile) {
             div2.setAttribute(key, tile[key]);            
