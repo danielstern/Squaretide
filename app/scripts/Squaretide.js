@@ -112,6 +112,7 @@ function Squaretide() {
                 return !tile.occupied;
             }).forEach(function(tile) {
                 tile.occupied = true;
+                tile.selected = false;
                 tile.color = getSafeColor(tile);
                 tile.chaining = false;
             });
@@ -136,6 +137,7 @@ function Squaretide() {
             window._numRows = level.rows;
             window._numColumns = level.columns;
 
+            broadcast("level");
             resume();
         }
 
@@ -298,6 +300,9 @@ function Squaretide() {
             }
         }
 
+        function getLevel() {
+            return level;
+        }
 
         function onEnterFrame() {
 
@@ -357,6 +362,7 @@ function Squaretide() {
         this.tiles = tiles;
         this.getSafeColor = getSafeColor;
         this.pause = pause;
+        this.getLevel = getLevel;
         this.resume = resume;
 
         /*exported tick, startGame, endGame */
