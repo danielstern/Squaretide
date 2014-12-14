@@ -43,6 +43,10 @@
         }
         // display: none;
     }
+    .level-info-display,.total-score,.message-display,.combo-display {
+        opacity: 0 !important;
+        transition: 0.2s all;
+    }
 }
 
 .game[mode="game"] {
@@ -52,13 +56,17 @@
 
     h1 {
         top: 0.5rem;
-        font-size: 1rem;
+        font-size: 0rem;
         width: 100%;
     }
 
     menu {
         opacity: 0;
         pointer-events: none;
+    }
+    .level-info-display, .total-score,.message-display,.combo-display {
+        opacity: 1;
+        transition: 0.2s all;
     }
 
 }

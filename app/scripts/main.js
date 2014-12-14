@@ -33,26 +33,60 @@ if (document.getElementById('game')) {
         })
     });
 
-    Jukebox.timer.setInterval(function(){
+    Jukebox.timer.setInterval(function() {
         state = game.state;
-        document.getElementById('score').innerHTML = parseInt(state.scoreThisLevel,10);
-        // document.getElementById('currentComboCount').innerHTML = state.currentComboCount;
-        // document.getElementById('currentChainCount').innerHTML = state.currentComboChain;
-        // document.getElementById('currentComboMultiplier').innerHTML = state.currentComboMultiplier;
-        document.getElementById('time').innerHTML = Math.floor(state.timeRemaining / 1000);
-     
-    },25);
+        document.getElementById('score').innerHTML = parseInt(state.scoreThisLevel, 10);
 
-    game.on("level",function(){
+        document.getElementById('time').innerHTML = Math.floor(state.timeRemaining / 1000);
+
+    }, 25);
+
+
+    game.on("level", function() {
         var level = game.getLevel();
+        var state = game.state;
         document.getElementById('target').innerHTML = Math.floor(game.getLevel().targetScore);
         document.getElementById('level').innerHTML = Math.floor(state.level);
-        chainMin.innerHTML = "" ;
+        chainMin.innerHTML = "";
         for (var i = 0; i < game.getLevel().minimumChainLength; i++) {
-            chainMin.innerHTML += "<square color=0 class=avatar></square>" ;
+            chainMin.innerHTML += "<square color=0 class=avatar></square>";
         }
+    })
+
+    function showComboElements() {
+        document.getElementById('plus-display').setAttribute("hide",false);
+        document.getElementById('combo-elements').setAttribute("hide",false);
+        document.getElementById('messageDisplay').setAttribute("hide",false);
+    }
+    function hideComboElements() {
+        document.getElementById('plus-display').setAttribute("hide",true);
+        document.getElementById('combo-elements').setAttribute("hide",true);
+        document.getElementById('messageDisplay').setAttribute("hide",true);
+    }
+
+    game.on("score.tile", function() {
+        var state = game.state;
+        document.getElementById('currentComboCount').innerHTML = state.currentComboCount;
+        document.getElementById('currentChainCount').innerHTML = state.currentComboChain;
+        document.getElementById('currentComboMultiplier').innerHTML = state.currentComboMultiplier;
+        document.getElementById('comboScore').innerHTML = parseInt(state.currentComboScore);
+        showComboElements();
+
+        var comboScore = state.currentComboScore;
+        var message = 'Boring';
+        if (comboScore > 500) message = 'Dull'
+        if (comboScore > 1000) message = 'Weak'
+        if (comboScore > 1500) message = 'Soft'
+        if (comboScore > 2000) message = 'Mediocre'
+        document.getElementById('messageDisplay').innerHTML = message;
+    })
+
+    game.on("score.resolve", function(combo) {
+        hideComboElements();        
+        // document.getElementById('comboScore').innerHTML = parseInt(combo.totalComboScore);
     })
 
     game.startGame();
     game.pause();
+    hideComboElements();
 }

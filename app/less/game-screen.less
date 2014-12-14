@@ -11,7 +11,7 @@ section[name='game-screen'] {
         overflow: hidden;
     }
 
-    .score, .time {
+    .time {
         position: absolute;
         z-index: 1000;
         color: @white1;
@@ -22,18 +22,86 @@ section[name='game-screen'] {
         top: @sq*3;
         margin: auto;
         pointer-events: none;
+        text-align: right;
         // top: 700px;
     }
-    .time {
-        text-align: right;
+
+    .level-info-display {
+        position: absolute;
+        width: 33%;
+        left: 0;
+        top: @sq;
+        font-size: @sq * 1.2;
+
+        >div{
+            margin-bottom: @sq / 4;
+        }
+
     }
+
+    .legend {
+        float: left;
+    }
+
     .combo-display {
         position: absolute;
         z-index: 1000;
         color: @white1;
         font-size: 2rem;
-        top: 50%;
-        display: none;
+        left: 25%;
+        width: 40%;
+        // top: 50%;
+        top: @sq;
+        * {
+            opacity: 1;
+            transition: 0.2s all;
+        }
+        // display: none;
         // bottom: 0px;
+        .combo-module {
+            width: 33%;
+            float: left;
+            font-size: 16px;
+        }
+        .combo-score {
+            position: absolute;
+            right: 0;
+            top: @sq * 4;
+            font-size: @sq * 1.5;
+        }
+        .combo-score-number {
+            float: right;
+        }
+        .combo-score-plus {
+            float: left;
+        }
+        .combo-counter {
+            
+        }
+
+    }
+
+
+        [hide='true'] {
+            transition: 2s all;
+            opacity: 0 !important;
+        }
+    .message-display {
+        position: absolute;
+        color: @white1;
+        font-size: 3rem;
+        left: 65%;
+        width: 15%;
+        top: @sq;
+    }
+}
+@media screen and (max-width:480px) {
+    section[name='game-screen'] {
+        .combo-module {
+            font-size: 1rem !important;
+        }
+    }
+    .legend {
+        display: none;
     }
 }

@@ -87,11 +87,11 @@ function Squaretide() {
             listeners[type].push(listener);
         }
 
-        function broadcast(type) {
+        function broadcast(type,arg) {
 
             if (listeners[type]) {
                 listeners[type].forEach(function(listener) {
-                    listener(state);
+                    listener(arg);
                 });
 
             }
@@ -171,49 +171,37 @@ function Squaretide() {
 
 
         function resolveCurrentCombo() {
-            // console.log("Resolving combo",state.currentComboCount,state.currentComboMultiplier,state.currentComboChain);
-            // console.log("BASE SCORE! ", state.currentComboScore);
-            // console.log("TOTAL TILES! ", state.currentComboCount);
 
-            if (state.currentComboMultiplier > 1) {
-                // console.log("COMBO! ", state.currentComboMultiplier);
-            }
-            if (state.currentComboChain > 1) {
-                // console.log("CHAIN! ", state.currentComboChain);
-            }
             var totalComboScore = state.currentComboScore *= state.currentComboChain;
-            // var totalComboScore = state.currentComboScore *= state.currentComboMultiplier *= state.currentComboChain;
-            // console.log("TOTAL COMBO SCORE!", totalComboScore);
             state.score += totalComboScore;
             state.scoreThisLevel += totalComboScore;
+
+            broadcast('score.resolve',{
+                totalComboScore:totalComboScore,
+                currentComboChain:state.currentComboChain,
+                currentComboCount:state.currentComboCount,
+                currentComboMultiplier:state.currentComboMultiplier,
+            });
+
             resetCombo();
         }
 
 
         function resolveTile(tile) {
-            // console.log("Resolvign tiles")
-
             tile.occupied = false;
             state.currentComboCount += 1;
             var tileScore = level.pointsPerTile * state.currentComboCount;
-            // var tileScore = 100 * state.currentComboMultiplier * state.currentComboCount;
-            // console.log("TILE POINTS!:", tileScore);
             state.currentComboScore += tileScore;
             state.chainTimeRemaining = config.chainGracePeriod;
+
+            broadcast('score.tile');            
         }
 
         function resolveChain(tiles) {
 
-            // console.log("Resolving chain",tiles);
-
             state.currentComboMultiplier += 1;
 
             var baseTone = tiles[0].color;
-
-            // if (!tiles.every(logic.getOccupied)) {
-            //     return;
-            // }
-            // console.log("Resolve chain...",tiles);
 
             tiles.forEach(function(tile) {
                 tile.chaining = true;
@@ -222,39 +210,27 @@ function Squaretide() {
             
             trampoline(tiles, resolveTile, config.tileResolveTime);
 
-            // timer.setTimeout(function(){
-            // },1000);
+            broadcast('score.chain');
 
         }
 
 
         function resolveChains(chains) {
-            console.log("resolve chains");
 
             var consolidatedChains = logic.consolidateChains(chains);
 
             pause();
 
             state.currentComboChain += 1;
-            // console.log("resolve chains",chains);
 
             function getTotalTimeToResolveChain(chain) {
-                // if (!chain.every(logic.getOccupied)) {
-                //     return 0;
-                // }
                 var totalResolveTime = chain.length * config.tileResolveTime + 1;
-                // console.log("Total resolve time?",totalResolveTime);
                 return totalResolveTime;
             }
 
-            console.log("Consolidated chains?",consolidatedChains);
-
             trampoline(consolidatedChains, resolveChain, getTotalTimeToResolveChain, function(){
-                console.log("final resolve callback");
                 resume();
             });
-            // trampoline(chains, resolveChain, 1000, resume);
-
         }
 
 
