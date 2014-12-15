@@ -83,7 +83,35 @@
             <div class=gamefield id='gamefield'> </div>
         </section>
         <section name=post-level>
-
+            <div ng-if=victory>
+                <div class=summary>
+                    <div>
+                        level {{state.level}} complete. 
+                    </div>
+                    <div>
+                        score {{state.score}}
+                    </div>
+                </div>
+                <button class=next-level-button ng-click=nextLevel()>
+                    Next Level
+                </button>
+            </div>
+            <div ng-if=!victory>
+                <div class=summary>
+                    <div>
+                        defeat.
+                    </div>
+                    <div>
+                        highest level : {{state.level}}
+                    </div>
+                    <div>
+                        score {{state.score}}
+                    </div>
+                </div>
+                <button class=next-level-button ng-click=mainMenu()>
+                    Main Menu
+                </button>
+            </div>
         </section>
 
     </div>

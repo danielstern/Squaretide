@@ -21,22 +21,36 @@ angular.module("SquaretideContainer",[])
     $rootScope.startGame = function(){
         $rootScope.mode = "game";
         game.startGame();
-        game.on("end", function() {
-            $rootScope.mode = "main-menu";
-        })
     }
+
+    game.on("end", function() {
+        $rootScope.mode = "post-level";
+        $rootScope.victory = false;
+    })
+
+    $rootScope.nextLevel = function() {
+        $rootScope.mode = "game";
+        game.nextLevel();
+    }
+
+    $rootScope.mainMenu = function() {
+        $rootScope.mode = "main-menu";
+    }
+
+    game.startGame();
+    game.pause();
 
 
     game.on("level", function() {
         var level = game.getLevel();
         $rootScope.level = level;
         $rootScope.difficultySymbols.length = level.minimumChainLength;
-        // document.getElementById('target').innerHTML = Math.floor(game.getLevel().targetScore);
-        // document.getElementById('level').innerHTML = Math.floor(state.level);
-        // chainMin.innerHTML = "";
-        // for (var i = 0; i < game.getLevel().minimumChainLength; i++) {
-            // chainMin.innerHTML += "<square color=0 class=avatar></square>";
-        // }
+    })
+
+    game.on("level.complete",function(){
+        // game.pause();
+        $rootScope.mode = "post-level";
+        $rootScope.victory = true;
     })
 
 
@@ -75,8 +89,7 @@ angular.module("SquaretideContainer",[])
         $rootScope.$apply();
     });
 
-    game.startGame();
-    game.pause();
+
 })
 
 // var showInstructions = false;

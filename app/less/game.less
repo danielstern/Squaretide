@@ -1,6 +1,7 @@
 @import 'square.less';
 @import 'home-screen.less';
 @import 'game-screen.less';
+@import 'post-level.less';
 
 .game {
     .centerAbsolute();
@@ -21,18 +22,32 @@
         text-shadow: 1px 1px 1px @fade, 0px 1px 1px @fade;   
     }
 
-    &[mode="main-menu"] {
+    section[name='home-screen'],section[name='game-screen'] {
+        opacity: 0;
+        pointer-events: none;
+    }
 
+    section[name='post-level'] {
+        margin-top: -1000px;
+    }
+
+    section[name='game-screen'] {
+        opacity: 0.5;
+    }
+
+    .meta {
+        opacity: 0;
+        transition: 0.2s all;
+    }
+
+    &[mode="main-menu"] {
 
         section[name='home-screen'] {
             opacity: 1;
             transition: 0.2s all;
+            pointer-events: all;
         }
 
-        .meta {
-            opacity: 0;
-            transition: 0.2s all;
-        }
     }
 
     &[mode="game"] {
@@ -42,11 +57,10 @@
             width: 100%;
         }
 
-        section[name='home-screen'] {
-            opacity: 0;
-            pointer-events: none;
+        section[name='game-screen'] {
+            opacity: 1;
+            pointer-events: all;
         }
-
 
         .meta {
             opacity: 1;
@@ -57,15 +71,10 @@
 
     &[mode="post-level"] {
 
-        section[name='home-screen'] {
-            opacity: 0;
-            pointer-events: none;
-        }
-
-
-        .meta {
-            opacity: 0;
-            transition: 0.2s all;
+        section[name='post-level'] {
+            margin-top: 0px;
+            transition: 0.5s all;
+            pointer-events: all;
         }
 
     }
