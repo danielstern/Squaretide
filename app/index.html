@@ -45,7 +45,7 @@
                         level: {{state.level}}
                     </div>
                     <div>
-                        target: {{level.targetScore}}
+                        target: {{level.targetScore | number:0}}
                     </div>
                     <div>
                         min chain:
@@ -53,7 +53,7 @@
                     </div>
                 </div>
                 <div class='total-score'>
-                    {{state.scoreThisLevel}}
+                    {{state.scoreThisLevel | number:0}}
                 </div>
                 <div class='combo-elements' ng-class="{'fade-out':!state.currentComboCount}">
                     <div class="combo-numbers">
@@ -69,7 +69,7 @@
                         </div>
                     </div>
                     <div class='combo-score'>
-                        +{{state.currentComboScore}}    
+                        +{{state.currentComboScore | number:0}}    
                         <span ng-if=state.currentComboScore>
                             x{{state.currentComboMultiplier}}
                         </span>
@@ -89,7 +89,7 @@
                         level {{state.level}} complete. 
                     </div>
                     <div>
-                        score {{state.score}}
+                        score {{state.score | number:0}}
                     </div>
                 </div>
                 <button class=next-level-button ng-click=nextLevel()>
@@ -105,7 +105,7 @@
                         highest level : {{state.level}}
                     </div>
                     <div>
-                        score {{state.score}}
+                        score {{state.score | number:0}}
                     </div>
                 </div>
                 <button class=next-level-button ng-click=mainMenu()>

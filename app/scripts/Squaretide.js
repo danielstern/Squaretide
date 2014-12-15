@@ -74,7 +74,8 @@ function Squaretide() {
             });
 
             if (goodColors.length < 1) {
-                throw new Error("The number of colors and the size of this field are not compatible. It is not possible to find a safe color");
+                // throw new Error("The number of colors and the size of this field are not compatible. It is not possible to find a safe color");
+                return safeColors[Math.floor(Math.random() * safeColors.length)];
             }
 
             return goodColors[Math.floor(Math.random() * goodColors.length)];
