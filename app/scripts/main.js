@@ -1,6 +1,6 @@
 angular.module("SquaretideContainer",[])
 .run(function($rootScope){
-    var synth = Jukebox.getSynth(JBSCHEMA.synthesizers['Duke Straight Up']);
+    
     var game = new Squaretide();
     var state = game.state;
 
@@ -19,6 +19,7 @@ angular.module("SquaretideContainer",[])
     $rootScope.startGame = function(){
         $rootScope.mode = "game";
         game.startGame();
+        fastSequence();
     }
 
     game.on("end", function() {
@@ -89,9 +90,40 @@ angular.module("SquaretideContainer",[])
 
 
 })
-
+var synth = Jukebox.getSynth(JBSCHEMA.synthesizers['Duke Straight Up']);
 var soundManager = {
     tone: function(tone, duration) {
-        // synth.play(tone * 4 + 12, 100);
+        synth.play(tone * 4 + 12, 100);
     }
+}
+
+function majorScale(interval) {
+    var rate = interval % 4;
+    if (rate === 0) return 0;
+    if (rate === 1) return 5;
+    if (rate === 2) return 8;
+    if (rate === 3) return 11;
+}
+
+function fastSequence(notes) {
+    console.log("Castseuence");
+    Jukebox.timer.setSequence([{
+        timeout:100,
+        callback: function() {
+            console.log("nex forst invoc")
+            soundManager.tone(majorScale(0));
+
+        }
+    },{
+        timeout:100,
+        callback: function() {
+            console.log("nex seq invoc")
+            soundManager.tone(majorScale(1));
+        }
+    },{
+        timeout:100,
+        callback: function() {
+            soundManager.tone(majorScale(2));
+        }
+    }])
 }
