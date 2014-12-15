@@ -1,5 +1,5 @@
 angular.module("SquaretideContainer", [])
-    .run(function($rootScope) {
+    .run(["$rootScope",function($rootScope) {
 
         var game = new Squaretide();
         var state = game.state;
@@ -109,8 +109,9 @@ angular.module("SquaretideContainer", [])
         bass.off();
 
 
-    })
+}])
 var synth = Jukebox.getSynth(JBSCHEMA.synthesizers['Duke Straight Up']);
+synth.volume 0.2;
 var soundManager = {
     tone: function(tone, duration) {
         synth.play(tone + 12, 100);
@@ -148,7 +149,6 @@ var soundManager = {
         var scales = ['major', 'minor', 'frigean'];
         var value2mod = value2 % scales.length;
         var scale = scales[value2mod];
-        console.log("scale from 2 values...", base, scale)
         this.scaleSequence(base, scale, 100,2);
     }
 }
@@ -185,7 +185,6 @@ var BassSequencer = function() {
         time++;
         var drumTime = Math.floor(time / bps);
         var beat = drumTime % bpm;
-        console.log("drum time")
         if (beat === 0) {
             if (queued) {
                 bass.play(bassLine(step,0),65);
@@ -220,8 +219,6 @@ var BassSequencer = function() {
 
 var bass = new BassSequencer();
 
-// var drumMachine = new DrumMachine();
-
 function getScale(notes){
     return function (interval, base) {
         base = base || 0;
@@ -235,50 +232,11 @@ function getScale(notes){
 
         var note = +base + +map[rate];
 
-        console.log("retur note...",note);
         return note;
     }
 }
 
-// function majorScale(interval, base) {
-//     var rate = interval % 8;
-//     if (rate === 0) return 0 + base;
-//     if (rate === 1) return 4 + base;
-//     if (rate === 2) return 7 + base;
-//     if (rate === 3) return 12 + base;
-//     if (rate === 4) return 11 + base;
-//     if (rate === 5) return 10 + base;
-//     if (rate === 6) return 9 + base;
-//     if (rate === 7) return 10 + base;
-//     if (rate === 8) return 8 + base;
-// }
 
-// function minorScale(interval, base) {
-//     var rate = interval % 4;
-//     if (rate === 0) return 0 + base;
-//     if (rate === 1) return 3 + base;
-//     if (rate === 2) return 7 + base;
-//     if (rate === 3) return 3 + base;
-// }
-
-
-// function bassLine(interval, base) {
-//     var intro = "0 7 10 7 12 7 10 7 12 7 10 7 5 3 3 2"
-//     var verse = "5 3 0 3 5 3 0 3 0 7 10 7 0 7 10 7"
-//     var notes = intro + " " 
-//                 + intro + " " 
-//                 + verse + " "
-//                 + verse;
-//     var max = notes.split(" ").length;
-//     var rate = interval % max;
-//     var map = {};
-//     for (var i = 0; i < max; i++) {
-//         var note = notes.split(" ")[i];
-//         map[i] = note;
-//     }
-
-//     return base + map[rate];
-// }
 
 var frigeanScale = getScale("0 1 4 5 7 5 4 1 0");
 var minorScale = getScale("0 3 7 3");
@@ -286,14 +244,7 @@ var majorScale = getScale("0 4 7 12 16 12 7 4");
 var groovy = getScale("0 7 10 7 12 7 10 7 12 7 10 7 5 3 3 2");
 
 var scales = [majorScale,minorScale,frigeanScale,groovy];
+
 function getRandomScale(){
     return scales[Math.floor(Math.random() * scales.length)];
 }
-// var intro = "0 7 10 7 12 7 10 7 12 7 10 7 5 3 3 2"
-// var verse = "5 3 0 3 5 3 0 3 0 7 10 7 0 7 10 7"
-// var notes = intro + " " 
-            // + intro + " " 
-            // + verse + " "
-            // + verse;
-// 
-// var bassLine = getScale(notes);

@@ -416,6 +416,7 @@ module.exports = function (grunt) {
     'useminPrepare',
     'concurrent:dist',
     'autoprefixer',
+    'less',
     'concat',
     'cssmin',
     'uglify',
