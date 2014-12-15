@@ -49,7 +49,7 @@ function TileVisualizer(tile) {
             tile.timeSelected = new Date().getTime();
             tile.selected = true;
 
-            soundManager.tone(tile.color, 50);
+            soundManager.scaleSequence(tile.color, 'major',50,1);
         }
     };
 }

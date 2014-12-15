@@ -194,10 +194,11 @@ function Squaretide() {
             var tileScore = level.pointsPerTile * state.currentComboCount;
             state.currentComboScore += tileScore;
             state.chainTimeRemaining = config.chainGracePeriod;
+            state.lastResolvedTileColor = tile.color;
 
             // console.log("resolve tile",state.currentComboCount,tile.color,majorScale(state.currentComboCount));
 
-            soundManager.tone(majorScale(state.currentComboCount,tile.color));
+            // soundManager.tone(majorScale(state.currentComboCount,tile.color));
 
             broadcast('score.tile');            
         }
@@ -236,6 +237,8 @@ function Squaretide() {
             trampoline(consolidatedChains, resolveChain, getTotalTimeToResolveChain, function(){
                 resume();
             });
+
+
         }
 
 
@@ -270,7 +273,7 @@ function Squaretide() {
 
                     tiles.switchTiles(tile1, tile2);
 
-                    soundManager.scaleFromTwoValues(tile1.color, tile2.color);
+                    // soundManager.scaleFromTwoValues(tile1.color, tile2.color);
 
                     // soundManager.scaleSequence(tile1.color, 'minor',75);
                     // soundManager.scaleSequence(tile2.color, 'major',75);

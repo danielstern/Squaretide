@@ -4,12 +4,212 @@
 		"selected_items":
 		[
 			[
-				"square",
-				"squareSide"
+				"Bass",
+				"BassSequencer"
+			],
+			[
+				"fr",
+				"frigeanScale"
+			],
+			[
+				"tim",
+				"timesHit"
+			],
+			[
+				"dru",
+				"drumSequences"
+			],
+			[
+				"dr",
+				"drumSequences"
+			],
+			[
+				"meas",
+				"measuresSinceChange"
+			],
+			[
+				"drum",
+				"drumMachine"
+			],
+			[
+				"cur",
+				"currentbeat"
+			],
+			[
+				"minor",
+				"minorScale"
+			],
+			[
+				"major",
+				"majorScale"
+			],
+			[
+				"ever",
+				"everyFifth"
+			],
+			[
+				"text",
+				"text-align"
+			],
+			[
+				"curren",
+				"currentComboMultiplier"
+			],
+			[
+				"hide",
+				"hideComboElements"
+			],
+			[
+				"curr",
+				"currentComboCount"
+			],
+			[
+				"new",
+				"newArray"
+			],
+			[
+				"tile",
+				"tile2"
+			],
+			[
+				"bott",
+				"bottomLeftTile"
+			],
+			[
+				"bottom",
+				"bottomLeftTile"
+			],
+			[
+				"cons",
+				"consolidatedArrays"
+			],
+			[
+				"top",
+				"topRightTile"
+			],
+			[
+				"inner",
+				"innerArray"
+			],
+			[
+				"con",
+				"consolidatedChains"
+			],
+			[
+				"inter",
+				"intersection"
+			],
+			[
+				"to",
+				"topRightTile"
+			],
+			[
+				"start",
+				"startGameTime"
+			],
+			[
+				"time",
+				"timeEnd"
+			],
+			[
+				"ex",
+				"expectedDelay"
+			],
+			[
+				"exp",
+				"expectedDelay"
+			],
+			[
+				"call",
+				"callback"
+			],
+			[
+				"score",
+				"scoreThisLevel"
+			],
+			[
+				"co",
+				"config"
+			],
+			[
+				"col",
+				"columns"
+			],
+			[
+				"se",
+				"settings"
+			],
+			[
+				"sco",
+				"scorePerTile"
+			],
+			[
+				"targ",
+				"targetScore"
+			],
+			[
+				"currentCom",
+				"currentComboScore"
 			],
 			[
 				"resolv",
-				"resolveChains"
+				"resolveCurrentCombo"
+			],
+			[
+				"cha",
+				"chainTimeRemaining"
+			],
+			[
+				"chain",
+				"chainTimeRemaining"
+			],
+			[
+				"curre",
+				"currentComboCount"
+			],
+			[
+				"saf",
+				"safeColors"
+			],
+			[
+				"seg",
+				"segment"
+			],
+			[
+				"index",
+				"indexOfTile"
+			],
+			[
+				"all",
+				"allSegments"
+			],
+			[
+				"Juk",
+				"Jukebox"
+			],
+			[
+				"Juke",
+				"JukeboxConstructor"
+			],
+			[
+				"getT",
+				"getTileAtCoordinates"
+			],
+			[
+				"cu",
+				"currentComboMultiplier"
+			],
+			[
+				"current",
+				"currentComboMultiplier"
+			],
+			[
+				"currentCombo",
+				"currentComboCount"
+			],
+			[
+				"square",
+				"squareSide"
 			],
 			[
 				"til",
@@ -28,10 +228,6 @@
 				"processor"
 			],
 			[
-				"se",
-				"sequence"
-			],
-			[
 				"seq",
 				"sequenceIsChain"
 			],
@@ -44,24 +240,12 @@
 				"getColumn"
 			],
 			[
-				"co",
-				"column"
-			],
-			[
-				"tile",
-				"tileset"
-			],
-			[
 				"getLast",
 				"getLastUnoccupiedIndex"
 			],
 			[
 				"tiles",
 				"tilesAreAdjacent"
-			],
-			[
-				"col",
-				"column"
 			],
 			[
 				"getLas",
@@ -116,10 +300,6 @@
 				"emptyValueProceedsFullValueInArray"
 			],
 			[
-				"all",
-				"changeColorAllTiles"
-			],
-			[
 				"box",
 				"box-shadow"
 			],
@@ -134,10 +314,6 @@
 			[
 				"game",
 				"gameEndListener"
-			],
-			[
-				"chain",
-				"chainsSinceLastCombo"
 			],
 			[
 				"min",
@@ -228,10 +404,6 @@
 				"areEqual"
 			],
 			[
-				"time",
-				"timeNow"
-			],
-			[
 				"st",
 				"stateParams"
 			],
@@ -288,51 +460,34 @@
 	"buffers":
 	[
 		{
+			"file": "app/scripts/main.js",
+			"settings":
+			{
+				"buffer_size": 8010,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app/scripts/drumMachine.js",
+			"settings":
+			{
+				"buffer_size": 3809,
+				"line_ending": "Windows"
+			}
+		},
+		{
 			"file": "app/scripts/Squaretide.js",
 			"settings":
 			{
-				"buffer_size": 5356,
+				"buffer_size": 9570,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "app/scripts/gameSettingsFromLevel.js",
+			"file": "bower_components/jukebox/jukebox.js",
 			"settings":
 			{
-				"buffer_size": 36,
-				"line_ending": "Windows",
-				"name": "function gameSettingFromLevel(){"
-			}
-		},
-		{
-			"file": "app/scripts/TileVisualizer.js",
-			"settings":
-			{
-				"buffer_size": 958,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "app/less/main.less",
-			"settings":
-			{
-				"buffer_size": 6507,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "Gruntfile.js",
-			"settings":
-			{
-				"buffer_size": 10204,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "app/index.html",
-			"settings":
-			{
-				"buffer_size": 3541,
+				"buffer_size": 26484,
 				"line_ending": "Windows"
 			}
 		}
@@ -343,6 +498,10 @@
 		"height": 380.0,
 		"selected_items":
 		[
+			[
+				"packa",
+				"Package Control: Install Package"
+			],
 			[
 				"pack",
 				"Package Control: Install Package"
@@ -368,7 +527,7 @@
 				"Package Control: Install Package"
 			]
 		],
-		"width": 416.0
+		"width": 512.0
 	},
 	"console":
 	{
@@ -385,20 +544,37 @@
 	},
 	"file_history":
 	[
-		"/D/Projects/squaretide/dist/index.html",
-		"/D/Projects/squaretide/test/index.html",
-		"/D/Projects/squaretide/app/index.html",
-		"/D/Projects/squaretide/Gruntfile.js",
-		"/D/Projects/squaretide/app/scripts/trampoline.js",
+		"/D/Projects/squaretide/bower_components/jukebox/jukebox.js",
+		"/D/Projects/squaretide/app/scripts/gameSettingsFromLevel.js",
+		"/D/Projects/squaretide/test/spec/Squaretide.js",
 		"/D/Projects/squaretide/app/scripts/Logic.js",
 		"/D/Projects/squaretide/app/scripts/main.js",
+		"/D/Projects/squaretide/app/scripts/Squaretide.js",
+		"/D/Projects/squaretide/app/scripts/TileVisualizer.js",
+		"/D/Projects/squaretide/app/index.html",
+		"/D/Projects/squaretide/app/squaretide.zip",
+		"/D/Projects/squaretide/app/less/post-level.less",
+		"/D/Projects/squaretide/app/less/game-screen.less",
+		"/D/Projects/squaretide/app/partials/instructions.html",
+		"/D/Projects/squaretide/app/less/game.less",
+		"/D/Projects/squaretide/app/less/main.less",
+		"/D/Projects/squaretide/app/less/home-screen.less",
+		"/D/Projects/squaretide/app/less/square.less",
+		"/D/Projects/squaretide/test/index.html",
+		"/D/Projects/squaretide/Gruntfile.js",
 		"/D/Projects/squaretide/test/spec/Logic.js",
 		"/D/Projects/squaretide/app/scripts/Tileset.js",
-		"/D/Projects/squaretide/app/less/main.less",
-		"/D/Projects/squaretide/app/scripts/Squaretide.js",
-		"/D/Projects/squaretide/dist/scripts/f1e0094b.main.js",
-		"/D/Projects/squaretide/app/scripts/TileVisualizer.js",
+		"/D/Projects/squaretide/test/sinon.js",
+		"/D/Projects/squaretide/app/scripts/trampoline.js",
+		"/D/Projects/squaretide/test/spec/trampoline.js",
+		"/D/Projects/squaretide/app/less/colors.less",
+		"/D/Projects/squaretide/app/less/mixins.less",
+		"/D/Projects/squaretide/app/less/animations.less",
 		"/D/Projects/squaretide/test/spec/Tileset.js",
+		"/D/Projects/jukeboxjs/app/scripts/jukebox.js",
+		"/D/Projects/squaretide/test/bower.json",
+		"/D/Projects/squaretide/dist/index.html",
+		"/D/Projects/squaretide/dist/scripts/f1e0094b.main.js",
 		"/D/Projects/squaretide/squaretide.sublime-project",
 		"/D/Projects/squaretide/node_modules/load-grunt-tasks/load-grunt-tasks.js",
 		"/D/Projects/squaretide/node_modules/grunt-contrib-uglify/node_modules/uglify-js/node_modules/optimist/example/line_count_options.js",
@@ -495,24 +671,7 @@
 		"/D/Projects/flashforum/client/app/main/main.controller.js",
 		"/D/Projects/flashforum/client/app/thread/thread.js",
 		"/D/Projects/flashforum/client/app/thread/thread.less",
-		"/D/Projects/flashforum/server/api/thing/thing.model.js",
-		"/D/Projects/flashforum/client/app/main/main.js",
-		"/D/Projects/flashforum/client/bower_components/angular-bootstrap/ui-bootstrap.js",
-		"/D/Projects/flashforum/flashforum.sublime-project",
-		"/D/Projects/flashforum/client/app/account/signup/signup.jade",
-		"/D/Projects/flashforum/client/app/thread/thread.controller.js",
-		"/D/Projects/flashforum/client/app/thread/thread.jade",
-		"/D/Projects/flashforum/server/api/post/post.controller.js",
-		"/D/Projects/flashforum/e2e/main/main.po.js",
-		"/D/Projects/flashforum/server/app.js",
-		"/D/Projects/flashforum/package.json",
-		"/D/Projects/flashforum/server/api/post/index.js",
-		"/D/Projects/flashforum/server/api/thread/index.js",
-		"/D/Projects/flashforum/server/api/thread/thread.controller.js",
-		"/D/Projects/flashforum/server/api/thread/thread.socket.js",
-		"/D/Projects/flashforum/.tmp/app/main/main.html",
-		"/D/Projects/flashforum/client/app/account/account.js",
-		"/D/Projects/flashforum/client/app/app.js"
+		"/D/Projects/flashforum/server/api/thing/thing.model.js"
 	],
 	"find":
 	{
@@ -520,7 +679,7 @@
 	},
 	"find_in_files":
 	{
-		"height": 0.0,
+		"height": 90.0,
 		"where_history":
 		[
 			""
@@ -531,6 +690,115 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"drumMachine",
+			"drumm",
+			"blend",
+			"Drums",
+			"phost",
+			"tick",
+			"drumMachine",
+			"tick",
+			"phost",
+			"soundman",
+			"setS",
+			"scales",
+			"sca",
+			"scaleSe",
+			"scales",
+			"actio",
+			"end",
+			"broadca",
+			"time",
+			"score",
+			"score.ti",
+			"var game",
+			"nextLevel",
+			"broadcast",
+			"broadcas",
+			"level",
+			".instructio",
+			"resolveCurrentCombo",
+			"chainTimeRemaining",
+			"chainGracePeriod",
+			"findAndRes",
+			"tileins",
+			"watch",
+			"connect",
+			"hasTil",
+			"populate",
+			"onEn",
+			"onEt",
+			"onE",
+			"conso",
+			"operating",
+			"connect",
+			"script",
+			"flatten",
+			"resolv",
+			"chain",
+			"chian",
+			"logic",
+			"tileset",
+			"tileVi",
+			"numColor",
+			"max-w",
+			"Fit",
+			"rgba",
+			"rgna",
+			"fade",
+			"radialGradient",
+			"fade2",
+			"fade1",
+			"state.score +",
+			"state.score+",
+			"nextLe",
+			"endGa",
+			"mocha",
+			"0.0.",
+			"options",
+			"`",
+			"options",
+			"rows",
+			"numrows",
+			"numColumns",
+			"nextl",
+			"COLU",
+			"ROWS",
+			"startG",
+			"colors",
+			"pointsPerTile",
+			"duration",
+			"minimumChainLength",
+			"numCo",
+			"100",
+			"pointsPer",
+			"game",
+			"-cont",
+			"score",
+			"7",
+			"state",
+			"grace pe",
+			"grace",
+			"tileResolveTime",
+			"\nchainGracePeriod",
+			"chainGracePeriod",
+			"chainTimeRemaining",
+			"consol",
+			"2",
+			"3",
+			"getSafeColor",
+			"getAll",
+			"startG",
+			"startGame",
+			"popu",
+			"3",
+			"minimumChainLength",
+			"logic",
+			"console",
+			"cibsike",
+			"webkita",
+			"connect",
+			"mocha",
 			"Tileset",
 			"instructions",
 			"px\\",
@@ -549,116 +817,7 @@
 			"logic",
 			"tiles",
 			"tiles.ti",
-			"getTiles",
-			"getTi",
-			"getTileD",
-			"getTileat",
-			"init(",
-			"0.0.0",
-			"test",
-			"logic",
-			"init",
-			"game.",
-			"game",
-			"getColumn",
-			"resolveTi",
-			"purgeal",
-			"switch",
-			"can",
-			"canIn",
-			"occupied",
-			"getLastEmpty",
-			"33",
-			"tilesA",
-			"getRandomTi",
-			"changeColorAllTiles",
-			"populateAllEmptyTiles",
-			"onEnterFrame",
-			"getMatch",
-			"broad",
-			"onTic",
-			"startT",
-			"startG",
-			"onEnt",
-			"tick",
-			"TileSetAnalyzer",
-			"flattenb",
-			"flatten",
-			"score",
-			"delay",
-			"resolveTi",
-			"delay",
-			"trampo",
-			"resolvet",
-			"getRandomColor",
-			"totals",
-			"score",
-			"gameEndListener",
-			"durati",
-			"durati.",
-			"durati",
-			"gridSize",
-			"adjac",
-			"tileFrequency",
-			"trampolin",
-			"colors",
-			"spin-",
-			"color6",
-			"color=",
-			"color",
-			"color=",
-			"[",
-			"js",
-			"colors",
-			"synth",
-			"juke",
-			"open",
-			"bower_c",
-			"bower-c",
-			"bower",
-			".synth",
-			"gain",
-			"vole",
-			"stop",
-			"tone =",
-			"tone(",
-			"switcht",
-			"tone",
-			"gamefi",
-			"purple",
-			"debugg",
-			"-webki",
-			"square",
-			"show-me",
-			"spin-out",
-			"animat",
-			"-webkit-transform: translateZ(0px) rotateX(0deg) rotateY(0deg); ",
-			"webkit",
-			"gamefi",
-			"occup",
-			"occupi",
-			"square",
-			"transit",
-			"button",
-			"instru",
-			"button",
-			"    height: @squareSide * 3;",
-			"button",
-			"butt",
-			"nav",
-			"startb",
-			"button",
-			"white1",
-			"c",
-			"h1",
-			"color: w",
-			"color: ",
-			"gamef",
-			"playfie",
-			"h1",
-			"select",
-			"score",
-			"h1"
+			"getTiles"
 		],
 		"highlight": false,
 		"in_selection": false,
@@ -700,23 +859,23 @@
 	"groups":
 	[
 		{
-			"selected": 4,
+			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "app/scripts/Squaretide.js",
+					"file": "app/scripts/main.js",
 					"settings":
 					{
-						"buffer_size": 5356,
+						"buffer_size": 8010,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								367,
-								367
+								7644,
+								7117
 							]
 						],
 						"settings":
@@ -726,31 +885,32 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 4098.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "app/scripts/gameSettingsFromLevel.js",
+					"file": "app/scripts/drumMachine.js",
 					"settings":
 					{
-						"buffer_size": 36,
+						"buffer_size": 3809,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								34,
-								34
+								2638,
+								3807
 							]
 						],
 						"settings":
 						{
-							"auto_name": "function gameSettingFromLevel(){",
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -760,18 +920,18 @@
 				},
 				{
 					"buffer": 2,
-					"file": "app/scripts/TileVisualizer.js",
+					"file": "app/scripts/Squaretide.js",
 					"settings":
 					{
-						"buffer_size": 958,
+						"buffer_size": 9570,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								562,
-								562
+								4072,
+								4072
 							]
 						],
 						"settings":
@@ -781,91 +941,35 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 2597.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 3,
-					"file": "app/less/main.less",
+					"file": "bower_components/jukebox/jukebox.js",
 					"settings":
 					{
-						"buffer_size": 6507,
+						"buffer_size": 26484,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								671,
-								671
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/LESS/LESS.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 141.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "Gruntfile.js",
-					"settings":
-					{
-						"buffer_size": 10204,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
+								9620,
+								9641
 							]
 						],
 						"settings":
 						{
 							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 2,
+							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "app/index.html",
-					"settings":
-					{
-						"buffer_size": 3541,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								3393,
-								3393
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 1615.0,
+						"translation.y": 5477.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -919,20 +1023,200 @@
 		"selected_items":
 		[
 			[
-				".less",
+				"jukeb",
+				"bower_components/jukebox/jukebox.js"
+			],
+			[
+				"squart",
+				"app/scripts/Squaretide.js"
+			],
+			[
+				"jukebox",
+				"bower_components/jukebox/jukebox.js"
+			],
+			[
+				"juke",
+				"bower_components/jukebox/jukebox.js"
+			],
+			[
+				"sq",
+				"test/spec/Squaretide.js"
+			],
+			[
+				"games",
+				"app/scripts/gameSettingsFromLevel.js"
+			],
+			[
+				"inde",
+				"app/index.html"
+			],
+			[
+				"inst",
+				"app/partials/instructions.html"
+			],
+			[
+				"squaretid",
+				"test/spec/Squaretide.js"
+			],
+			[
+				"square",
+				"app/scripts/Squaretide.js"
+			],
+			[
+				"game-sc",
+				"app/less/game-screen.less"
+			],
+			[
+				"game.l",
+				"app/less/game.less"
+			],
+			[
+				"game",
+				"app/scripts/gameSettingsFromLevel.js"
+			],
+			[
+				"main",
+				"app/scripts/main.js"
+			],
+			[
+				"main.",
 				"app/less/main.less"
 			],
 			[
-				"index",
-				"app\\index.html"
+				"home",
+				"app/less/home-screen.less"
+			],
+			[
+				"main.le",
+				"app/less/main.less"
 			],
 			[
 				"main.l",
-				"app\\less\\main.less"
+				"app/less/main.less"
+			],
+			[
+				"game.",
+				"app/less/game.less"
+			],
+			[
+				"main.les",
+				"app/less/main.less"
+			],
+			[
+				"squaret",
+				"app/scripts/Squaretide.js"
+			],
+			[
+				"screen",
+				"app/less/home-screen.less"
+			],
+			[
+				"gamefrom",
+				"app/scripts/gameSettingsFromLevel.js"
+			],
+			[
+				"square.l",
+				"app/less/square.less"
+			],
+			[
+				"squaretide",
+				"app/scripts/Squaretide.js"
+			],
+			[
+				"game.le",
+				"app/less/game.less"
+			],
+			[
+				"visual",
+				"app/scripts/TileVisualizer.js"
+			],
+			[
+				"index",
+				"test/index.html"
 			],
 			[
 				"gruntf",
 				"Gruntfile.js"
+			],
+			[
+				"logic",
+				"test/spec/Logic.js"
+			],
+			[
+				"tilese",
+				"app/scripts/Tileset.js"
+			],
+			[
+				"squa",
+				"test/spec/Squaretide.js"
+			],
+			[
+				"squareti",
+				"app/scripts/Squaretide.js"
+			],
+			[
+				"grunt",
+				"Gruntfile.js"
+			],
+			[
+				"tramp",
+				"app/scripts/trampoline.js"
+			],
+			[
+				"logi",
+				"app/scripts/Logic.js"
+			],
+			[
+				"tileset",
+				"app/scripts/Tileset.js"
+			],
+			[
+				"visu",
+				"app/scripts/TileVisualizer.js"
+			],
+			[
+				"getlev",
+				"app/scripts/gameSettingsFromLevel.js"
+			],
+			[
+				"main.j",
+				"app/scripts/main.js"
+			],
+			[
+				"main.js",
+				"app/scripts/main.js"
+			],
+			[
+				"gruntfi",
+				"Gruntfile.js"
+			],
+			[
+				"tilevi",
+				"app/scripts/TileVisualizer.js"
+			],
+			[
+				"froml",
+				"app/scripts/gameSettingsFromLevel.js"
+			],
+			[
+				"tilevis",
+				"app/scripts/TileVisualizer.js"
+			],
+			[
+				"gamese",
+				"app/scripts/gameSettingsFromLevel.js"
+			],
+			[
+				"gru",
+				"Gruntfile.js"
+			],
+			[
+				"t",
+				"app/scripts/Tileset.js"
+			],
+			[
+				".less",
+				"app/less/main.less"
 			],
 			[
 				"sqa",
@@ -955,32 +1239,12 @@
 				"app\\scripts\\Squaretide.js"
 			],
 			[
-				"logic",
-				"app\\scripts\\Logic.js"
-			],
-			[
-				"tileset",
-				"app\\scripts\\Tileset.js"
-			],
-			[
 				"tiles",
 				"Tileset.as"
 			],
 			[
-				"main.j",
-				"app\\scripts\\main.js"
-			],
-			[
 				"jukebo",
 				"app\\scripts\\jukebox.js"
-			],
-			[
-				"tilevi",
-				"app\\scripts\\TileVisualizer.js"
-			],
-			[
-				"main",
-				"app\\scripts\\main.js"
 			],
 			[
 				"tileseta",
@@ -991,20 +1255,8 @@
 				"TileSetAnalyzer.as"
 			],
 			[
-				"grunt",
-				"Gruntfile.js"
-			],
-			[
 				"tile",
 				"app\\scripts\\Tile.js"
-			],
-			[
-				"tilese",
-				"Tileset.as"
-			],
-			[
-				"visual",
-				"app\\scripts\\TileVisualizer.js"
 			],
 			[
 				".css",
@@ -1023,10 +1275,6 @@
 				"app\\less\\old_less.less"
 			],
 			[
-				"main.les",
-				"app\\less\\main.less"
-			],
-			[
 				"shim.",
 				"app\\less\\shim.less"
 			],
@@ -1037,18 +1285,6 @@
 			[
 				"main.t",
 				"app\\typescript\\main.ts"
-			],
-			[
-				"inde",
-				"app\\index.html"
-			],
-			[
-				"main.le",
-				"app\\less\\main.less"
-			],
-			[
-				"main.",
-				"app\\partials\\main.html"
 			],
 			[
 				"rang",

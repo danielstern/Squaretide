@@ -22,7 +22,7 @@ function gameSettingsFromLevel(level){
 	var chainLength = 3 + everyFifth(level); // more combo is more hard	
 	var targetScore = powerOf(level) * 1000 +  10000 + everyThird(level) * 20000; // higher target score is more hard
 	var scorePerTile = 100 + 10 * powerOf(level); // more score per tile is more awesome
-	var duration = 30 + 5 * everyThird(level) + 15 * everyFifth(level); // shorter duration is more hard
+	var duration = 15 + 5 * everyThird(level) + 15 * everyFifth(level); // shorter duration is more hard
 	var rows = 4 + everyThird(level); // larger grid makes it easier
 	var columns = 4 + everyThird(level); 
 	var chainGracePeriod = 15; // doesnt change

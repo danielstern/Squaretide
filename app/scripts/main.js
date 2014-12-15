@@ -21,23 +21,31 @@ angular.module("SquaretideContainer", [])
             $rootScope.mode = "game";
             game.startGame();
             soundManager.scaleSequence(1);
-            bass.on();
+            // bass.on();
         }
 
         game.on("end", function() {
             $rootScope.mode = "post-level";
             $rootScope.victory = false;
+            soundManager.scaleSequence(2, 'frigean',100,7);
             // drumMachine.off();
         })
 
         $rootScope.nextLevel = function() {
             $rootScope.mode = "game";
             game.nextLevel();
+            soundManager.scaleSequence(0, 'frigean');
             // drumMachine.off();
         }
 
+        game.on("score.tile",function(){
+            soundManager.scaleSequence(state.lastResolvedTileColor + majorScale(state.currentComboCount),'major',50,1)
+        })
+
         $rootScope.mainMenu = function() {
             $rootScope.mode = "main-menu";
+            soundManager.scaleSequence(2, 'frigean',100,8);
+
             // drumMachine.off();
         }
 
@@ -54,6 +62,7 @@ angular.module("SquaretideContainer", [])
 
         game.on("level.complete", function() {
             // game.pause();
+            soundManager.scaleSequence(7, 'groovy',50,12);
             // drumMachine.off();
             $rootScope.mode = "post-level";
             $rootScope.victory = true;
@@ -109,6 +118,7 @@ var soundManager = {
     scaleSequence: function(base, scale, duration, repeat) {
         base = base || 0;
         scale = scale || 'major';
+        repeat = repeat || 4;
         var processor = majorScale;
         if (scale === 'minor') {
             processor = minorScale;
@@ -121,7 +131,7 @@ var soundManager = {
         repeat = repeat || 1;
 
         instructions = [];
-        for (var i = 0; i < 4 * repeat; i++) {
+        for (var i = 0; i < repeat; i++) {
             instructions.push({
                 timeout: duration,
                 callback: function(j) {
@@ -139,7 +149,7 @@ var soundManager = {
         var value2mod = value2 % scales.length;
         var scale = scales[value2mod];
         console.log("scale from 2 values...", base, scale)
-        this.scaleSequence(base, scale, 100);
+        this.scaleSequence(base, scale, 100,2);
     }
 }
 
@@ -212,83 +222,78 @@ var bass = new BassSequencer();
 
 // var drumMachine = new DrumMachine();
 
-function majorScale(interval, base) {
-    var rate = interval % 8;
-    if (rate === 0) return 0 + base;
-    if (rate === 1) return 4 + base;
-    if (rate === 2) return 7 + base;
-    if (rate === 3) return 12 + base;
-    if (rate === 4) return 11 + base;
-    if (rate === 5) return 10 + base;
-    if (rate === 6) return 9 + base;
-    if (rate === 7) return 10 + base;
-    if (rate === 8) return 8 + base;
-}
+function getScale(notes){
+    return function (interval, base) {
+        base = base || 0;
+        var max = notes.split(" ").length;
+        var rate = interval % max;
+        var map = {};
+        for (var i = 0; i < max; i++) {
+            var note = notes.split(" ")[i];
+            map[i] = note;
+        }
 
-function minorScale(interval, base) {
-    var rate = interval % 4;
-    if (rate === 0) return 0 + base;
-    if (rate === 1) return 3 + base;
-    if (rate === 2) return 7 + base;
-    if (rate === 3) return 3 + base;
-}
+        var note = +base + +map[rate];
 
-
-function bassLine(interval, base) {
-    var intro = "0 7 10 7 12 7 10 7 12 7 10 7 5 3 3 2"
-    var verse = "5 3 0 3 5 3 0 3 0 7 10 7 0 7 10 7"
-    var notes = intro + " " 
-                + intro + " " 
-                + verse + " "
-                + verse;
-    var max = notes.split(" ").length;
-    var rate = interval % max;
-    var map = {};
-    for (var i = 0; i < max; i++) {
-        var note = notes.split(" ")[i];
-        map[i] = note;
+        console.log("retur note...",note);
+        return note;
     }
-
-    return base + map[rate];
 }
 
-function frigeanScale(interval, base) {
-    var rate = interval % 6;
-    if (rate === 0) return 0 + base;
-    if (rate === 1) return 1 + base;
-    if (rate === 2) return 4 + base;
-    if (rate === 3) return 5 + base;
-    if (rate === 4) return 10 + base;
-    if (rate === 5) return 12 + base;
-    if (rate === 6) return 10 + base;
-}
-
-// function fastSequence(base,tonality) {
-//     console.log("Castseuence");
-//     var scale = majorScale;
-//     tonality = tonality || 'major';
-//     if (tonality === 'minor') {
-//         scale = minorScale;
-//     }
-//     Jukebox.timer.setSequence([{
-//         timeout:100,
-//         callback: function() {
-//             soundManager.tone(scale(0,base));
-//         }
-//     },{
-//         timeout:100,
-//         callback: function() {
-//             soundManager.tone(scale(1,base));
-//         }
-//     },{
-//         timeout:100,
-//         callback: function() {
-//             soundManager.tone(scale(2,base));
-//         }
-//     },{
-//         timeout:100,
-//         callback: function() {
-//             soundManager.tone(scale(1,base));
-//         }
-//     }])
+// function majorScale(interval, base) {
+//     var rate = interval % 8;
+//     if (rate === 0) return 0 + base;
+//     if (rate === 1) return 4 + base;
+//     if (rate === 2) return 7 + base;
+//     if (rate === 3) return 12 + base;
+//     if (rate === 4) return 11 + base;
+//     if (rate === 5) return 10 + base;
+//     if (rate === 6) return 9 + base;
+//     if (rate === 7) return 10 + base;
+//     if (rate === 8) return 8 + base;
 // }
+
+// function minorScale(interval, base) {
+//     var rate = interval % 4;
+//     if (rate === 0) return 0 + base;
+//     if (rate === 1) return 3 + base;
+//     if (rate === 2) return 7 + base;
+//     if (rate === 3) return 3 + base;
+// }
+
+
+// function bassLine(interval, base) {
+//     var intro = "0 7 10 7 12 7 10 7 12 7 10 7 5 3 3 2"
+//     var verse = "5 3 0 3 5 3 0 3 0 7 10 7 0 7 10 7"
+//     var notes = intro + " " 
+//                 + intro + " " 
+//                 + verse + " "
+//                 + verse;
+//     var max = notes.split(" ").length;
+//     var rate = interval % max;
+//     var map = {};
+//     for (var i = 0; i < max; i++) {
+//         var note = notes.split(" ")[i];
+//         map[i] = note;
+//     }
+
+//     return base + map[rate];
+// }
+
+var frigeanScale = getScale("0 1 4 5 7 5 4 1 0");
+var minorScale = getScale("0 3 7 3");
+var majorScale = getScale("0 4 7 12 16 12 7 4");
+var groovy = getScale("0 7 10 7 12 7 10 7 12 7 10 7 5 3 3 2");
+
+var scales = [majorScale,minorScale,frigeanScale,groovy];
+function getRandomScale(){
+    return scales[Math.floor(Math.random() * scales.length)];
+}
+// var intro = "0 7 10 7 12 7 10 7 12 7 10 7 5 3 3 2"
+// var verse = "5 3 0 3 5 3 0 3 0 7 10 7 0 7 10 7"
+// var notes = intro + " " 
+            // + intro + " " 
+            // + verse + " "
+            // + verse;
+// 
+// var bassLine = getScale(notes);
