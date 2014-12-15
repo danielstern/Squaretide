@@ -14,12 +14,13 @@ angular.module("SquaretideContainer",[])
 
     $rootScope.showInstructions = function() {
         $rootScope.instructionsMaximized = !$rootScope.instructionsMaximized;
+        soundManager. scaleSequence(0,'minor');
     }
 
     $rootScope.startGame = function(){
         $rootScope.mode = "game";
         game.startGame();
-        fastSequence();
+        soundManager. scaleSequence(1);
     }
 
     game.on("end", function() {
@@ -93,37 +94,106 @@ angular.module("SquaretideContainer",[])
 var synth = Jukebox.getSynth(JBSCHEMA.synthesizers['Duke Straight Up']);
 var soundManager = {
     tone: function(tone, duration) {
-        synth.play(tone * 4 + 12, 100);
+        synth.play(tone + 12, 100);
+    },
+    scaleSequence: function(base,scale,duration,repeat) {
+        base = base || 0;
+        scale = scale || 'major';
+        var processor = majorScale;
+         if (scale === 'minor') {
+            processor = minorScale;
+        }
+         if (scale === 'frigean') {
+            processor = frigeanScale;
+        }
+
+        duration = duration || 100;
+        repeat = repeat || 1;
+
+        instructions = [];
+        for (var i = 0; i < 4 * repeat; i++) {
+            instructions.push({
+                timeout:duration,
+                callback: function(j) {
+                    console.log("play note callback,",j,base);
+                    soundManager.tone(processor(j,base));
+                },
+                arg: i
+            })
+        };
+
+        console.log("instructions?",instructions);
+
+        Jukebox.timer.setSequence(instructions);
+    },
+    scaleFromTwoValues:function(value1,value2) {
+        var base = value1;
+        var scales = ['major','minor','frigean'];
+        var value2mod = value2 % scales.length;
+        var scale = scales[value2mod];
+        console.log("scale from 2 values...",base,scale)
+        this.scaleSequence(base,scale,100);
     }
 }
 
-function majorScale(interval) {
+function majorScale(interval,base) {
+    var rate = interval % 8;
+    if (rate === 0) return 0 + base;
+    if (rate === 1) return 4 + base;
+    if (rate === 2) return 7 + base;
+    if (rate === 3) return 12 + base;
+    if (rate === 4) return 11 + base;
+    if (rate === 5) return 10 + base;
+    if (rate === 6) return 9 + base;
+    if (rate === 7) return 10 + base;
+    if (rate === 8) return 8 + base;
+}
+
+function minorScale(interval,base) {
     var rate = interval % 4;
-    if (rate === 0) return 0;
-    if (rate === 1) return 5;
-    if (rate === 2) return 8;
-    if (rate === 3) return 11;
+    if (rate === 0) return 0 + base;
+    if (rate === 1) return 3 + base;
+    if (rate === 2) return 7 + base;
+    if (rate === 3) return 3 + base;
 }
 
-function fastSequence(notes) {
-    console.log("Castseuence");
-    Jukebox.timer.setSequence([{
-        timeout:100,
-        callback: function() {
-            console.log("nex forst invoc")
-            soundManager.tone(majorScale(0));
-
-        }
-    },{
-        timeout:100,
-        callback: function() {
-            console.log("nex seq invoc")
-            soundManager.tone(majorScale(1));
-        }
-    },{
-        timeout:100,
-        callback: function() {
-            soundManager.tone(majorScale(2));
-        }
-    }])
+function frigeanScale(interval,base) {
+    var rate = interval % 6;
+    if (rate === 0) return 0 + base;
+    if (rate === 1) return 1 + base;
+    if (rate === 2) return 4 + base;
+    if (rate === 3) return 5 + base;
+    if (rate === 4) return 10 + base;
+    if (rate === 5) return 12 + base;
+    if (rate === 6) return 10 + base;
 }
+
+// function fastSequence(base,tonality) {
+//     console.log("Castseuence");
+//     var scale = majorScale;
+//     tonality = tonality || 'major';
+//     if (tonality === 'minor') {
+//         scale = minorScale;
+//     }
+//     Jukebox.timer.setSequence([{
+//         timeout:100,
+//         callback: function() {
+//             soundManager.tone(scale(0,base));
+//         }
+//     },{
+//         timeout:100,
+//         callback: function() {
+//             soundManager.tone(scale(1,base));
+//         }
+//     },{
+//         timeout:100,
+//         callback: function() {
+//             soundManager.tone(scale(2,base));
+//         }
+//     },{
+//         timeout:100,
+//         callback: function() {
+//             soundManager.tone(scale(1,base));
+//         }
+//     }])
+// }

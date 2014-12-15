@@ -195,6 +195,10 @@ function Squaretide() {
             state.currentComboScore += tileScore;
             state.chainTimeRemaining = config.chainGracePeriod;
 
+            // console.log("resolve tile",state.currentComboCount,tile.color,majorScale(state.currentComboCount));
+
+            soundManager.tone(majorScale(state.currentComboCount,tile.color));
+
             broadcast('score.tile');            
         }
 
@@ -207,7 +211,7 @@ function Squaretide() {
             tiles.forEach(function(tile) {
                 tile.chaining = true;
             });
-            soundManager.tone(baseTone);
+            
             
             trampoline(tiles, resolveTile, config.tileResolveTime);
 
@@ -266,10 +270,12 @@ function Squaretide() {
 
                     tiles.switchTiles(tile1, tile2);
 
-                    soundManager.tone(tile1.color, 100);
-                    soundManager.tone(tile2.color, 100);
+                    soundManager.scaleFromTwoValues(tile1.color, tile2.color);
 
-                    timer.setTimeout(resume, 100);
+                    // soundManager.scaleSequence(tile1.color, 'minor',75);
+                    // soundManager.scaleSequence(tile2.color, 'major',75);
+
+                    timer.setTimeout(resume, 250);
 
                 } else {
                     tile1.selected = false;
