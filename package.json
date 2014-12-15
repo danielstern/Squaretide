@@ -29,6 +29,7 @@
     "node": ">=0.10.0"
   },
   "dependencies": {
+    "grunt-contrib-compress": "^0.12.0",
     "grunt-contrib-less": "^0.12.0"
   }
 }

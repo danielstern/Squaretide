@@ -354,6 +354,23 @@ module.exports = function (grunt) {
       }
     },
 
+
+    compress: {
+      main: {
+        options: {
+          archive: 'squaretide_dist.zip'
+        },
+        files: [
+          {src: ['dist/*']},
+          {src: ['dist/**/*']},
+          // {src: ['dist/*'], dest: '/'},
+          // {expand: true, cwd: 'path/', src: ['**'], dest: 'internal_folder3/'}, // makes all src relative to cwd
+          // {flatten: true, src: ['path/**'], dest: 'internal_folder4/', filter: 'isFile'} // flattens results to a single level
+        ]
+      }
+    },
+
+
     // Run some tasks in parallel to speed up build process
     concurrent: {
       server: [
@@ -423,7 +440,8 @@ module.exports = function (grunt) {
     'copy:dist',
     'rev',
     'usemin',
-    'htmlmin'
+    'htmlmin',
+    'compress'
   ]);
 
   grunt.registerTask('default', [

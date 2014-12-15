@@ -72,14 +72,14 @@ angular.module("SquaretideContainer", [])
         game.on("score.tile", function() {
 
             var comboScore = state.currentComboScore;
-            var message = 'Boring';
-            if (comboScore > 500) message = 'Dull'
-            if (comboScore > 1000) message = 'Weak'
-            if (comboScore > 1500) message = 'Soft'
-            if (comboScore > 2000) message = 'Mediocre'
-            if (comboScore > 3000) message = 'Not Bad'
-            if (comboScore > 4000) message = 'OK'
-            if (comboScore > 5000) message = 'Alright'
+            var message = 'OK';
+            if (comboScore > 500) message = 'Fair'
+            if (comboScore > 1000) message = 'Decent'
+            if (comboScore > 1500) message = 'Solid'
+            if (comboScore > 2000) message = 'Nice'
+            if (comboScore > 3000) message = 'Adept'
+            if (comboScore > 4000) message = 'Skilled'
+            if (comboScore > 5000) message = 'Impressive'
             if (comboScore > 6000) message = 'Cool'
             if (comboScore > 7000) message = 'Good'
             if (comboScore > 8500) message = 'Very Good'
@@ -111,7 +111,7 @@ angular.module("SquaretideContainer", [])
 
 }])
 var synth = Jukebox.getSynth(JBSCHEMA.synthesizers['Duke Straight Up']);
-synth.volume 0.2;
+synth.volume = 0.2;
 var soundManager = {
     tone: function(tone, duration) {
         synth.play(tone + 12, 100);
