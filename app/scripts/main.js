@@ -145,39 +145,40 @@ var soundManager = {
 
 var DrumMachine = function() {
 
-    function getProcessor(tone, bpm) {
-        return function(drumTime) {
-            // var bpm = 16;
-            var currentBeat = drumTime % bpm;
-            if (Math.floor(currentBeat) === 0) {
-                if (this.queued) {
-                    drums.play(tone, 40);
-                    this.queued = false;
-                    // console.log("currentbeat?",this.queued);
-                }
-            } else {
-                // console.log("enabling quued");
-                this.queued = true;
-            }
-        }
-    }
+    // function getProcessor(tone, bpm) {
+    //     return function(drumTime) {
+    //         // var bpm = 16;
+    //         var currentBeat = drumTime % bpm;
+    //         if (Math.floor(currentBeat) === 0) {
+    //             if (this.queued) {
+    //                 drums.play(tone, 40);
+    //                 this.queued = false;
+    //                 // console.log("currentbeat?",this.queued);
+    //             }
+    //         } else {
+    //             // console.log("enabling quued");
+    //             this.queued = true;
+    //         }
+    //     }
+    // }
 
-    function getDoubleProcessor(tone, bpm) {
+    function getProcessor(tone, bpm,maxHits,offset) {
         return function(drumTime) {
             var currentBeat = drumTime % bpm;
-            var maxHits = 1;
+            maxHits = maxHits || 1;
+            offset = offset || 0;
             var hitSpacing = bpm * 8;
             var processor = this;
             processor.timesHit = 0;
 
-            if (Math.floor(currentBeat) === 0) {
+            if (Math.floor(currentBeat) === 0 + offset) {
                 if (this.queued) {
                     drums.play(tone, 40);
                     processor.timesHit++;
-                    if (processor.timesHit <= maxHits) {
+                    if (processor.timesHit < maxHits) {
                         Jukebox.timer.setTimeout(function(){
                         console.log("double the hitz");
-                            drums.play(tone, 40);
+                            drums.play(tone);
                         }, hitSpacing);
                     }
                     this.queued = false;
@@ -191,26 +192,38 @@ var DrumMachine = function() {
 
     var drumSequences = {
         low: [{
-            processor: getProcessor(1, 16),
+            processor: getProcessor(0, 16),
             queued: true
         },{
-            processor: getProcessor(1, 32),
+            processor: getProcessor(0, 32),
             queued: true
         },{
-            processor: getDoubleProcessor(1, 16),
+            processor: getProcessor(0, 16, 2),
             queued: true
         }],
-        high: [{
-            processor: getProcessor(3, 4),
-            queued: true
-        }, {
-            processor: getProcessor(3, 8),
+        med: [{
+            processor: getProcessor(1, 8,1,1),
             queued: true
         },{
-            processor: getProcessor(3, 16),
+            processor: getProcessor(1, 16,1),
+            queued: true
+        }],
+        high: [
+        // {
+        //     processor: getProcessor(2, 4),
+        //     queued: true
+        // }, {
+        //     processor: getProcessor(2, 8),
+        //     queued: true
+        // },
+        {
+            processor: getProcessor(2, 16),
             queued: true
         },{
-            processor: getDoubleProcessor(3, 16),
+            processor: getProcessor(2, 16,2),
+            queued: true
+        },{
+            processor: getProcessor(2, 8,2),
             queued: true
         }]
     }
@@ -232,6 +245,7 @@ var DrumMachine = function() {
         sequences = [
             drumSequences.low[Math.floor(Math.random() * drumSequences.low.length)],
             drumSequences.high[Math.floor(Math.random() * drumSequences.high.length)],
+            drumSequences.med[Math.floor(Math.random() * drumSequences.med.length)],
         ];
     }
 
