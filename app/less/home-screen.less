@@ -54,11 +54,11 @@ section[name='home-screen'] {
     }
 
 
-    #instructionsButton {
+    .instructions-button {
         .pattern(darken(@color3,25%));
         right: 0rem;
     }
-    #startButton {
+    .new-game-button {
         .pattern(darken(@color5,25%));
         left: 0rem;
     }
@@ -66,7 +66,7 @@ section[name='home-screen'] {
         margin-left: 3rem;
     }
 
-    &[show-instructions="true"] {
+    &.show-instructions {
         background-color: darken(@fade, 0%);
 
         .instructions {

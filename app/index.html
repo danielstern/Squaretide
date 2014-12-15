@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js">
+<html class="no-js" ng-app=SquaretideContainer>
 
 <head>
     <meta charset="utf-8">
@@ -21,55 +21,22 @@
 
 <body>
 
-    <div id="game" class=game>
+    <div class=game mode={{mode}}>
 
         <h1>
            Squaretide
         </h1>
-        <section name=home-screen id='home'>
+        <section name=home-screen ng-class="{'show-instructions':instructionsMaximized}">
             <nav>
-                <button id='startButton'>
+                <button  class=new-game-button>
                     New Game
                 </button>
-                <button id='instructionsButton'>
+                <button ng-click=showInstructions()  class=instructions-button>
                     Help
                 </button>
             </nav>
             <article class="instructions">
-                <h3>
-                    Can you save the polygon princess from the rhomboid renegades?
-                </h3>
-                <p>
-                    <strong>
-                  Tap 
-                </strong> two adjacent squares to switch them.
-                </p>
-                <p>
-                    Line up squares of the same color to collect points.
-                </p>
-                <p>
-                    Obtain bonus points for multiple chains and combos.
-                </p>
-                <p>
-                    Reach the target score before time runs out to proceed to the next level.
-                </p>
-                <p>
-                    Some things may change as the level increases...
-                    <ul>
-                        <li>
-                            Target score
-                        </li>
-                        <li>
-                            Size of the playing field
-                        </li>
-                        <li>
-                            Tiles need to make a chain
-                        </li>
-                        <li>
-                            Amount of colors
-                        </li>
-                    </ul>
-                </p>
+               <div ng-include="'partials/instructions.html'"></div>
             </article>
         </section>
 
@@ -141,7 +108,7 @@
                             <div id='comboScore' class=combo-score-number>
                                 
                             </div>   
-                            
+
                          </div>
                 </div>
             </div>
@@ -149,6 +116,9 @@
             <div  id='messageDisplay'>
             </div>             
             </div>
+        </section>
+        <section name=post-level>
+            
         </section>
 
     </div>
@@ -158,6 +128,7 @@
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/less/dist/less.js"></script>
     <script src="bower_components/jukebox/jukebox.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 

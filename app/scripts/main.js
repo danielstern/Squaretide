@@ -1,45 +1,25 @@
-var synth = Jukebox.getSynth(JBSCHEMA.synthesizers['Duke Straight Up']);
-
-var game = new Squaretide();
 
 
+angular.module("SquaretideContainer",[])
+.run(function($rootScope){
+    var synth = Jukebox.getSynth(JBSCHEMA.synthesizers['Duke Straight Up']);
+    var game = new Squaretide();
 
-var showInstructions = false;
+    $rootScope.mode = "main-menu";
+    $rootScope.showInstructions = false;
 
-var soundManager = {
-    tone: function(tone, duration) {
-        // synth.play(tone * 4 + 12, 100);
+    $rootScope.showInstructions = function() {
+        console.log("change instructions...",$rootScope.showInstructions);
+        $rootScope.instructionsMaximized = !$rootScope.instructionsMaximized;
     }
-}
 
-if (document.getElementById('game')) {
-
-    document.getElementById('game').setAttribute("mode", "main-menu");
-
-    var instructions = document.getElementById("instructionsButton");
-    var start = document.getElementById("startButton");
-    instructions.addEventListener("click", function() {
-        showInstructions = !showInstructions;
-        document.getElementById('home').setAttribute("show-instructions", showInstructions);
-        soundManager.tone(0, 200);
-    });
-
-    start.addEventListener("click", function() {
-        soundManager.tone(1, 200);
-        document.getElementById('game').setAttribute("mode", "game");
+    $rootScope.startGame = function(){
+        // document.getElementById('game').setAttribute("mode", "game");
         game.startGame();
         game.on("end", function() {
-            document.getElementById('game').setAttribute("mode", "main-menu");
+            // document.getElementById('game').setAttribute("mode", "main-menu");
         })
-    });
-
-    Jukebox.timer.setInterval(function() {
-        state = game.state;
-        document.getElementById('score').innerHTML = parseInt(state.scoreThisLevel, 10);
-
-        document.getElementById('time').innerHTML = Math.floor(state.timeRemaining / 1000);
-
-    }, 25);
+    }
 
 
     game.on("level", function() {
@@ -53,28 +33,18 @@ if (document.getElementById('game')) {
         }
     })
 
-    function showComboElements() {
-        document.getElementById('plus-display').setAttribute("hide",false);
-        document.getElementById('combo-elements').setAttribute("hide",false);
-        document.getElementById('messageDisplay').setAttribute("hide",false);
-    }
-    function hideComboElements() {
-        document.getElementById('plus-display').setAttribute("hide",true);
-        document.getElementById('combo-elements').setAttribute("hide",true);
-        document.getElementById('messageDisplay').setAttribute("hide",true);
-    }
 
     game.on("score.tile", function() {
         var state = game.state;
-        document.getElementById('currentComboCount').innerHTML = state.currentComboCount;
-        document.getElementById('currentChainCount').innerHTML = state.currentComboChain;
-        document.getElementById('currentComboMultiplier').innerHTML = state.currentComboMultiplier;
-        document.getElementById('comboScore').innerHTML = parseInt(state.currentComboScore) + " ";
+        // document.getElementById('currentComboCount').innerHTML = state.currentComboCount;
+        // document.getElementById('currentChainCount').innerHTML = state.currentComboChain;
+        // document.getElementById('currentComboMultiplier').innerHTML = state.currentComboMultiplier;
+        // document.getElementById('comboScore').innerHTML = parseInt(state.currentComboScore) + " ";
         if (state.currentComboMultiplier > 1) {
-             document.getElementById('comboScore').innerHTML +="x" + state.currentComboMultiplier;
+             // document.getElementById('comboScore').innerHTML +="x" + state.currentComboMultiplier;
         }
 
-        showComboElements();
+        // showComboElements();
 
         var comboScore = state.currentComboScore;
         var message = 'Boring';
@@ -98,7 +68,7 @@ if (document.getElementById('game')) {
         if (comboScore > 35000) message = 'Killing Spree!!!'
         if (comboScore > 40000) message = 'Wicked Sick!!!'
         if (comboScore > 50000) message = 'GODLIKE!!!!'
-        document.getElementById('messageDisplay').innerHTML = message;
+        // document.getElementById('messageDisplay').innerHTML = message;
     })
 
     game.on("score.resolve", function(combo) {
@@ -106,7 +76,56 @@ if (document.getElementById('game')) {
         // document.getElementById('comboScore').innerHTML = parseInt(combo.totalComboScore);
     })
 
+    Jukebox.timer.setInterval(function() {
+        state = game.state;
+        document.getElementById('score').innerHTML = parseInt(state.scoreThisLevel, 10);
+
+        document.getElementById('time').innerHTML = Math.floor(state.timeRemaining / 1000);
+
+    }, 25);
+
     game.startGame();
     game.pause();
-    hideComboElements();
+})
+
+// var showInstructions = false;
+
+var soundManager = {
+    tone: function(tone, duration) {
+        // synth.play(tone * 4 + 12, 100);
+    }
 }
+
+// if (document.getElementById('game')) {
+
+//     // document.getElementById('game').setAttribute("mode", "main-menu");
+
+//     // var instructions = document.getElementById("instructionsButton");
+//     // var start = document.getElementById("startButton");
+//     // instructions.addEventListener("click", function() {
+//     //     showInstructions = !showInstructions;
+//     //     document.getElementById('home').setAttribute("show-instructions", showInstructions);
+//     //     soundManager.tone(0, 200);
+//     // });
+
+//     // start.addEventListener("click", function() {
+       
+//     // });
+
+
+
+
+
+//     function showComboElements() {
+//         document.getElementById('plus-display').setAttribute("hide",false);
+//         document.getElementById('combo-elements').setAttribute("hide",false);
+//         document.getElementById('messageDisplay').setAttribute("hide",false);
+//     }
+//     function hideComboElements() {
+//         document.getElementById('plus-display').setAttribute("hide",true);
+//         document.getElementById('combo-elements').setAttribute("hide",true);
+//         document.getElementById('messageDisplay').setAttribute("hide",true);
+//     }
+
+  
+// }
