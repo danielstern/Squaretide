@@ -1,6 +1,3 @@
-/* contains operations that do not modify the array of tiles. */
-
-
 var Logic = function() {
 
     function getSegments(array) {
@@ -34,19 +31,15 @@ var Logic = function() {
     }
 
     function consolidateChains(arrays) {
-    	console.log("Consolidaing..",arrays);
         var consolidatedArrays = [];
         arrays = arrays.map(function(array){
         	return array.slice(0);
         })
-        // arrays = arrays.slice(0);
 
         arrays.forEach(function(array) {
         	if (array) {
-	            // for (var i = arrays.length; i >= 0; i--) {
 	            for (var i = 0; i < arrays.length; i++) {
 	                var innerArray = arrays[i];
-	                // console.log("Comparing...",array,innerArray);
 	                if (innerArray) {
 	                	var intersection = getIntersection(array, innerArray);
 	                	if (intersection) {
@@ -54,37 +47,12 @@ var Logic = function() {
 		                		array.push(innerArray.pop());
 		                	};
 	                	}
-	                	// if (intersection) {
-	                	//     innerArray.splice(indexOfTile(innerArray, intersection), 1);
-	                	//     arrays.splice(i, 1);
-	                	// }
 	                }
 	                
 	            }
             	consolidatedArrays.push(removeDuplicateTilesFromChain(array));
         	}
         });
-
-    	// if (array) {
-     //        for (var i = arrays.length; i >= 0; i--) {
-     //            var innerArray = arrays[i - 1];
-     //            if (innerArray) {
-     //            	var intersection = getIntersection(array, innerArray);
-     //            	if (intersection) {
-     //            		var itemsForMigration = innerArray.splice(indexOfTile(innerArray, intersection), 1);
-                		
-     //            	    consolidatedArrays.push(array.concat(itemsForMigration));
-     //            		// console.log("intersection...",array.concat(innerArray))
-     //            	    arrays.splice(i, 1);
-     //            	}
-     //            }
-                
-     //        }
-    	// }
-
-
-        console.log("Final arrays",consolidatedArrays);
-
 
         return consolidatedArrays.filter(function(array){
         	return array.length > 0;
@@ -95,7 +63,6 @@ var Logic = function() {
         var intersection = null;
         array1.forEach(function(tile) {
             if (array1 !== array2 && tileInSegment(array2, tile)) {
-                // console.log("these chains intersect");
                 intersection = tile;
             }
         })

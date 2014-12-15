@@ -1,5 +1,3 @@
-
-
 angular.module("SquaretideContainer",[])
 .run(function($rootScope){
     var synth = Jukebox.getSynth(JBSCHEMA.synthesizers['Duke Straight Up']);
@@ -91,8 +89,6 @@ angular.module("SquaretideContainer",[])
 
 
 })
-
-// var showInstructions = false;
 
 var soundManager = {
     tone: function(tone, duration) {

@@ -292,11 +292,9 @@ function Squaretide() {
             state.timeRemaining -= state.speed;
 
             if (state.timeRemaining < 0) {
-                // endGame();
                 if (state.scoreThisLevel >= level.targetScore) {
                     broadcast('level.complete');
                     pause();
-                    // nextLevel();
                 } else {
                     endGame();
                 }

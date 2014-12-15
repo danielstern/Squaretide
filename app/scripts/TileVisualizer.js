@@ -26,8 +26,6 @@ function TileVisualizer(tile) {
             clearInterval(interval);
         }
 
-        // console.log("Columns?",window._numColumns)
-
         var width = 100/_numColumns;
         var height = 100/_numRows;
 
@@ -40,7 +38,6 @@ function TileVisualizer(tile) {
             + 'top:'+height *tile.y+'%;'
             + 'left:'+width *tile.x+'%;'
             );
-        // div2.setAttribute('style','height:7%');
     };
 
     var interval = setInterval(onTick, 33);
