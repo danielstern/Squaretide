@@ -21,7 +21,6 @@ angular.module("SquaretideContainer",[])
     $rootScope.startGame = function(){
         $rootScope.mode = "game";
         game.startGame();
-        console.log("startin game");
         game.on("end", function() {
             $rootScope.mode = "main-menu";
         })

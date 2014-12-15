@@ -20,74 +20,70 @@
 </head>
 
 <body>
-
     <div class=game mode={{mode}}>
-
         <h1>
            Squaretide
         </h1>
         <section name=home-screen ng-class="{'show-instructions':instructionsMaximized}">
             <nav>
-                <button  class=new-game-button ng-click=startGame()>
+                <button class=new-game-button ng-click=startGame()>
                     New Game
                 </button>
-                <button ng-click=showInstructions()  class=instructions-button>
+                <button ng-click=showInstructions() class=instructions-button>
                     Help
                 </button>
             </nav>
             <article class="instructions">
-               <div ng-include="'partials/instructions.html'"></div>
+                <div ng-include="'partials/instructions.html'"></div>
             </article>
         </section>
 
         <section name=game-screen>
-
-            <div class=gamefield id='gamefield'>
-            
-            </div>
-            <div class="level-info-display">
-                
-            <div class='level'>
-                level: {{state.level}}
-            </div>
-            <div class='target'>
-                target: {{level.targetScore}}
-            </div>
-            <div class='chainMin'>
-                min chain: <square color=0 class=avatar ng-repeat="symbol in difficultySymbols track by $index"></square>
-            </div>
-            <div class="level-score">
-                {{state.scoreThisLevel}}
-            </div>
-            </div>
-            <div id="time" class='time'>{{state.timeRemaining / 1000 | number:0}}</div>
-            <div class="combo-display combo-counter">
-                <div id='combo-elements'>
-                    <div class='combo-module'>
-                        Combo: {{state.currentComboCount}}
+            <div class="meta">
+                <div class="level-info-display">
+                    <div>
+                        level: {{state.level}}
                     </div>
-                    <div class='combo-module'>
-                        Multiplier: {{state.currentComboMultiplier}}
+                    <div>
+                        target: {{level.targetScore}}
                     </div>
-                    <div class='combo-module'>
-                        Chain: {{state.currentComboChain}}
+                    <div>
+                        min chain:
+                        <square color=0 class=avatar ng-repeat="symbol in difficultySymbols track by $index"></square>
                     </div>
                 </div>
-                <div class=total-score>
-                    </div>             
-                         <div class='combo-score combo-counter' id='plus-display'>
-                            + {{state.currentComboScore}} x {{state.currentComboMultiplier}}
-
-                         </div>
+                <div class='total-score'>
+                    {{state.scoreThisLevel}}
                 </div>
+                <div class='combo-elements' ng-class="{'fade-out':!state.currentComboCount}">
+                    <div class="combo-numbers">
+
+                        <div>
+                            Combo: {{state.currentComboCount}}
+                        </div>
+                        <div>
+                            Multiplier: {{state.currentComboMultiplier}}
+                        </div>
+                        <div>
+                            Chain: {{state.currentComboChain}}
+                        </div>
+                    </div>
+                    <div class='combo-score'>
+                        +{{state.currentComboScore}}    
+                        <span ng-if=state.currentComboScore>
+                            x{{state.currentComboMultiplier}}
+                        </span>
+                    </div>
+                    <div class=message-display>
+                        {{message}}
+                    </div>
+                </div>
+                <div id="time" class='time'>{{state.timeRemaining / 1000 | number:0}}</div>
             </div>
-            <div class=message-display>
-            <div  id='messageDisplay'>
-            </div>             
-            </div>
+            <div class=gamefield id='gamefield'> </div>
         </section>
         <section name=post-level>
-            
+
         </section>
 
     </div>

@@ -3,22 +3,71 @@
 @import 'game-screen.less';
 
 .game {
+    .centerAbsolute();
+
     width: 95%;
     height:100%;
     max-width: 560px;
     max-height: 560px;
 
-    .centerAbsolute();
 
     h1 {
         .centerAbsolute();
         transition: 0.6s all;
         text-transform: uppercase;
         font-size: @sq * 6;
+        backface-visibility:hidden;
         color: @white1;
-        text-shadow: 1px 1px 1px @fade, 0px 1px 1px @fade;
+        text-shadow: 1px 1px 1px @fade, 0px 1px 1px @fade;   
+    }
 
-        
+    &[mode="main-menu"] {
+
+
+        section[name='home-screen'] {
+            opacity: 1;
+            transition: 0.2s all;
+        }
+
+        .meta {
+            opacity: 0;
+            transition: 0.2s all;
+        }
+    }
+
+    &[mode="game"] {
+        h1 {
+            top: 0.5rem;
+            font-size: 0rem;
+            width: 100%;
+        }
+
+        section[name='home-screen'] {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+
+        .meta {
+            opacity: 1;
+            transition: 0.2s all;
+        }
+
+    }
+
+    &[mode="post-level"] {
+
+        section[name='home-screen'] {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+
+        .meta {
+            opacity: 0;
+            transition: 0.2s all;
+        }
+
     }
 
 }
@@ -31,40 +80,22 @@
     }
 }
 
-.game[mode="main-menu"] {
-
-    section[name='home-screen'] {
-        display: block;
-    }
-
-    section[name='game-screen'] {
-        .score,.time {
-            display: none;
-        }
-        // display: none;
-    }
-    .level-info-display,.total-score,.message-display,.combo-display {
-        opacity: 0 !important;
-        transition: 0.2s all;
-    }
-}
+.game
 
 .game[mode="game"] {
-    section[name='home-screen'] {
-        display: none;
-    }
-
     h1 {
         top: 0.5rem;
         font-size: 0rem;
         width: 100%;
     }
 
-    menu {
+    section[name='home-screen'] {
         opacity: 0;
         pointer-events: none;
     }
-    .level-info-display, .total-score,.message-display,.combo-display {
+
+
+    .meta {
         opacity: 1;
         transition: 0.2s all;
     }
