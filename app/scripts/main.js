@@ -4,47 +4,44 @@ angular.module("SquaretideContainer",[])
 .run(function($rootScope){
     var synth = Jukebox.getSynth(JBSCHEMA.synthesizers['Duke Straight Up']);
     var game = new Squaretide();
+    var state = game.state;
 
     $rootScope.mode = "main-menu";
     $rootScope.showInstructions = false;
+    $rootScope.game = game;
+    $rootScope.state = state;
+    $rootScope.difficultySymbols = [];
+
+    $rootScope.$watch('state.time');
 
     $rootScope.showInstructions = function() {
-        console.log("change instructions...",$rootScope.showInstructions);
         $rootScope.instructionsMaximized = !$rootScope.instructionsMaximized;
     }
 
     $rootScope.startGame = function(){
-        // document.getElementById('game').setAttribute("mode", "game");
+        $rootScope.mode = "game";
         game.startGame();
+        console.log("startin game");
         game.on("end", function() {
-            // document.getElementById('game').setAttribute("mode", "main-menu");
+            $rootScope.mode = "main-menu";
         })
     }
 
 
     game.on("level", function() {
         var level = game.getLevel();
-        var state = game.state;
-        document.getElementById('target').innerHTML = Math.floor(game.getLevel().targetScore);
-        document.getElementById('level').innerHTML = Math.floor(state.level);
-        chainMin.innerHTML = "";
-        for (var i = 0; i < game.getLevel().minimumChainLength; i++) {
-            chainMin.innerHTML += "<square color=0 class=avatar></square>";
-        }
+        $rootScope.level = level;
+        $rootScope.difficultySymbols.length = level.minimumChainLength;
+        // document.getElementById('target').innerHTML = Math.floor(game.getLevel().targetScore);
+        // document.getElementById('level').innerHTML = Math.floor(state.level);
+        // chainMin.innerHTML = "";
+        // for (var i = 0; i < game.getLevel().minimumChainLength; i++) {
+            // chainMin.innerHTML += "<square color=0 class=avatar></square>";
+        // }
     })
 
 
     game.on("score.tile", function() {
-        var state = game.state;
-        // document.getElementById('currentComboCount').innerHTML = state.currentComboCount;
-        // document.getElementById('currentChainCount').innerHTML = state.currentComboChain;
-        // document.getElementById('currentComboMultiplier').innerHTML = state.currentComboMultiplier;
-        // document.getElementById('comboScore').innerHTML = parseInt(state.currentComboScore) + " ";
-        if (state.currentComboMultiplier > 1) {
-             // document.getElementById('comboScore').innerHTML +="x" + state.currentComboMultiplier;
-        }
-
-        // showComboElements();
 
         var comboScore = state.currentComboScore;
         var message = 'Boring';
@@ -67,22 +64,17 @@ angular.module("SquaretideContainer",[])
         if (comboScore > 30000) message = 'Unbelievable!!!'
         if (comboScore > 35000) message = 'Killing Spree!!!'
         if (comboScore > 40000) message = 'Wicked Sick!!!'
-        if (comboScore > 50000) message = 'GODLIKE!!!!'
-        // document.getElementById('messageDisplay').innerHTML = message;
-    })
+        if (comboScore > 50000) message = 'GODLIKE!!!!';
 
-    game.on("score.resolve", function(combo) {
-        hideComboElements();        
-        // document.getElementById('comboScore').innerHTML = parseInt(combo.totalComboScore);
-    })
+        $rootScope.message = message;
 
-    Jukebox.timer.setInterval(function() {
-        state = game.state;
-        document.getElementById('score').innerHTML = parseInt(state.scoreThisLevel, 10);
+        $rootScope.$apply();
 
-        document.getElementById('time').innerHTML = Math.floor(state.timeRemaining / 1000);
+    });
 
-    }, 25);
+    game.on("tick",function(){
+        $rootScope.$apply();
+    });
 
     game.startGame();
     game.pause();
@@ -95,37 +87,3 @@ var soundManager = {
         // synth.play(tone * 4 + 12, 100);
     }
 }
-
-// if (document.getElementById('game')) {
-
-//     // document.getElementById('game').setAttribute("mode", "main-menu");
-
-//     // var instructions = document.getElementById("instructionsButton");
-//     // var start = document.getElementById("startButton");
-//     // instructions.addEventListener("click", function() {
-//     //     showInstructions = !showInstructions;
-//     //     document.getElementById('home').setAttribute("show-instructions", showInstructions);
-//     //     soundManager.tone(0, 200);
-//     // });
-
-//     // start.addEventListener("click", function() {
-       
-//     // });
-
-
-
-
-
-//     function showComboElements() {
-//         document.getElementById('plus-display').setAttribute("hide",false);
-//         document.getElementById('combo-elements').setAttribute("hide",false);
-//         document.getElementById('messageDisplay').setAttribute("hide",false);
-//     }
-//     function hideComboElements() {
-//         document.getElementById('plus-display').setAttribute("hide",true);
-//         document.getElementById('combo-elements').setAttribute("hide",true);
-//         document.getElementById('messageDisplay').setAttribute("hide",true);
-//     }
-
-  
-// }
