@@ -21,24 +21,24 @@ angular.module("SquaretideContainer", [])
             $rootScope.mode = "game";
             game.startGame();
             soundManager.scaleSequence(1);
-            drumMachine.on();
+            bass.on();
         }
 
         game.on("end", function() {
             $rootScope.mode = "post-level";
             $rootScope.victory = false;
-            drumMachine.off();
+            // drumMachine.off();
         })
 
         $rootScope.nextLevel = function() {
             $rootScope.mode = "game";
             game.nextLevel();
-            drumMachine.off();
+            // drumMachine.off();
         }
 
         $rootScope.mainMenu = function() {
             $rootScope.mode = "main-menu";
-            drumMachine.off();
+            // drumMachine.off();
         }
 
         game.startGame();
@@ -49,12 +49,12 @@ angular.module("SquaretideContainer", [])
             var level = game.getLevel();
             $rootScope.level = level;
             $rootScope.difficultySymbols.length = level.minimumChainLength;
-            drumMachine.on();
+            // drumMachine.on();
         })
 
         game.on("level.complete", function() {
             // game.pause();
-            drumMachine.off();
+            // drumMachine.off();
             $rootScope.mode = "post-level";
             $rootScope.victory = true;
         })
@@ -95,8 +95,9 @@ angular.module("SquaretideContainer", [])
             $rootScope.$apply();
         });
 
-        Jukebox.timer.setInterval(drumMachine.tick, 33);
-        drumMachine.off();
+        Jukebox.timer.setInterval(bass.tick, 33);
+        // drumMachine.off();
+        bass.off();
 
 
     })
@@ -142,120 +143,48 @@ var soundManager = {
     }
 }
 
-
-var DrumMachine = function() {
-
-    // function getProcessor(tone, bpm) {
-    //     return function(drumTime) {
-    //         // var bpm = 16;
-    //         var currentBeat = drumTime % bpm;
-    //         if (Math.floor(currentBeat) === 0) {
-    //             if (this.queued) {
-    //                 drums.play(tone, 40);
-    //                 this.queued = false;
-    //                 // console.log("currentbeat?",this.queued);
-    //             }
-    //         } else {
-    //             // console.log("enabling quued");
-    //             this.queued = true;
-    //         }
-    //     }
-    // }
-
-    function getProcessor(tone, bpm,maxHits,offset) {
-        return function(drumTime) {
-            var currentBeat = drumTime % bpm;
-            maxHits = maxHits || 1;
-            offset = offset || 0;
-            var hitSpacing = bpm * 8;
-            var processor = this;
-            processor.timesHit = 0;
-
-            if (Math.floor(currentBeat) === 0 + offset) {
-                if (this.queued) {
-                    drums.play(tone, 40);
-                    processor.timesHit++;
-                    if (processor.timesHit < maxHits) {
-                        Jukebox.timer.setTimeout(function(){
-                        console.log("double the hitz");
-                            drums.play(tone);
-                        }, hitSpacing);
-                    }
-                    this.queued = false;
-                }
-            } else {
-                // console.log("enabling quued");
-                this.queued = true;
-            }
-        }
-    }
-
-    var drumSequences = {
-        low: [{
-            processor: getProcessor(0, 16),
-            queued: true
-        },{
-            processor: getProcessor(0, 32),
-            queued: true
-        },{
-            processor: getProcessor(0, 16, 2),
-            queued: true
-        }],
-        med: [{
-            processor: getProcessor(1, 8,1,1),
-            queued: true
-        },{
-            processor: getProcessor(1, 16,1),
-            queued: true
-        }],
-        high: [
-        // {
-        //     processor: getProcessor(2, 4),
-        //     queued: true
-        // }, {
-        //     processor: getProcessor(2, 8),
-        //     queued: true
-        // },
-        {
-            processor: getProcessor(2, 16),
-            queued: true
-        },{
-            processor: getProcessor(2, 16,2),
-            queued: true
-        },{
-            processor: getProcessor(2, 8,2),
-            queued: true
-        }]
-    }
-
-    var drums = Jukebox.getSynth(JBSCHEMA.synthesizers['Phoster P52 Drum Unit']);
-    drums.volume = 0.2;
+var BassSequencer = function() {
+    var bass = Jukebox.getSynth(JBSCHEMA.synthesizers['Blenderbart Bass Unit']);
+    bass.volume = 0.2;
 
 
 
-    var bps = 120 / 120;
+    var bps = 60 / 32;
     var bpm = 4;
     var measuresPerChange = 128;
     var measuresSinceChange = 0;
     var time = 0;
     var enabled = true;
     var sequences = [];
+    var step = 0;
 
     function refreshSequences() {
         sequences = [
-            drumSequences.low[Math.floor(Math.random() * drumSequences.low.length)],
-            drumSequences.high[Math.floor(Math.random() * drumSequences.high.length)],
-            drumSequences.med[Math.floor(Math.random() * drumSequences.med.length)],
+            // drumSequences.low[Math.floor(Math.random() * drumSequences.low.length)],
+            // drumSequences.high[Math.floor(Math.random() * drumSequences.high.length)],
+            // drumSequences.med[Math.floor(Math.random() * drumSequences.med.length)],
         ];
     }
 
     refreshSequences();
 
+    var queued = true;
 
     function tick() {
         if (!enabled) return;
         time++;
         var drumTime = Math.floor(time / bps);
+        var beat = drumTime % bpm;
+        console.log("drum time")
+        if (beat === 0) {
+            if (queued) {
+                bass.play(bassLine(step,0),65);
+                step++;
+                queued = false;
+            }
+        } else {
+            queued = true;
+        }
 
         measuresSinceChange++;
         if (measuresSinceChange >= measuresPerChange) {
@@ -264,9 +193,8 @@ var DrumMachine = function() {
         }
 
 
-        sequences.forEach(function(seq) {
-            seq.processor(drumTime);
-        })
+        // sequences.forEach(function(seq) {
+        // })
     };
 
     this.on = function() {
@@ -280,7 +208,9 @@ var DrumMachine = function() {
     this.tick = tick;
 }
 
-var drumMachine = new DrumMachine();
+var bass = new BassSequencer();
+
+// var drumMachine = new DrumMachine();
 
 function majorScale(interval, base) {
     var rate = interval % 8;
@@ -301,6 +231,25 @@ function minorScale(interval, base) {
     if (rate === 1) return 3 + base;
     if (rate === 2) return 7 + base;
     if (rate === 3) return 3 + base;
+}
+
+
+function bassLine(interval, base) {
+    var intro = "0 7 10 7 12 7 10 7 12 7 10 7 5 3 3 2"
+    var verse = "5 3 0 3 5 3 0 3 0 7 10 7 0 7 10 7"
+    var notes = intro + " " 
+                + intro + " " 
+                + verse + " "
+                + verse;
+    var max = notes.split(" ").length;
+    var rate = interval % max;
+    var map = {};
+    for (var i = 0; i < max; i++) {
+        var note = notes.split(" ")[i];
+        map[i] = note;
+    }
+
+    return base + map[rate];
 }
 
 function frigeanScale(interval, base) {
