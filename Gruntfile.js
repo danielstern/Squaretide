@@ -361,8 +361,8 @@ module.exports = function (grunt) {
           archive: 'squaretide_dist.zip'
         },
         files: [
-          {src: ['dist/*']},
-          {src: ['dist/**/*']},
+          {expand: true, src: ['**'],cwd:'dist/'},
+          // {src: ['**/*'],cwd:'dist/'},
           // {src: ['dist/*'], dest: '/'},
           // {expand: true, cwd: 'path/', src: ['**'], dest: 'internal_folder3/'}, // makes all src relative to cwd
           // {flatten: true, src: ['path/**'], dest: 'internal_folder4/', filter: 'isFile'} // flattens results to a single level

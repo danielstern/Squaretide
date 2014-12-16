@@ -13,6 +13,7 @@ describe("the trampoline",function(){
 			var timeStart = new Date().getTime();
 			var expectedDelay = delay * array.length;
 			var expectedEndTime = timeStart + expectedDelay;
+			// var expectedEndTime = timeStart + expectedDelay;
 
 			trampoline(array,callback,delay,function(){
 				console.log("diff...",new Date().getTime()-expectedEndTime);
